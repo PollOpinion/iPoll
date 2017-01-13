@@ -210,17 +210,23 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBAction func btnFirSignUpTapped(_ sender: AnyObject) {
         
         print("Firebase SignUp button tapped... \n", self.txtFirEmail.text!, "\n", self.txtFirPassword.text!)
-        if self.txtFirEmail.text! != nil && self.txtFirPassword.text! != nil {
+       
+        if self.txtFirEmail.text?.isEmpty == false && self.txtFirPassword.text?.isEmpty == false {
             
-            FIRAuth.auth()?.signIn(withEmail: self.txtFirEmail.text!, password: self.txtFirPassword.text!, completion: { (firUser, error) in
+            FIRAuth.auth()?.createUser(withEmail: self.txtFirEmail.text!, password: self.txtFirPassword.text!, completion: { (firUser, error) in
                 if error != nil {
                     self.displayAlert(message: error.debugDescription)
+                    
+                    return
                 }
+                
+                let msg:String = String(format: "User Created : %s", (firUser?.email)!)
+                self.displayAlert(message: msg)
             })
         }
         else{
             
-            self.displayAlert(message: "Email and passowrd are mandatory!")
+            self.displayAlert(message: "SignUp : Email and passowrd are mandatory!")
         }
         
     }
@@ -228,6 +234,24 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBAction func btnFirLoginTapped(_ sender: AnyObject) {
         
         print("Firebase Login button tapped...\n", self.txtFirEmail.text!, "\n", self.txtFirPassword.text!)
+        
+        if self.txtFirEmail.text?.isEmpty == false && self.txtFirPassword.text?.isEmpty == false {
+            
+            FIRAuth.auth()?.signIn(withEmail: self.txtFirEmail.text!, password: self.txtFirPassword.text!, completion: { (firUser, error) in
+                if error != nil {
+                    self.displayAlert(message: error.debugDescription)
+                    
+                    return
+                }
+                
+                let msg:String = String(format: "Login sucessfull : %s", (firUser?.email)!)
+                self.displayAlert(message: msg)
+            })
+        }
+        else{
+            
+            self.displayAlert(message: "Login : Email and passowrd are mandatory!")
+        }
     }
     
 }
