@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DDVP/ViewController.swift"
-            timestampString = "505996164.865677"
+            timestampString = "506003607.897781"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "loginToFirebaseUsingFb()"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DDVP/ViewController.swift"
-            timestampString = "505996164.865677"
+            timestampString = "506003607.897781"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "loginToFirebaseUsingFb()"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,13 +42,73 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DDVP/ViewController.swift"
-            timestampString = "505996164.865677"
+            timestampString = "506001862.716133"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
-            landmarkName = "loginToFirebaseUsingFb()"
-            landmarkType = "7">
+            startingLineNumber = "10"
+            endingLineNumber = "10">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DDVP.ViewController.__deallocating_deinit"
+                  moduleName = "DDVP"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kaushikjadhav/Desktop/iPoll/DDVP/DDVP/ViewController.swift"
+                  timestampString = "506002392.959403"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DDVP.ViewController.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; DDVP.ViewController"
+                  moduleName = "DDVP"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kaushikjadhav/Desktop/iPoll/DDVP/DDVP/ViewController.swift"
+                  timestampString = "506002392.961284"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "57">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DDVP.ViewController.__allocating_init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; DDVP.ViewController"
+                  moduleName = "DDVP"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kaushikjadhav/Desktop/iPoll/DDVP/DDVP/ViewController.swift"
+                  timestampString = "506002392.963095"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DDVP.ViewController.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;DDVP.ViewController&gt;"
+                  moduleName = "DDVP"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kaushikjadhav/Desktop/iPoll/DDVP/DDVP/ViewController.swift"
+                  timestampString = "506002392.967254"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

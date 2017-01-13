@@ -91,6 +91,16 @@
                                 <frame key="frameInset" minX="177" minY="132" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pj-j0-QiI">
+                                <frame key="frameInset" minX="137" minY="318" width="100" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0025028256265846593" blue="0.0031184887533164396" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="btnLogoutTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EtS-Dj-kTm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -98,6 +108,7 @@
                     <connections>
                         <outlet property="btnFirLogin" destination="WBk-Pq-zTT" id="Uw5-m2-gKB"/>
                         <outlet property="btnFirSignUp" destination="SII-uW-lSt" id="Tnf-Zg-zyR"/>
+                        <outlet property="btnLogout" destination="6pj-j0-QiI" id="WTq-ji-Apf"/>
                         <outlet property="coverPhotoActivity" destination="6bO-QV-cYd" id="Mkr-Vy-ooj"/>
                         <outlet property="fbCoverPhoto" destination="BBS-lV-u4Z" id="1dx-zs-35b"/>
                         <outlet property="fbEmail" destination="ZB3-LS-3vP" id="QBL-vQ-z9a"/>

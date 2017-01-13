@@ -18,6 +18,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         return button
     }()
     
+    @IBOutlet weak var btnLogout: UIButton!
     @IBOutlet weak var firLoginView: UIView!
     @IBOutlet weak var txtFirEmail: UITextField!
     @IBOutlet weak var txtFirPassword: UITextField!
@@ -37,6 +38,9 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         view.addSubview(loginButton)
         loginButton.center = view.center
         loginButton.delegate = self
+        
+        btnLogout.center = view.center
+        btnLogout.isHidden = true
         
         if (FBSDKAccessToken.current()) != nil{
             fetchFBProfile()
@@ -192,6 +196,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             }
             
             self.firLoginView.isHidden = true
+            self.btnLogout.isHidden = true
             self.displayAlert(message: "Sucesfully loggedin to firebase.")
             
             print("Sucesfully loggedin for firebase user : ", fireBaseUser)
@@ -220,8 +225,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                     return
                 }
                 
-                let msg:String = String(format: "User Created : %s", (firUser?.email)!)
-                self.displayAlert(message: msg)
+                self.fireBaseSignUpComplete(user: firUser!)
             })
         }
         else{
@@ -244,8 +248,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                     return
                 }
                 
-                let msg:String = String(format: "Login sucessfull : %s", (firUser?.email)!)
-                self.displayAlert(message: msg)
+                self.fireBaseLoginComplete(user: firUser!)
             })
         }
         else{
@@ -254,5 +257,37 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
     }
     
+    @IBAction func btnLogoutTapped(_ sender: AnyObject) {
+        
+        try! FIRAuth.auth()?.signOut()
+        
+        self.btnLogout.isHidden = true
+        self.loginButton.isHidden = false
+        self.firLoginView.isHidden = false
+        
+    }
+    
+    
+    func fireBaseLoginComplete(user : FIRUser){
+        
+        self.btnLogout.isHidden = false
+        self.loginButton.isHidden = true
+        self.firLoginView.isHidden = true
+        
+        let msg:String = String(format: "Login sucessfull : %s", (user.email)!)
+        
+        self.displayAlert(message: msg)
+        
+    }
+    
+    func fireBaseSignUpComplete(user : FIRUser){
+        
+        self.btnLogout.isHidden = false
+        self.loginButton.isHidden = true
+        self.firLoginView.isHidden = true
+        
+        let msg:String = String(format: "Login sucessfull : %s", (user.email)!)
+        self.displayAlert(message: msg)
+    }
 }
 
