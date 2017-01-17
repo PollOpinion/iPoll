@@ -73,7 +73,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                 print("FBSDKGraphRequest error : \(error)")
                 return
             }
-            print(result)
+            print(result!)
             let resultDic = result as? NSDictionary
             
             let name = resultDic!["name"]
@@ -189,7 +189,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         let firAuthCredentials = FIRFacebookAuthProvider.credential(withAccessToken: fbaccessTokenString)
         FIRAuth.auth()?.signIn(with: firAuthCredentials, completion: { (fireBaseUser, error) in
             if error != nil {
-                print("Error logging in for firebase user. Error :\n ", error)
+                print("Error logging in for firebase user. Error :\n ", error!)
                 
                 self.displayAlert(message: "Error logging in to firebase user.")
                 return
@@ -199,7 +199,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             self.btnLogout.isHidden = true
             self.displayAlert(message: "Sucesfully loggedin to firebase.")
             
-            print("Sucesfully loggedin for firebase user : ", fireBaseUser)
+            print("Sucesfully loggedin for firebase user : ", fireBaseUser!)
             
         })
     }
