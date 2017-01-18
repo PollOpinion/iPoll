@@ -24,12 +24,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet weak var txtFirPassword: UITextField!
     @IBOutlet weak var btnFirSignUp: UIButton!
     @IBOutlet weak var btnFirLogin: UIButton!
-    @IBOutlet weak var myPicView: UIImageView!
-    @IBOutlet weak var fbName: UILabel!
-    @IBOutlet weak var fbEmail: UILabel!
-    @IBOutlet weak var fbPicLoadActivity: UIActivityIndicatorView!
-    @IBOutlet weak var coverPhotoActivity: UIActivityIndicatorView!
-    @IBOutlet weak var fbCoverPhoto: UIImageView!
     
     override func viewDidLoad() {
        
@@ -54,12 +48,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     func alignSubviews(){
         let x = view.center.x
         
-        myPicView.center = CGPoint(x: x, y: myPicView.center.y)
-        fbName.center = CGPoint(x: x, y: fbName.center.y)
-        fbEmail.center = CGPoint(x: x, y: fbEmail.center.y)
-        fbPicLoadActivity.center = CGPoint(x: x, y: fbPicLoadActivity.center.y)
-        fbCoverPhoto.center = CGPoint(x: x, y: fbCoverPhoto.center.y)
-        coverPhotoActivity.center = CGPoint(x: x, y: coverPhotoActivity.center.y)
         firLoginView.center = CGPoint(x: x, y: firLoginView.center.y)
     }
 
@@ -90,10 +78,12 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
 
             print("----------")
             
-            self.fbName.text = "\(name!) - \(fbId!)"
-            self.fbEmail.text = "\(email!)"
-            self.loadPic(imageUrl: dpUrl!, imgView: self.myPicView, activity: self.fbPicLoadActivity)
-            self.loadPic(imageUrl: coverSourceUrl!, imgView: self.fbCoverPhoto, activity: self.coverPhotoActivity)
+//            self.fbName.text = "\(name!) - \(fbId!)"
+//            self.fbEmail.text = "\(email!)"
+//            self.loadPic(imageUrl: dpUrl!, imgView: self.myPicView, activity: self.fbPicLoadActivity)
+//            self.loadPic(imageUrl: coverSourceUrl!, imgView: self.fbCoverPhoto, activity: self.coverPhotoActivity)
+            
+            self.performSegue(withIdentifier: "segueResultDetailVC", sender: self)
         }
     }
     
@@ -101,10 +91,10 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         print("void FB profile")
         
-        self.fbName.text = nil
-        self.fbEmail.text = nil
-        self.myPicView.image = nil
-        self.fbCoverPhoto.image = nil
+//        self.fbName.text = nil
+//        self.fbEmail.text = nil
+//        self.myPicView.image = nil
+//        self.fbCoverPhoto.image = nil
     }
     
     func logoutFirebase(){
@@ -122,6 +112,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!){
         
         print("FB login did complete")
+        
+        self.firLoginView.isHidden = true
         
         fetchFBProfile()
         
@@ -197,9 +189,12 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             self.firLoginView.isHidden = true
             self.btnLogout.isHidden = true
-            self.displayAlert(message: "Sucesfully loggedin to firebase.")
             
-            print("Sucesfully loggedin for firebase user : ", fireBaseUser!)
+            let msg:String  = String(format:"Login Sucessfull \n Display Name : \(fireBaseUser!.displayName!) \n Email : \(fireBaseUser!.email!) \n Provider ID: \(fireBaseUser!.providerID) \n User ID : \(fireBaseUser!.uid) \n Photo URL : \(fireBaseUser!.photoURL!)")
+            
+            self.displayAlert(message: msg)
+            
+            print(msg)
             
         })
     }
@@ -289,5 +284,24 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         let msg:String = String(format: "Login sucessfull : %s", (user.email)!)
         self.displayAlert(message: msg)
     }
+    
+
+    
+    
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+        
+//        if let loginResultVC:LoginResultDetailViewController = segue.destination as? LoginResultDetailViewController {
+//        
+//        loginResultVC.fbEmail.text = "email"
+//        loginResultVC.fbName.text = "name"
+//        }
+        
+     }
+ 
 }
 

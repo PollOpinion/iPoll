@@ -15,6 +15,8 @@
 		D47CE7221E26281900EDEC7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D47CE7201E26281900EDEC7D /* LaunchScreen.storyboard */; };
 		D47CE72D1E26281A00EDEC7D /* DDVPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47CE72C1E26281A00EDEC7D /* DDVPTests.swift */; };
 		D47CE7461E28B18500EDEC7D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D47CE7451E28B18500EDEC7D /* GoogleService-Info.plist */; };
+		DA4B9B2A1E2E358E003BFD61 /* LoginResultDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B291E2E358E003BFD61 /* LoginResultDetailViewController.swift */; };
+		DA4B9B2C1E2F386F003BFD61 /* PollUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B2B1E2F386F003BFD61 /* PollUser.swift */; };
 		F0FAFBE1F8B0C69D9A467D16 /* Pods_DDVP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3219DD6AFC4E41D21DE9C37B /* Pods_DDVP.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +49,8 @@
 		D47CE7441E28A8E900EDEC7D /* DDVP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DDVP.entitlements; sourceTree = "<group>"; };
 		D47CE7451E28B18500EDEC7D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8BF37A9C3C7FD84FA88983B /* Pods-DDVPTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDVPTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DDVPTests/Pods-DDVPTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DA4B9B291E2E358E003BFD61 /* LoginResultDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginResultDetailViewController.swift; sourceTree = "<group>"; };
+		DA4B9B2B1E2F386F003BFD61 /* PollUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollUser.swift; sourceTree = "<group>"; };
 		F612758880399ED7BC44B052 /* Pods-DDVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDVP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DDVP/Pods-DDVP.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,7 +109,9 @@
 				D47CE7441E28A8E900EDEC7D /* DDVP.entitlements */,
 				D47CE7171E26281900EDEC7D /* AppDelegate.swift */,
 				D47CE7191E26281900EDEC7D /* ViewController.swift */,
+				DA4B9B291E2E358E003BFD61 /* LoginResultDetailViewController.swift */,
 				D47CE73C1E262F7A00EDEC7D /* DDVP-Bridging-Header.h */,
+				DA4B9B2B1E2F386F003BFD61 /* PollUser.swift */,
 				D47CE71B1E26281900EDEC7D /* Main.storyboard */,
 				D47CE71E1E26281900EDEC7D /* Assets.xcassets */,
 				D47CE7201E26281900EDEC7D /* LaunchScreen.storyboard */,
@@ -345,8 +351,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA4B9B2A1E2E358E003BFD61 /* LoginResultDetailViewController.swift in Sources */,
 				D47CE71A1E26281900EDEC7D /* ViewController.swift in Sources */,
 				D47CE7181E26281900EDEC7D /* AppDelegate.swift in Sources */,
+				DA4B9B2C1E2F386F003BFD61 /* PollUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
