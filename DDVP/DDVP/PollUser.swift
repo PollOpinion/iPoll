@@ -9,14 +9,28 @@
 import Foundation
 
 
+enum LoginProvider {
+    // enumeration definition goes here
+    case custom, facebook
+}
+
 class PollUser {
     
-    var Id: Int
+    var Id: String
     var Name: String
+    var Email: String
+    var PhotoURL: URL
+    var ProviderId: String
     
-    init(id: Int, name: String?) {
-        self.Id = id
-        self.Name = name ?? ""
+    
+    init(id: String?, name: String?, email: String?, photoURL: URL?, providerId: String?) {
+        self.Id = id!
+        self.Name = name ?? "NotAvailable"
+        self.Email = email ?? "NotAvailable"
+        self.PhotoURL = photoURL ?? URL(string: "NoUrlAvailable")!
+        self.ProviderId = providerId ?? "NotAvailable"
+        
+        
     }
     
 }

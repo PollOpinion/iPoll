@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		29CF37C2180EC88B4C0FF006 /* Pods_DDVPTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C29FFC58C1469D5F7142E74 /* Pods_DDVPTests.framework */; };
 		D47CE7181E26281900EDEC7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47CE7171E26281900EDEC7D /* AppDelegate.swift */; };
-		D47CE71A1E26281900EDEC7D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47CE7191E26281900EDEC7D /* ViewController.swift */; };
+		D47CE71A1E26281900EDEC7D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47CE7191E26281900EDEC7D /* LoginViewController.swift */; };
 		D47CE71D1E26281900EDEC7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D47CE71B1E26281900EDEC7D /* Main.storyboard */; };
 		D47CE71F1E26281900EDEC7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D47CE71E1E26281900EDEC7D /* Assets.xcassets */; };
 		D47CE7221E26281900EDEC7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D47CE7201E26281900EDEC7D /* LaunchScreen.storyboard */; };
@@ -37,7 +37,7 @@
 		663119AF4B887F86D07277D1 /* Pods-DDVP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDVP.release.xcconfig"; path = "Pods/Target Support Files/Pods-DDVP/Pods-DDVP.release.xcconfig"; sourceTree = "<group>"; };
 		D47CE7141E26281900EDEC7D /* DDVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47CE7171E26281900EDEC7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D47CE7191E26281900EDEC7D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D47CE7191E26281900EDEC7D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D47CE71C1E26281900EDEC7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D47CE71E1E26281900EDEC7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D47CE7211E26281900EDEC7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 			children = (
 				D47CE7441E28A8E900EDEC7D /* DDVP.entitlements */,
 				D47CE7171E26281900EDEC7D /* AppDelegate.swift */,
-				D47CE7191E26281900EDEC7D /* ViewController.swift */,
+				D47CE7191E26281900EDEC7D /* LoginViewController.swift */,
 				DA4B9B291E2E358E003BFD61 /* LoginResultDetailViewController.swift */,
 				D47CE73C1E262F7A00EDEC7D /* DDVP-Bridging-Header.h */,
 				DA4B9B2B1E2F386F003BFD61 /* PollUser.swift */,
@@ -352,7 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA4B9B2A1E2E358E003BFD61 /* LoginResultDetailViewController.swift in Sources */,
-				D47CE71A1E26281900EDEC7D /* ViewController.swift in Sources */,
+				D47CE71A1E26281900EDEC7D /* LoginViewController.swift in Sources */,
 				D47CE7181E26281900EDEC7D /* AppDelegate.swift in Sources */,
 				DA4B9B2C1E2F386F003BFD61 /* PollUser.swift in Sources */,
 			);
