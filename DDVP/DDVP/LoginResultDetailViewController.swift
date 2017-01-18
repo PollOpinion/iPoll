@@ -10,20 +10,27 @@ import UIKit
 
 class LoginResultDetailViewController: UIViewController {
     
-    @IBOutlet weak var myPicView: UIImageView!
-    @IBOutlet weak var fbName: UILabel!
-    @IBOutlet weak var fbEmail: UILabel!
-    @IBOutlet weak var fbPicLoadActivity: UIActivityIndicatorView!
-    @IBOutlet weak var coverPhotoActivity: UIActivityIndicatorView!
-    @IBOutlet weak var fbCoverPhoto: UIImageView!
+    @IBOutlet weak var userPhoto: UIImageView!
+    @IBOutlet weak var photoActivity: UIActivityIndicatorView!
+    @IBOutlet weak var userId: UILabel!
+    @IBOutlet weak var userEmail: UILabel!
+    @IBOutlet weak var userName: UILabel!
+    
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.title = "Login Result"
-
         alignSubviews()
+        
+        self.userId.text = pollUser?.Id
+        self.userEmail.text = pollUser?.Email
+        self.userName.text = pollUser?.Name
+        
+        if pollUser?.PhotoURL != nil {
+            self.loadPic(imageUrl: (pollUser?.PhotoURL.absoluteString)!, imgView: self.userPhoto, activity: self.photoActivity)
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,17 +49,56 @@ class LoginResultDetailViewController: UIViewController {
     }
     */
     
+    //MARK: - Helper Functions
+    
     // align all subviews Horizontally Centered to view
     func alignSubviews(){
         let x = view.center.x
         
-        myPicView.center = CGPoint(x: x, y: myPicView.center.y)
-        fbName.center = CGPoint(x: x, y: fbName.center.y)
-        fbEmail.center = CGPoint(x: x, y: fbEmail.center.y)
-        fbPicLoadActivity.center = CGPoint(x: x, y: fbPicLoadActivity.center.y)
-        fbCoverPhoto.center = CGPoint(x: x, y: fbCoverPhoto.center.y)
-        coverPhotoActivity.center = CGPoint(x: x, y: coverPhotoActivity.center.y)
+        userPhoto.center = CGPoint(x: x, y: userPhoto.center.y)
+        photoActivity.center = CGPoint(x: x, y: photoActivity.center.y)
+        userId.center = CGPoint(x: x, y: userId.center.y)
+        userEmail.center = CGPoint(x: x, y: userEmail.center.y)
+        userName.center = CGPoint(x: x, y: userName.center.y)
+    }
+    
+    func loadPic(imageUrl:String, imgView:UIImageView, activity:UIActivityIndicatorView)
+    {
+        activity.startAnimating()
         
+        let catPictureURL = URL(string: imageUrl)!
+        
+        // Creating a session object with the default configuration.
+        // You can read more about it here https://developer.apple.com/reference/foundation/urlsessionconfiguration
+        let session = URLSession(configuration: .default)
+        
+        // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
+        let downloadPicTask = session.dataTask(with: catPictureURL) { (data, response, error) in
+            // The download has finished.
+            if let e = error {
+                print("Error downloading cat picture: \(e)")
+            } else {
+                // No errors found.
+                // It would be weird if we didn't have a response, so check for that too.
+                if let res = response as? HTTPURLResponse {
+                    print("Downloaded cat picture with response code \(res.statusCode)")
+                    if let imageData = data {
+                        // Finally convert that Data into an image and do what you wish with it.
+                        let image = UIImage(data: imageData)
+                        // Do something with your image.
+                        imgView.image = image
+                        
+                    } else {
+                        print("Couldn't get image: Image is nil")
+                    }
+                } else {
+                    print("Couldn't get response code for some reason")
+                }
+            }
+            activity.stopAnimating()
+        }
+        
+        downloadPicTask.resume()
     }
 
 }

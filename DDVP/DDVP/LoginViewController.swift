@@ -10,6 +10,8 @@ import UIKit
 import FBSDKLoginKit
 import Firebase
 
+var pollUser : PollUser?
+
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     let loginButton: FBSDKLoginButton = {
@@ -37,7 +39,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         btnLogout.isHidden = true
         
         if (FBSDKAccessToken.current()) != nil{
-            fetchFBProfile()
+//            fetchFBProfile()
+            loginToFirebaseUsingFb()
+        }
+        else{
+            print("Auto fb login failed...")
         }
         
         alignSubviews()
@@ -55,9 +61,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         print("FB login did complete")
         
-        self.firLoginView.isHidden = true
-        
-        fetchFBProfile()
+//        fetchFBProfile()
         
         loginToFirebaseUsingFb()
         
@@ -67,11 +71,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!){
         
         print("FB logout complete")
-        
-        voidFBProfile()
-        logoutFirebase()
-        self.firLoginView.isHidden = false
-        
+
+        logoutFirebaseAndReset()
     }
     
     func loginButtonWillLogin(_ loginButton: FBSDKLoginButton!) -> Bool {
@@ -128,11 +129,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBAction func btnLogoutTapped(_ sender: AnyObject) {
         
-        try! FIRAuth.auth()?.signOut()
+        print("Custom logout complete")
         
-        self.btnLogout.isHidden = true
-        self.loginButton.isHidden = false
-        self.firLoginView.isHidden = false
+        logoutFirebaseAndReset()
         
     }
     
@@ -151,13 +150,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         self.firLoginView.isHidden = true
         
-        let pollUser : PollUser = PollUser.init(id: user.uid, name: user.displayName, email: user.email, photoURL: user.photoURL, providerId: user.providerID)
+        pollUser = PollUser.init(id: user.uid, name: user.displayName, email: user.email, photoURL: user.photoURL, providerId: user.providerID)
         
         
-        let msg:String  = String(format:"Login Sucessfull \n Display Name : \(pollUser.Name) \n Email : \(pollUser.Email) \n Provider Id: \(pollUser.ProviderId) \n User Id : \(pollUser.Id) \n Photo URL : \(pollUser.PhotoURL)")
+        //below two lines just for testing, can be removed later
+        let msg:String  = String(format:"Login Sucessfull \n Display Name : \(pollUser!.Name) \n Email : \(pollUser!.Email) \n Provider Id: \(pollUser!.ProviderId) \n User Id : \(pollUser!.Id) \n Photo URL : \(pollUser!.PhotoURL)")
         
         print(msg)
-        self.displayAlert(message: msg)
+//        self.displayAlert(message: msg)
+        
+       self.performSegue(withIdentifier: "segueLoginResultDetailVC", sender: nil)
         
     }
     
@@ -175,7 +177,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     
      // MARK: - Navigation
-     
+    
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
@@ -196,45 +198,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    func loadPic(imageUrl:String, imgView:UIImageView, activity:UIActivityIndicatorView)
-    {
-        activity.startAnimating()
-        
-        let catPictureURL = URL(string: imageUrl)!
-        
-        // Creating a session object with the default configuration.
-        // You can read more about it here https://developer.apple.com/reference/foundation/urlsessionconfiguration
-        let session = URLSession(configuration: .default)
-        
-        // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
-        let downloadPicTask = session.dataTask(with: catPictureURL) { (data, response, error) in
-            // The download has finished.
-            if let e = error {
-                print("Error downloading cat picture: \(e)")
-            } else {
-                // No errors found.
-                // It would be weird if we didn't have a response, so check for that too.
-                if let res = response as? HTTPURLResponse {
-                    print("Downloaded cat picture with response code \(res.statusCode)")
-                    if let imageData = data {
-                        // Finally convert that Data into an image and do what you wish with it.
-                        let image = UIImage(data: imageData)
-                        // Do something with your image.
-                        imgView.image = image
-                        
-                    } else {
-                        print("Couldn't get image: Image is nil")
-                    }
-                } else {
-                    print("Couldn't get response code for some reason")
-                }
-            }
-            activity.stopAnimating()
-        }
-        
-        downloadPicTask.resume()
     }
     
     func loginToFirebaseUsingFb(){
@@ -263,6 +226,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         firLoginView.center = CGPoint(x: x, y: firLoginView.center.y)
     }
     
+    //Not in use currently
     func fetchFBProfile(){
         
         print("fetch FB profile")
@@ -298,19 +262,17 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
     }
     
-    func voidFBProfile(){
+    func logoutFirebaseAndReset(){
         
-        print("void FB profile")
-        
-        //        self.fbName.text = nil
-        //        self.fbEmail.text = nil
-        //        self.myPicView.image = nil
-        //        self.fbCoverPhoto.image = nil
-    }
-    
-    func logoutFirebase(){
+        print("FireBase logout and reset")
         
         try! FIRAuth.auth()?.signOut()
+        
+        self.btnLogout.isHidden = true
+        self.loginButton.isHidden = false
+        self.firLoginView.isHidden = false
+        
+        pollUser = nil
         
     }
  
