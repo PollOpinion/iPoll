@@ -20,7 +20,7 @@ enum UserRole {
 }
 
 
-class PollUser {
+struct PollUser {
     
     var Id: String
     var Name: String
@@ -39,4 +39,11 @@ class PollUser {
         self.LoginRole = role
     }
     
+    func toAnyObject() -> Any {
+        return [
+            "name": Name,
+            "email": Email,
+            "providerId": ProviderId
+        ]
+    }
 }

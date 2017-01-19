@@ -111,16 +111,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         print("Firebase Login button tapped...\n", self.txtFirEmail.text!, "\n", self.txtFirPassword.text!)
         
         if self.txtFirEmail.text?.isEmpty == false && self.txtFirPassword.text?.isEmpty == false {
-            
-            FIRAuth.auth()?.signIn(withEmail: self.txtFirEmail.text!, password: self.txtFirPassword.text!, completion: { (firUser, error) in
-                if error != nil {
-                    self.displayAlert(message: error.debugDescription)
-                    
-                    return
-                }
-                
-                self.fireBaseLoginComplete(user: firUser!, loginProvider: UserProvider.custom)
-            })
+            self.firebaseLogin()
         }
         else{
             
@@ -182,9 +173,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.btnLogout.isHidden = false
         self.loginButton.isHidden = true
         self.firLoginView.isHidden = true
-        
-        let msg:String = String(format: "Login sucessfull : %s", (user.email)!)
-        self.displayAlert(message: msg)
+        self.firebaseLogin()
     }
     
 
@@ -287,6 +276,20 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.firLoginView.isHidden = false
         
         pollUser = nil
+        
+    }
+    
+    func firebaseLogin (){
+        
+        FIRAuth.auth()?.signIn(withEmail: self.txtFirEmail.text!, password: self.txtFirPassword.text!, completion: { (firUser, error) in
+            if error != nil {
+                self.displayAlert(message: error.debugDescription)
+                
+                return
+            }
+            
+            self.fireBaseLoginComplete(user: firUser!, loginProvider: UserProvider.custom)
+        })
         
     }
  
