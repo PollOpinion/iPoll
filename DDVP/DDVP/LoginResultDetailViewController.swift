@@ -16,9 +16,9 @@ class LoginResultDetailViewController: UIViewController {
     @IBOutlet weak var userEmail: UILabel!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userRole: UILabel!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var roleSegement: UISegmentedControl!
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,6 +52,35 @@ class LoginResultDetailViewController: UIViewController {
     }
     */
     
+    //MARK: - Action handler
+    
+    @IBAction func nextBtnTapped(_ sender: Any) {
+        
+        if pollUser?.LoginRole == UserRole.presenter {
+            self.performSegue(withIdentifier: "seguePresenterVC", sender: nil)
+        }
+        else{ //participant
+            self.performSegue(withIdentifier: "segueParticipantVC", sender: nil)
+        }
+        
+    }
+
+    @IBAction func userRoleChanged(_ sender: Any) {
+        
+        let segCntrl:UISegmentedControl = sender as! UISegmentedControl
+        switch segCntrl.selectedSegmentIndex  {
+        case 0:
+            pollUser?.LoginRole = UserRole.presenter
+            break
+        case 1:
+            pollUser?.LoginRole = UserRole.participant
+            break
+        default:
+            pollUser?.LoginRole = UserRole.presenter
+            break
+        }
+    }
+    
     //MARK: - Helper Functions
     
     // align all subviews Horizontally Centered to view
@@ -64,6 +93,8 @@ class LoginResultDetailViewController: UIViewController {
         userEmail.center = CGPoint(x: x, y: userEmail.center.y)
         userName.center = CGPoint(x: x, y: userName.center.y)
         userRole.center = CGPoint(x: x, y: userRole.center.y)
+        roleSegement.center = CGPoint(x: x, y: roleSegement.center.y)
+        nextButton.center = CGPoint(x: x, y: nextButton.center.y)
     }
     
     func loadPic(imageUrl:String, imgView:UIImageView, activity:UIActivityIndicatorView)
@@ -110,12 +141,13 @@ class LoginResultDetailViewController: UIViewController {
         
         if pollUser?.LoginRole == UserRole.presenter{
             roleStr = "Presenter"
+            self.roleSegement.selectedSegmentIndex = 0
         }
         else{
             roleStr = "Participant"
+            self.roleSegement.selectedSegmentIndex = 1
         }
         
-        self.userRole.text = String(format: "You are logged in as \(roleStr)")
+        print("You are logged in as \(roleStr)")
     }
-
 }
