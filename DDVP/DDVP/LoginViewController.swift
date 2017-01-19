@@ -20,6 +20,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         return button
     }()
     
+    @IBOutlet weak var roleSegment: UISegmentedControl!
     @IBOutlet weak var btnLogout: UIButton!
     @IBOutlet weak var firLoginView: UIView!
     @IBOutlet weak var txtFirEmail: UITextField!
@@ -118,7 +119,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                     return
                 }
                 
-                self.fireBaseLoginComplete(user: firUser!, loginProvider: LoginProvider.custom)
+                self.fireBaseLoginComplete(user: firUser!, loginProvider: UserProvider.custom)
             })
         }
         else{
@@ -137,9 +138,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
    // MARK: - Firebase
     
-    func fireBaseLoginComplete(user : FIRUser, loginProvider:LoginProvider){
+    func fireBaseLoginComplete(user : FIRUser, loginProvider:UserProvider){
         
-        if loginProvider == LoginProvider.custom {
+        if loginProvider == UserProvider.custom {
             self.btnLogout.isHidden = false
             self.loginButton.isHidden = true
         }
@@ -150,7 +151,20 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         self.firLoginView.isHidden = true
         
-        pollUser = PollUser.init(id: user.uid, name: user.displayName, email: user.email, photoURL: user.photoURL, providerId: user.providerID)
+        var userRole: UserRole
+        switch self.roleSegment.selectedSegmentIndex {
+        case 0:
+            userRole = UserRole.presenter
+            break
+        case 1:
+            userRole = UserRole.participant
+            break
+        default:
+            userRole = UserRole.presenter
+            break
+        }
+        
+        pollUser = PollUser.init(id: user.uid, name: user.displayName, email: user.email, photoURL: user.photoURL, providerId: user.providerID, role: userRole )
         
         
         //below two lines just for testing, can be removed later
@@ -215,7 +229,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             self.firLoginView.isHidden = true
             self.btnLogout.isHidden = true
             
-            self.fireBaseLoginComplete(user: fireBaseUser!, loginProvider: LoginProvider.facebook)
+            self.fireBaseLoginComplete(user: fireBaseUser!, loginProvider: UserProvider.facebook)
         })
     }
     

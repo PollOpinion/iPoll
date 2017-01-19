@@ -15,6 +15,7 @@ class LoginResultDetailViewController: UIViewController {
     @IBOutlet weak var userId: UILabel!
     @IBOutlet weak var userEmail: UILabel!
     @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var userRole: UILabel!
     
     
 
@@ -30,6 +31,8 @@ class LoginResultDetailViewController: UIViewController {
         if pollUser?.PhotoURL != nil {
             self.loadPic(imageUrl: (pollUser?.PhotoURL.absoluteString)!, imgView: self.userPhoto, activity: self.photoActivity)
         }
+        
+        self.displayUserRole()
         
     }
 
@@ -60,6 +63,7 @@ class LoginResultDetailViewController: UIViewController {
         userId.center = CGPoint(x: x, y: userId.center.y)
         userEmail.center = CGPoint(x: x, y: userEmail.center.y)
         userName.center = CGPoint(x: x, y: userName.center.y)
+        userRole.center = CGPoint(x: x, y: userRole.center.y)
     }
     
     func loadPic(imageUrl:String, imgView:UIImageView, activity:UIActivityIndicatorView)
@@ -99,6 +103,19 @@ class LoginResultDetailViewController: UIViewController {
         }
         
         downloadPicTask.resume()
+    }
+    
+    func displayUserRole() {
+        var roleStr:String
+        
+        if pollUser?.LoginRole == UserRole.presenter{
+            roleStr = "Presenter"
+        }
+        else{
+            roleStr = "Participant"
+        }
+        
+        self.userRole.text = String(format: "You are logged in as \(roleStr)")
     }
 
 }

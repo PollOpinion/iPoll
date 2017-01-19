@@ -9,10 +9,16 @@
 import Foundation
 
 
-enum LoginProvider {
-    // enumeration definition goes here
+// login provider e.g. facebook
+enum UserProvider {
     case custom, facebook
 }
+
+//user role
+enum UserRole {
+    case presenter, participant
+}
+
 
 class PollUser {
     
@@ -21,16 +27,16 @@ class PollUser {
     var Email: String
     var PhotoURL: URL
     var ProviderId: String
+    var LoginRole: UserRole
     
     
-    init(id: String?, name: String?, email: String?, photoURL: URL?, providerId: String?) {
+    init(id: String?, name: String?, email: String?, photoURL: URL?, providerId: String?, role: UserRole) {
         self.Id = id!
         self.Name = name ?? "NotAvailable"
         self.Email = email ?? "NotAvailable"
         self.PhotoURL = photoURL ?? URL(string: "NoUrlAvailable")!
         self.ProviderId = providerId ?? "NotAvailable"
-        
-        
+        self.LoginRole = role
     }
     
 }
