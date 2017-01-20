@@ -216,7 +216,7 @@
             </objects>
             <point key="canvasLocation" x="1952.8" y="113.79310344827587"/>
         </scene>
-        <!--Participant View Controller-->
+        <!--Participant-->
         <scene sceneID="MGa-SG-7Zt">
             <objects>
                 <tableViewController id="Swc-fy-stp" customClass="ParticipantViewController" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
@@ -229,7 +229,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fcL-ZM-gp5" id="LVQ-r1-v1K">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -239,12 +239,15 @@
                             <outlet property="delegate" destination="Swc-fy-stp" id="5yf-vF-qk4"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Participant" id="dyB-48-o5h" userLabel="Participant">
+                        <barButtonItem key="rightBarButtonItem" title="+" id="m1o-MQ-asd"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kya-aH-uEE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2862" y="549"/>
         </scene>
-        <!--Presenter View Controller-->
+        <!--Presenter-->
         <scene sceneID="Od9-Pr-9qR">
             <objects>
                 <tableViewController id="44W-Tu-Wnd" customClass="PresenterViewController" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
@@ -253,13 +256,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.74470064268369485" green="0.97645542392262552" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="sO7-cX-VKv">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventCell" id="sO7-cX-VKv" customClass="PresenterEventCell" customModule="DDVP" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sO7-cX-VKv" id="edh-eW-RRP">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYY-l2-TD9">
+                                            <rect key="frame" x="22" y="12" width="331" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="eventName" destination="YYY-l2-TD9" id="cNx-pZ-Mlf"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -267,10 +282,20 @@
                             <outlet property="delegate" destination="44W-Tu-Wnd" id="dU5-FI-Gxx"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Presenter" id="YGl-KE-DW9">
+                        <barButtonItem key="rightBarButtonItem" title="+" id="cBy-hx-YGB">
+                            <connections>
+                                <action selector="addEventTapped:" destination="44W-Tu-Wnd" id="cqQ-83-aR1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="barBtnAddEvent" destination="cBy-hx-YGB" id="xLB-L9-AZU"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aHp-Tq-lLB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2862" y="-293"/>
+            <point key="canvasLocation" x="2861.5999999999999" y="-293.70314842578711"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="X6A-0t-81N">
