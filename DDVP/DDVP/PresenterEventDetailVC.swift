@@ -1,19 +1,34 @@
 //
-//  PresenterViewController.swift
+//  PresenterEventDetailVC.swift
 //  DDVP
 //
-//  Created by Pankaj Neve on 19/01/17.
+//  Created by Pankaj Neve on 20/01/17.
 //  Copyright © 2017 CTS. All rights reserved.
 //
 
 import UIKit
 
-class PresenterViewController: UITableViewController {
+class PresenterEventDetailVC: UITableViewController {
+    
+    
+    struct PresenterQueEvent{
+        
+        var title: String
+        var question: String
+        var count: Int
+        
+        
+        init(titleStr: String?, questionStr: String?, countInt:Int) {
+            self.title = titleStr ?? ""
+            self.question = questionStr ?? ""
+            self.count = countInt
+        }
+    }
+    
+    
+    var eventsArray = [Any] ()
+    
 
-    @IBOutlet weak var barBtnAddEvent: UIBarButtonItem!
-    
-    var eventsArray = [String]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,26 +36,17 @@ class PresenterViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         self.tableView.reloadData()
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    // MARK: - Table View Delegate
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        print ("Row at index \(indexPath.row) tapped")
-        self.performSegue(withIdentifier: "seguePresenterEventDetailsVC", sender: self)
-    }
-    
-    
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -55,14 +61,17 @@ class PresenterViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as! PresenterEventCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PresenterQueCell", for: indexPath) as! PresenterQuestionCell
 
-        cell.eventName.text = self.eventsArray[indexPath.row]
+        // Configure the cell...
+        let eventObj : PresenterQueEvent = self.eventsArray[indexPath.row] as! PresenterQueEvent
+        cell.queTitleLbl.text = eventObj.title
+        cell.queQueLbl.text = eventObj.question
+        cell.queSubscribersCountLbl.text = String("\(eventObj.count)")
 
         return cell
     }
     
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -98,7 +107,7 @@ class PresenterViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -106,35 +115,19 @@ class PresenterViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
-    
-    //MARK: Action Handler
-    
-    @IBAction func addEventTapped(_ sender: Any) {
-        let alert = UIAlertController(title: "Add Event", message: "Enter the event name", preferredStyle: UIAlertControllerStyle.alert)
-        var eventNameTextField: UITextField?
-        alert.addTextField { (textField: UITextField) -> Void in
-            eventNameTextField = textField
-            eventNameTextField?.placeholder = "Your event name goes here..."
-            eventNameTextField?.autocapitalizationType = UITextAutocapitalizationType.words
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) { (alertAction) -> Void in
-        }
-        alert.addAction(cancelAction)
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { [weak self] (alertAction) -> Void in
-            
-            if let eventName = eventNameTextField?.text, eventName.characters.count > 0 {
-                print(eventName)
-                //TOOD : add event to Firebase
-                self?.eventsArray.append(eventName)
-                self?.tableView.reloadData()
-            }
-        }
-        alert.addAction(okAction)
+    @IBAction func addQuestionBarBtnTapped(_ sender: Any) {
         
-        self.present(alert, animated: true) { () -> Void in
-            
-        }
+        print ("addQuestionBarBtnTapped")
+        //TODO: launch another view(something similar to AddQuestionVC form PUBLISHER app) or a readymade view for PUBLISHER reference app, which will configure a question. 
+        
+        /// folllwoing code is for testing only
+        
+        let eventTemp : PresenterQueEvent = PresenterQueEvent.init(titleStr: "Title", questionStr: "Question string here?", countInt: 23)
+        eventsArray.append(eventTemp)
+        
+        self.tableView.reloadData()
+        
     }
 }
