@@ -21,10 +21,26 @@ class FirebaseManager: NSObject{
     
     // MARK: Public methods
     // MARK: Event methods
-    func addEventWithName(eventName: String) {
-        let allChannelsFirebase = FIRDatabase.database().reference().child(kEventsList + "/" + eventName)
+    
+    func fetchAllEvents(){
+        let allEventsFirebase = FIRDatabase.database().reference().child(kEventsList)
         
-        allChannelsFirebase.setValue(eventName) { (error, databaseReference) in
+        allEventsFirebase.observeSingleEvent(of: FIRDataEventType.value) { (dataSnapshot: FIRDataSnapshot) in
+            guard dataSnapshot.exists() else{
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationAllEvents), object: nil)
+                return
+            }
+            
+            let channelsListArray = dataSnapshot.value as! [String: String]
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationAllEvents), object: nil, userInfo: channelsListArray)
+        }
+        
+    }
+    
+    func addEventWithName(eventName: String) {
+        let allEventsFirebase = FIRDatabase.database().reference().child(kEventsList + "/" + eventName)
+        
+        allEventsFirebase.setValue(eventName) { (error : Error?, databaseReference:FIRDatabaseReference) in
             let isAdded = error == nil
             var userInfo : [String : Any] = ["isAdded": isAdded]
             
@@ -38,14 +54,14 @@ class FirebaseManager: NSObject{
     }
     
     // MARK: Question methods
-    func uploadQuestionAtChannel(channelName: String, withData data: [String: Any]) {
+    func uploadQuestionAtChannel(eventName: String, withData data: [String: Any]) {
         var uploadData = data
         uploadData[kKeyQuestionId] = FIRServerValue.timestamp()
         
-        let uploadQuestionFirebase = FIRDatabase.database().reference().child(channelName + kEventsQuiz).childByAutoId()
+        let uploadQuestionFirebase = FIRDatabase.database().reference().child(eventName + kEventsQuiz).childByAutoId()
         
         
-        uploadQuestionFirebase.setValue(uploadData) { (error, databaseReference) in
+        uploadQuestionFirebase.setValue(uploadData) { (error: Error?, databaseReference:FIRDatabaseReference) in
             
             let isUploaded = error == nil
             var userInfo: [String: Any] = ["isUploaded": isUploaded]
@@ -56,5 +72,24 @@ class FirebaseManager: NSObject{
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationUploadedQuestion), object: nil, userInfo: userInfo)
         }
     }
+    
+    
+    func fetchAllQuestionsInChannel(eventName: String) {
+        let questionsFirebase = FIRDatabase.database().reference().child(eventName + kEventsQuiz)
+        
+        questionsFirebase.queryOrderedByKey().observeSingleEvent(of: FIRDataEventType.value) { (dataSnapshot: FIRDataSnapshot) in
+            
+            guard dataSnapshot.exists() else{
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationFetchedQuestions), object: nil)
+                return
+            }
+            
+            let questionData = dataSnapshot.value as! [String : Any]
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationFetchedQuestions), object: nil, userInfo: questionData)
+        }
+
+    }
+
     
 }
