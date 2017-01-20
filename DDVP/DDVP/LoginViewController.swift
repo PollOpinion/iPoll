@@ -152,7 +152,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             break
         }
         
-        pollUser = PollUser.init(id: user.uid, name: user.displayName, email: user.email, photoURL: user.photoURL, providerId: user.providerID, role: userRole )
+        pollUser = PollUser.init(id: user.uid, name: user.displayName, email: user.email, photoURL: user.photoURL, providerId: user.providerID, role: userRole, provider: loginProvider )
         
         
         //below two lines just for testing, can be removed later
@@ -254,6 +254,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.firLoginView.isHidden = false
         
         pollUser = nil
+        
+        self.navigationController?.popViewController(animated: true)
         
     }
     

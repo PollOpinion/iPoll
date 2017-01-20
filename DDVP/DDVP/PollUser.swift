@@ -28,15 +28,17 @@ struct PollUser {
     var PhotoURL: URL
     var ProviderId: String
     var LoginRole: UserRole
+    var UserProvider: UserProvider
     
     
-    init(id: String?, name: String?, email: String?, photoURL: URL?, providerId: String?, role: UserRole) {
+    init(id: String?, name: String?, email: String?, photoURL: URL?, providerId: String?, role: UserRole, provider: UserProvider) {
         self.Id = id!
         self.Name = name ?? "NotAvailable"
         self.Email = email ?? "NotAvailable"
         self.PhotoURL = photoURL ?? URL(string: "NoUrlAvailable")!
         self.ProviderId = providerId ?? "NotAvailable"
         self.LoginRole = role
+        self.UserProvider = provider
     }
     
     func toAnyObject() -> Any {
