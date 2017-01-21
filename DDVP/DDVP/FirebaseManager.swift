@@ -21,7 +21,7 @@ class FirebaseManager: NSObject{
         super.init()
     }
     deinit {
-        self.stopListeningToOnlineUsersCount()
+        //self.stopListeningToOnlineUsersCount()
     }
     
     // MARK: Public methods
@@ -45,7 +45,7 @@ class FirebaseManager: NSObject{
     func addEventWithName(eventName: String) {
         let allEventsFirebase = FIRDatabase.database().reference().child(kEventsList + "/" + eventName)
         
-        allEventsFirebase.setValue(eventName) { (error : Error?, databaseReference:FIRDatabaseReference) in
+        allEventsFirebase.setValue(eventName) { (error, databaseReference) in
             let isAdded = error == nil
             var userInfo : [String : Any] = ["isAdded": isAdded]
             
@@ -66,7 +66,7 @@ class FirebaseManager: NSObject{
         let uploadQuestionFirebase = FIRDatabase.database().reference().child(eventName + kEventsQuiz).childByAutoId()
         
         
-        uploadQuestionFirebase.setValue(uploadData) { (error: Error?, databaseReference:FIRDatabaseReference) in
+        uploadQuestionFirebase.setValue(uploadData) { (error, databaseReference) in
             
             let isUploaded = error == nil
             var userInfo: [String: Any] = ["isUploaded": isUploaded]
