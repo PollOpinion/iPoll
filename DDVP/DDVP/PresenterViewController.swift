@@ -23,12 +23,61 @@ class PresenterViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        self.tableView.reloadData()
+        self.addObservers()
+        self.listAllEvents()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: Private methods
+    private func addObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(self.addedEventNotification(notification:)), name: NSNotification.Name(rawValue: kNotificationAddedEvents), object: nil)
+          notificationCenter.addObserver(self, selector: #selector(self.fetchEventNotification(notification:)), name: NSNotification.Name(rawValue: kNotificationAllEvents), object: nil)
+        
+    }
+    private func listAllEvents() {
+       MBProgressHUD.showAdded(to: self.view, animated: true)
+       FirebaseManager.sharedInstance.fetchAllEvents()
+    }
+    
+    
+    
+    // MARK: Selector methods
+    func addedEventNotification(notification: Notification) {
+        MBProgressHUD.hide(for: self.view, animated: true)
+        if let userInfo = notification.userInfo as! [String: AnyObject]?,
+            let isAdded = userInfo["isAdded"] as! Bool? {
+            guard isAdded else {
+                if let error = userInfo["error"] as! NSError? {
+                    //Show ALert
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+                    let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { (alertAction) -> Void in
+                    }
+                    alert.addAction(okAction)
+                    self.present(alert, animated: true) { () -> Void in
+                        
+                    }
+                }
+                return
+            }
+            self.listAllEvents()
+        }
+    }
+    
+    func fetchEventNotification(notification: Notification) {
+        MBProgressHUD.hide(for: self.view, animated: true)
+        if let eventsListArray = notification.userInfo as! [String: String]? {
+            self.eventsArray = eventsListArray.keys.sorted()
+            self.tableView.reloadData()
+        }
+
     }
     
     
@@ -126,9 +175,9 @@ class PresenterViewController: UITableViewController {
             
             if let eventName = eventNameTextField?.text, eventName.characters.count > 0 {
                 print(eventName)
-                //TOOD : add event to Firebase
-                self?.eventsArray.append(eventName)
-                self?.tableView.reloadData()
+                //add event to Firebase
+                MBProgressHUD.showAdded(to: (self?.view)!, animated: true)
+                FirebaseManager.sharedInstance.addEventWithName(eventName: eventName)
             }
         }
         alert.addAction(okAction)

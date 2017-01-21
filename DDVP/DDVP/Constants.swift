@@ -8,7 +8,7 @@
 
 import Foundation
 
-let kEventsList = "channels_list"
+let kEventsList = "events_list"
 let kEventsQuiz = "_quiz"
 let kEventsAnswer = "_answer"
 let kEventsOnlineUsers = "onlineUsers"

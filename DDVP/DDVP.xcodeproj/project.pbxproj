@@ -26,6 +26,7 @@
 		E85EFCC51E3131B200C916C1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85EFCC41E3131B200C916C1 /* Constants.swift */; };
 		E85EFCC81E33535B00C916C1 /* roboto in Resources */ = {isa = PBXBuildFile; fileRef = E85EFCC71E33535B00C916C1 /* roboto */; };
 		E85EFCCA1E3355A200C916C1 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85EFCC91E3355A200C916C1 /* FontManager.swift */; };
+		E85EFCCD1E33614A00C916C1 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E85EFCCC1E33614A00C916C1 /* MBProgressHUD.m */; };
 		F0FAFBE1F8B0C69D9A467D16 /* Pods_DDVP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3219DD6AFC4E41D21DE9C37B /* Pods_DDVP.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,8 @@
 		E85EFCC41E3131B200C916C1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E85EFCC71E33535B00C916C1 /* roboto */ = {isa = PBXFileReference; lastKnownFileType = folder; path = roboto; sourceTree = "<group>"; };
 		E85EFCC91E3355A200C916C1 /* FontManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
+		E85EFCCB1E33614A00C916C1 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		E85EFCCC1E33614A00C916C1 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		F612758880399ED7BC44B052 /* Pods-DDVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDVP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DDVP/Pods-DDVP.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +127,7 @@
 		D47CE7161E26281900EDEC7D /* DDVP */ = {
 			isa = PBXGroup;
 			children = (
+				E85EFCCF1E33616C00C916C1 /* Third Party */,
 				E85EFCC61E33534500C916C1 /* Resources */,
 				D47CE7441E28A8E900EDEC7D /* DDVP.entitlements */,
 				D47CE7171E26281900EDEC7D /* AppDelegate.swift */,
@@ -174,6 +178,23 @@
 				E85EFCC71E33535B00C916C1 /* roboto */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		E85EFCCE1E33615300C916C1 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				E85EFCCB1E33614A00C916C1 /* MBProgressHUD.h */,
+				E85EFCCC1E33614A00C916C1 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		E85EFCCF1E33616C00C916C1 /* Third Party */ = {
+			isa = PBXGroup;
+			children = (
+				E85EFCCE1E33615300C916C1 /* MBProgressHUD */,
+			);
+			name = "Third Party";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -396,6 +417,7 @@
 				D47CE7181E26281900EDEC7D /* AppDelegate.swift in Sources */,
 				DA4B9B301E3087C1003BFD61 /* PresenterViewController.swift in Sources */,
 				DA4B9B2C1E2F386F003BFD61 /* PollUser.swift in Sources */,
+				E85EFCCD1E33614A00C916C1 /* MBProgressHUD.m in Sources */,
 				DA4B9B2E1E30875D003BFD61 /* ParticipantViewController.swift in Sources */,
 				E85EFCCA1E3355A200C916C1 /* FontManager.swift in Sources */,
 				E85EFCC51E3131B200C916C1 /* Constants.swift in Sources */,
