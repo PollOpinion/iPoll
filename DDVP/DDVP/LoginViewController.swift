@@ -40,8 +40,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         btnLogout.isHidden = true
         
         if (FBSDKAccessToken.current()) != nil{
-//            fetchFBProfile()
-            loginToFirebaseUsingFb()
+            firebaseLogin(provider: UserProvider.facebook)
         }
         else{
             print("Auto fb login failed...")
@@ -62,9 +61,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         print("FB login did complete")
         
-//        fetchFBProfile()
-        
-        loginToFirebaseUsingFb()
+        firebaseLogin(provider: UserProvider.facebook)
         
     }
     
@@ -111,7 +108,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         print("Firebase Login button tapped...\n", self.txtFirEmail.text!, "\n", self.txtFirPassword.text!)
         
         if self.txtFirEmail.text?.isEmpty == false && self.txtFirPassword.text?.isEmpty == false {
-            self.firebaseLogin()
+            self.firebaseLogin(provider: UserProvider.custom)
         }
         else{
             
@@ -155,7 +152,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             break
         }
         
-        pollUser = PollUser.init(id: user.uid, name: user.displayName, email: user.email, photoURL: user.photoURL, providerId: user.providerID, role: userRole )
+        pollUser = PollUser.init(id: user.uid, name: user.displayName, email: user.email, photoURL: user.photoURL, providerId: user.providerID, role: userRole, provider: loginProvider )
         
         
         //below two lines just for testing, can be removed later
@@ -173,7 +170,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.btnLogout.isHidden = false
         self.loginButton.isHidden = true
         self.firLoginView.isHidden = true
-        self.firebaseLogin()
+        self.firebaseLogin(provider: UserProvider.custom)
     }
     
 
@@ -201,25 +198,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    func loginToFirebaseUsingFb(){
-        let fbToken = FBSDKAccessToken.current()
-        guard let fbaccessTokenString = fbToken?.tokenString else {return}
-        let firAuthCredentials = FIRFacebookAuthProvider.credential(withAccessToken: fbaccessTokenString)
-        FIRAuth.auth()?.signIn(with: firAuthCredentials, completion: { (fireBaseUser, error) in
-            if error != nil {
-                print("Error logging in for firebase user. Error :\n ", error!)
-                
-                self.displayAlert(message: "Error logging in to firebase user.")
-                return
-            }
-            
-            self.firLoginView.isHidden = true
-            self.btnLogout.isHidden = true
-            
-            self.fireBaseLoginComplete(user: fireBaseUser!, loginProvider: UserProvider.facebook)
-        })
     }
     
     // align all subviews Horizontally Centered to view
@@ -277,21 +255,38 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         pollUser = nil
         
+        self.navigationController?.popViewController(animated: true)
+        
     }
     
-    func firebaseLogin (){
+    func firebaseLogin (provider: UserProvider){
         
-        FIRAuth.auth()?.signIn(withEmail: self.txtFirEmail.text!, password: self.txtFirPassword.text!, completion: { (firUser, error) in
-            if error != nil {
-                self.displayAlert(message: error.debugDescription)
+        if provider == UserProvider.custom {
+            FIRAuth.auth()?.signIn(withEmail: self.txtFirEmail.text!, password: self.txtFirPassword.text!, completion: { (firUser, error) in
+                if error != nil {
+                    print("Error while logging into firebase using custom user. Error :\n ", error!)
+                    self.displayAlert(message: error.debugDescription)
+                    return
+                }
                 
-                return
-            }
+                self.fireBaseLoginComplete(user: firUser!, loginProvider: provider)
+            })
+        }
+        else{ // facebook login
             
-            self.fireBaseLoginComplete(user: firUser!, loginProvider: UserProvider.custom)
-        })
-        
+            let fbToken = FBSDKAccessToken.current()
+            guard let fbaccessTokenString = fbToken?.tokenString else {return}
+            let firAuthCredentials = FIRFacebookAuthProvider.credential(withAccessToken: fbaccessTokenString)
+            FIRAuth.auth()?.signIn(with: firAuthCredentials, completion: { (fireBaseUser, error) in
+                if error != nil {
+                    print("Error while logging into firebase using facebook user. Error :\n ", error!)
+                    self.displayAlert(message: error.debugDescription)
+                    return
+                }
+                
+                self.fireBaseLoginComplete(user: fireBaseUser!, loginProvider: provider)
+            })
+        }
     }
- 
 }
 

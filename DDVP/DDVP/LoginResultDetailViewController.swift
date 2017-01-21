@@ -7,8 +7,15 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class LoginResultDetailViewController: UIViewController {
+    
+    let loginButton: FBSDKLoginButton = {
+        let button = FBSDKLoginButton()
+        button.readPermissions = ["email"]
+        return button
+    }()
     
     @IBOutlet weak var userPhoto: UIImageView!
     @IBOutlet weak var photoActivity: UIActivityIndicatorView!
@@ -16,11 +23,29 @@ class LoginResultDetailViewController: UIViewController {
     @IBOutlet weak var userEmail: UILabel!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userRole: UILabel!
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var logoutButton: UIButton!
+
     @IBOutlet weak var roleSegement: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.hidesBackButton = true
+        
+        if pollUser?.UserProvider == UserProvider.facebook {
+        
+            logoutButton.isHidden = true
+            
+            view.addSubview(loginButton)
+            loginButton.center = view.center
+            let loginViewController: LoginViewController = self.backViewController() as! LoginViewController
+            loginButton.delegate = loginViewController
+        }
+        else {
+            logoutButton.isHidden = false
+            
+        }
+        
         
         alignSubviews()
         
@@ -54,7 +79,7 @@ class LoginResultDetailViewController: UIViewController {
     
     //MARK: - Action handler
     
-    @IBAction func nextBtnTapped(_ sender: Any) {
+    @IBAction func nextBarBtnTapped(_ sender: Any) {
         
         if pollUser?.LoginRole == UserRole.presenter {
             self.performSegue(withIdentifier: "seguePresenterVC", sender: nil)
@@ -64,6 +89,7 @@ class LoginResultDetailViewController: UIViewController {
         }
         
     }
+
 
     @IBAction func userRoleChanged(_ sender: Any) {
         
@@ -81,11 +107,18 @@ class LoginResultDetailViewController: UIViewController {
         }
     }
     
+    @IBAction func logoutTapped(_ sender: Any) {
+        
+        let loginViewController: LoginViewController = self.backViewController() as! LoginViewController
+        loginViewController.btnLogoutTapped(self)
+    }
     //MARK: - Helper Functions
     
     // align all subviews Horizontally Centered to view
     func alignSubviews(){
         let x = view.center.x
+        
+        logoutButton.center = view.center
         
         userPhoto.center = CGPoint(x: x, y: userPhoto.center.y)
         photoActivity.center = CGPoint(x: x, y: photoActivity.center.y)
@@ -94,7 +127,7 @@ class LoginResultDetailViewController: UIViewController {
         userName.center = CGPoint(x: x, y: userName.center.y)
         userRole.center = CGPoint(x: x, y: userRole.center.y)
         roleSegement.center = CGPoint(x: x, y: roleSegement.center.y)
-        nextButton.center = CGPoint(x: x, y: nextButton.center.y)
+        
     }
     
     func loadPic(imageUrl:String, imgView:UIImageView, activity:UIActivityIndicatorView)
@@ -149,5 +182,17 @@ class LoginResultDetailViewController: UIViewController {
         }
         
         print("You are logged in as \(roleStr)")
+    }
+    
+    
+    func backViewController() -> UIViewController? {
+        if let stack = self.navigationController?.viewControllers {
+            for i in (1..<stack.count).reversed() {
+                if(stack[i] == self) {
+                    return stack[i-1]
+                }
+            }
+        }
+        return nil
     }
 }

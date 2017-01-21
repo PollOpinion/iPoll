@@ -19,6 +19,9 @@
 		DA4B9B2C1E2F386F003BFD61 /* PollUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B2B1E2F386F003BFD61 /* PollUser.swift */; };
 		DA4B9B2E1E30875D003BFD61 /* ParticipantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B2D1E30875D003BFD61 /* ParticipantViewController.swift */; };
 		DA4B9B301E3087C1003BFD61 /* PresenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B2F1E3087C1003BFD61 /* PresenterViewController.swift */; };
+		DA4B9B341E323F39003BFD61 /* PresenterEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B331E323F39003BFD61 /* PresenterEventCell.swift */; };
+		DADC4DF51E324CC8003AD5BB /* PresenterQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4DF41E324CC8003AD5BB /* PresenterQuestionCell.swift */; };
+		DADC4DF71E324FDA003AD5BB /* PresenterEventDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4DF61E324FDA003AD5BB /* PresenterEventDetailVC.swift */; };
 		E85EFCC31E312D8D00C916C1 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85EFCC21E312D8D00C916C1 /* FirebaseManager.swift */; };
 		E85EFCC51E3131B200C916C1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85EFCC41E3131B200C916C1 /* Constants.swift */; };
 		F0FAFBE1F8B0C69D9A467D16 /* Pods_DDVP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3219DD6AFC4E41D21DE9C37B /* Pods_DDVP.framework */; };
@@ -57,6 +60,9 @@
 		DA4B9B2B1E2F386F003BFD61 /* PollUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollUser.swift; sourceTree = "<group>"; };
 		DA4B9B2D1E30875D003BFD61 /* ParticipantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantViewController.swift; sourceTree = "<group>"; };
 		DA4B9B2F1E3087C1003BFD61 /* PresenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterViewController.swift; sourceTree = "<group>"; };
+		DA4B9B331E323F39003BFD61 /* PresenterEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterEventCell.swift; sourceTree = "<group>"; };
+		DADC4DF41E324CC8003AD5BB /* PresenterQuestionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterQuestionCell.swift; sourceTree = "<group>"; };
+		DADC4DF61E324FDA003AD5BB /* PresenterEventDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterEventDetailVC.swift; sourceTree = "<group>"; };
 		E85EFCC21E312D8D00C916C1 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		E85EFCC41E3131B200C916C1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F612758880399ED7BC44B052 /* Pods-DDVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDVP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DDVP/Pods-DDVP.debug.xcconfig"; sourceTree = "<group>"; };
@@ -129,6 +135,9 @@
 				DA4B9B2F1E3087C1003BFD61 /* PresenterViewController.swift */,
 				E85EFCC21E312D8D00C916C1 /* FirebaseManager.swift */,
 				E85EFCC41E3131B200C916C1 /* Constants.swift */,
+				DA4B9B331E323F39003BFD61 /* PresenterEventCell.swift */,
+				DADC4DF41E324CC8003AD5BB /* PresenterQuestionCell.swift */,
+				DADC4DF61E324FDA003AD5BB /* PresenterEventDetailVC.swift */,
 			);
 			path = DDVP;
 			sourceTree = "<group>";
@@ -365,7 +374,10 @@
 			files = (
 				DA4B9B2A1E2E358E003BFD61 /* LoginResultDetailViewController.swift in Sources */,
 				D47CE71A1E26281900EDEC7D /* LoginViewController.swift in Sources */,
+				DADC4DF71E324FDA003AD5BB /* PresenterEventDetailVC.swift in Sources */,
+				DA4B9B341E323F39003BFD61 /* PresenterEventCell.swift in Sources */,
 				E85EFCC31E312D8D00C916C1 /* FirebaseManager.swift in Sources */,
+				DADC4DF51E324CC8003AD5BB /* PresenterQuestionCell.swift in Sources */,
 				D47CE7181E26281900EDEC7D /* AppDelegate.swift in Sources */,
 				DA4B9B301E3087C1003BFD61 /* PresenterViewController.swift in Sources */,
 				DA4B9B2C1E2F386F003BFD61 /* PollUser.swift in Sources */,
