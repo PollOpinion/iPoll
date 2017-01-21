@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,29 +18,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="DDVP" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZlI-sF-V9c">
-                                <frame key="frameInset" minX="137" minY="283" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
-                                </accessibility>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="iPoll" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ytD-DE-UwV">
-                                <frame key="frameInset" minX="16" minY="146" width="343" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iPoll" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="ytD-DE-UwV">
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="49" id="CcT-D1-oqj"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="343" id="WrG-Kb-jv6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="80"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A Digital Votting Pad" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lDF-H9-eql">
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="343" id="d4b-4z-heX"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="hQ0-lo-e3N"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="A Digital Votting Pad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDF-H9-eql">
-                                <frame key="frameInset" minX="16" minY="203" width="343" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DDVP" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZlI-sF-V9c">
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="183" id="80A-9o-Vra"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="201" id="S6O-MQ-2kV"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.29019607843137252" green="0.65098039215686276" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZlI-sF-V9c" firstAttribute="top" secondItem="lDF-H9-eql" secondAttribute="bottom" constant="85" id="COP-Pr-zXx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZlI-sF-V9c" secondAttribute="trailing" constant="71" id="KHp-0G-Kpl"/>
+                            <constraint firstItem="ytD-DE-UwV" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="16" id="O6Z-Yi-BYM"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="ZlI-sF-V9c" secondAttribute="bottom" constant="242" id="RQT-cB-RF7"/>
+                            <constraint firstItem="lDF-H9-eql" firstAttribute="top" secondItem="ytD-DE-UwV" secondAttribute="bottom" constant="14" id="T4H-Is-6Xn"/>
+                            <constraint firstItem="lDF-H9-eql" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="16" id="Wiw-Lb-X2j"/>
+                            <constraint firstItem="ytD-DE-UwV" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="53" id="et7-LL-JMY"/>
+                            <constraint firstAttribute="trailing" secondItem="ytD-DE-UwV" secondAttribute="trailing" constant="16" id="rKh-AJ-edk"/>
+                            <constraint firstAttribute="trailing" secondItem="lDF-H9-eql" secondAttribute="trailing" constant="16" id="wA9-4r-omt"/>
+                            <constraint firstItem="ZlI-sF-V9c" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="71" id="woe-aH-t4G"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -48,6 +67,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="DDVP" width="1024" height="1024"/>
+        <image name="DDVP" width="1536" height="1536"/>
     </resources>
 </document>
