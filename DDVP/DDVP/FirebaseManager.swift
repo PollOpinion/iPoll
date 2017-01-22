@@ -29,23 +29,24 @@ class FirebaseManager: NSObject{
     
     func fetchAllEvents(){
         let allEventsFirebase = FIRDatabase.database().reference().child(kEventsList)
-        
+        //allEventsFirebase.queryEqual(toValue: pollUser?.Id, childKey: "presenterID")
         allEventsFirebase.observeSingleEvent(of: FIRDataEventType.value) { (dataSnapshot: FIRDataSnapshot) in
             guard dataSnapshot.exists() else{
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationAllEvents), object: nil)
                 return
             }
             
-            let channelsListArray = dataSnapshot.value as! [String: String]
+            let channelsListArray = dataSnapshot.value as! [String: Any]
             NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationAllEvents), object: nil, userInfo: channelsListArray)
         }
         
     }
     
-    func addEventWithName(eventName: String) {
+    func addEventWithName(eventName: String, withData data: [String: Any]) {
+        let uploadData = data
         let allEventsFirebase = FIRDatabase.database().reference().child(kEventsList + "/" + eventName)
         
-        allEventsFirebase.setValue(eventName) { (error, databaseReference) in
+        allEventsFirebase.setValue(uploadData) { (error, databaseReference) in
             let isAdded = error == nil
             var userInfo : [String : Any] = ["isAdded": isAdded]
             
