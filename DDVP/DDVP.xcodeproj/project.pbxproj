@@ -22,6 +22,9 @@
 		DA4B9B341E323F39003BFD61 /* PresenterEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B331E323F39003BFD61 /* PresenterEventCell.swift */; };
 		DADC4DF51E324CC8003AD5BB /* PresenterQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4DF41E324CC8003AD5BB /* PresenterQuestionCell.swift */; };
 		DADC4DF71E324FDA003AD5BB /* PresenterEventDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4DF61E324FDA003AD5BB /* PresenterEventDetailVC.swift */; };
+		DADC4DFD1E349FDA003AD5BB /* PresenterQue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4DFC1E349FDA003AD5BB /* PresenterQue.swift */; };
+		DADC4DFF1E34A411003AD5BB /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4DFE1E34A411003AD5BB /* TextFieldCell.swift */; };
+		DADC4E011E34A563003AD5BB /* AddQuestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4E001E34A563003AD5BB /* AddQuestionVC.swift */; };
 		E85EFCC31E312D8D00C916C1 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85EFCC21E312D8D00C916C1 /* FirebaseManager.swift */; };
 		E85EFCC51E3131B200C916C1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85EFCC41E3131B200C916C1 /* Constants.swift */; };
 		E85EFCC81E33535B00C916C1 /* roboto in Resources */ = {isa = PBXBuildFile; fileRef = E85EFCC71E33535B00C916C1 /* roboto */; };
@@ -67,6 +70,9 @@
 		DA4B9B331E323F39003BFD61 /* PresenterEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterEventCell.swift; sourceTree = "<group>"; };
 		DADC4DF41E324CC8003AD5BB /* PresenterQuestionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterQuestionCell.swift; sourceTree = "<group>"; };
 		DADC4DF61E324FDA003AD5BB /* PresenterEventDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterEventDetailVC.swift; sourceTree = "<group>"; };
+		DADC4DFC1E349FDA003AD5BB /* PresenterQue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterQue.swift; sourceTree = "<group>"; };
+		DADC4DFE1E34A411003AD5BB /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		DADC4E001E34A563003AD5BB /* AddQuestionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuestionVC.swift; sourceTree = "<group>"; };
 		E85EFCC21E312D8D00C916C1 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		E85EFCC41E3131B200C916C1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E85EFCC71E33535B00C916C1 /* roboto */ = {isa = PBXFileReference; lastKnownFileType = folder; path = roboto; sourceTree = "<group>"; };
@@ -151,6 +157,9 @@
 				DADC4DF61E324FDA003AD5BB /* PresenterEventDetailVC.swift */,
 				E85EFCC91E3355A200C916C1 /* FontManager.swift */,
 				E85EFCD01E33B69100C916C1 /* ColorManager.swift */,
+				DADC4DFC1E349FDA003AD5BB /* PresenterQue.swift */,
+				DADC4DFE1E34A411003AD5BB /* TextFieldCell.swift */,
+				DADC4E001E34A563003AD5BB /* AddQuestionVC.swift */,
 			);
 			path = DDVP;
 			sourceTree = "<group>";
@@ -418,12 +427,15 @@
 				E85EFCC31E312D8D00C916C1 /* FirebaseManager.swift in Sources */,
 				DADC4DF51E324CC8003AD5BB /* PresenterQuestionCell.swift in Sources */,
 				D47CE7181E26281900EDEC7D /* AppDelegate.swift in Sources */,
+				DADC4DFF1E34A411003AD5BB /* TextFieldCell.swift in Sources */,
 				E85EFCD11E33B69100C916C1 /* ColorManager.swift in Sources */,
 				DA4B9B301E3087C1003BFD61 /* PresenterViewController.swift in Sources */,
+				DADC4DFD1E349FDA003AD5BB /* PresenterQue.swift in Sources */,
 				DA4B9B2C1E2F386F003BFD61 /* PollUser.swift in Sources */,
 				E85EFCCD1E33614A00C916C1 /* MBProgressHUD.m in Sources */,
 				DA4B9B2E1E30875D003BFD61 /* ParticipantViewController.swift in Sources */,
 				E85EFCCA1E3355A200C916C1 /* FontManager.swift in Sources */,
+				DADC4E011E34A563003AD5BB /* AddQuestionVC.swift in Sources */,
 				E85EFCC51E3131B200C916C1 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

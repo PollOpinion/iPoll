@@ -1,33 +1,14 @@
 //
-//  PresenterEventDetailVC.swift
+//  AddQuestionVC.swift
 //  DDVP
 //
-//  Created by Pankaj Neve on 20/01/17.
+//  Created by Pankaj Neve on 22/01/17.
 //  Copyright © 2017 CTS. All rights reserved.
 //
 
 import UIKit
 
-class PresenterEventDetailVC: UITableViewController {
-    
-    
-    struct PresenterQueEvent{
-        
-        var title: String
-        var question: String
-        var count: Int
-        
-        
-        init(titleStr: String?, questionStr: String?, countInt:Int) {
-            self.title = titleStr ?? ""
-            self.question = questionStr ?? ""
-            self.count = countInt
-        }
-    }
-    
-    
-    var eventsArray = [Any] ()
-    
+class AddQuestionVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,9 +18,6 @@ class PresenterEventDetailVC: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        self.tableView.reloadData()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,27 +29,24 @@ class PresenterEventDetailVC: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.eventsArray.count
+        return 0
     }
 
-    
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PresenterQueCell", for: indexPath) as! PresenterQuestionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
-        let eventObj : PresenterQueEvent = self.eventsArray[indexPath.row] as! PresenterQueEvent
-        cell.queTitleLbl.text = eventObj.title
-        cell.queQueLbl.text = eventObj.question
-        cell.queSubscribersCountLbl.text = String("\(eventObj.count)")
 
         return cell
     }
-    
+    */
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -107,7 +82,7 @@ class PresenterEventDetailVC: UITableViewController {
     }
     */
 
-    
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -115,23 +90,6 @@ class PresenterEventDetailVC: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    
+    */
 
-    @IBAction func addQuestionBarBtnTapped(_ sender: Any) {
-        
-        print ("addQuestionBarBtnTapped")
-        //TODO: launch another view(something similar to AddQuestionVC form PUBLISHER app) or a readymade view for PUBLISHER reference app, which will configure a question. 
-        
-
-        performSegue(withIdentifier: "segueAddQuestionVC", sender: self)
-
-        
-        /// folllwoing code is for testing only
-        
-//        let eventTemp : PresenterQueEvent = PresenterQueEvent.init(titleStr: "Title", questionStr: "Question string here?", countInt: 23)
-//        eventsArray.append(eventTemp)
-//        
-//        self.tableView.reloadData()
-        
-    }
 }
