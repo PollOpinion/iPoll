@@ -128,6 +128,12 @@ class LoginResultDetailViewController: UIViewController {
         userRole.center = CGPoint(x: x, y: userRole.center.y)
         roleSegement.center = CGPoint(x: x, y: roleSegement.center.y)
         
+        //user photo formatting
+        userPhoto.layer.borderWidth = 3.0
+//        userPhoto.layer.borderColor = UIColor.white.cgColor
+        userPhoto.layer.borderColor = UIColor.green.cgColor
+        userPhoto.layer.cornerRadius = userPhoto.frame.size.width/2
+        userPhoto.clipsToBounds = true
     }
     
     func loadPic(imageUrl:String, imgView:UIImageView, activity:UIActivityIndicatorView)

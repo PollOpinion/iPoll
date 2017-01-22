@@ -69,6 +69,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         print("FB login did complete")
         
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         firebaseLogin(provider: UserProvider.facebook)
         
     }
@@ -90,13 +92,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBAction func btnFirSignUpTapped(_ sender: AnyObject) {
         
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         print("Firebase SignUp button tapped... \n", self.txtFirEmail.text!, "\n", self.txtFirPassword.text!)
        
         if self.txtFirEmail.text?.isEmpty == false && self.txtFirPassword.text?.isEmpty == false {
             
             FIRAuth.auth()?.createUser(withEmail: self.txtFirEmail.text!, password: self.txtFirPassword.text!, completion: { (firUser, error) in
                 if error != nil {
-                    self.displayAlert(message: error.debugDescription)
+                    self.displayAlert(titleStr: "iPoll SignUp Error", messageStr: (error?.localizedDescription)!)
                     
                     return
                 }
@@ -106,12 +110,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
         else{
             
-            self.displayAlert(message: "SignUp : Email and passowrd are mandatory!")
+            self.displayAlert( titleStr: "SignUp", messageStr: "Email and passoword are mandatory!")
         }
         
     }
     
     @IBAction func btnFirLoginTapped(_ sender: AnyObject) {
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         
         print("Firebase Login button tapped...\n", self.txtFirEmail.text!, "\n", self.txtFirPassword.text!)
         
@@ -120,7 +126,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
         else{
             
-            self.displayAlert(message: "Login : Email and passowrd are mandatory!")
+            self.displayAlert(titleStr: "Login", messageStr: "Email and passoword are mandatory!")
         }
     }
     
@@ -167,9 +173,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         let msg:String  = String(format:"Login Sucessfull \n Display Name : \(pollUser!.Name) \n Email : \(pollUser!.Email) \n Provider Id: \(pollUser!.ProviderId) \n User Id : \(pollUser!.Id) \n Photo URL : \(pollUser!.PhotoURL)")
         
         print(msg)
-//        self.displayAlert(message: msg)
         
-       self.performSegue(withIdentifier: "segueLoginResultDetailVC", sender: nil)
+        MBProgressHUD.hide(for: self.view, animated: true)
+        self.performSegue(withIdentifier: "segueLoginResultDetailVC", sender: nil)
         
     }
     
@@ -201,11 +207,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     // MARK: - Helper functions
     
-    func displayAlert(message:String){
+    func displayAlert(titleStr:String, messageStr:String){
         
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: titleStr, message: messageStr, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+        
+        MBProgressHUD.hide(for: self.view, animated: true)
     }
     
     // align all subviews Horizontally Centered to view
@@ -265,6 +273,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         self.navigationController?.popViewController(animated: true)
         
+        
     }
     
     func firebaseLogin (provider: UserProvider){
@@ -273,7 +282,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             FIRAuth.auth()?.signIn(withEmail: self.txtFirEmail.text!, password: self.txtFirPassword.text!, completion: { (firUser, error) in
                 if error != nil {
                     print("Error while logging into firebase using custom user. Error :\n ", error!)
-                    self.displayAlert(message: error.debugDescription)
+                    self.displayAlert(titleStr:"iPoll Login Error", messageStr: (error?.localizedDescription)!)
                     return
                 }
                 
@@ -288,7 +297,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             FIRAuth.auth()?.signIn(with: firAuthCredentials, completion: { (fireBaseUser, error) in
                 if error != nil {
                     print("Error while logging into firebase using facebook user. Error :\n ", error!)
-                    self.displayAlert(message: error.debugDescription)
+                    self.displayAlert(titleStr:"Facebook Login Error",  messageStr: (error?.localizedDescription)!)
                     return
                 }
                 
