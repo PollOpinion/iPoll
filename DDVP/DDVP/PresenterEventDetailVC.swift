@@ -8,22 +8,28 @@
 
 import UIKit
 
-class PresenterEventDetailVC: UITableViewController {
+struct PresenterQueEvent{
     
+    var title: String
+    var question: String
+    var duration: Int
+    var opt1: String
+    var opt2: String
+    var opt3: String
+    var opt4: String
     
-    struct PresenterQueEvent{
-        
-        var title: String
-        var question: String
-        var count: Int
-        
-        
-        init(titleStr: String?, questionStr: String?, countInt:Int) {
-            self.title = titleStr ?? ""
-            self.question = questionStr ?? ""
-            self.count = countInt
-        }
+    init(titleStr: String?, questionStr: String?, durationInt:Int, opt1Str: String?, opt2Str: String?, opt3Str: String?, opt4Str: String?) {
+        self.title = titleStr ?? ""
+        self.question = questionStr ?? ""
+        self.duration = durationInt
+        self.opt1 = opt1Str ?? ""
+        self.opt2 = opt2Str ?? ""
+        self.opt3 = opt3Str ?? ""
+        self.opt4 = opt4Str ?? ""
     }
+}
+
+class PresenterEventDetailVC: UITableViewController {
     
     
     var eventsArray = [Any] ()
@@ -67,7 +73,7 @@ class PresenterEventDetailVC: UITableViewController {
         let eventObj : PresenterQueEvent = self.eventsArray[indexPath.row] as! PresenterQueEvent
         cell.queTitleLbl.text = eventObj.title
         cell.queQueLbl.text = eventObj.question
-        cell.queSubscribersCountLbl.text = String("\(eventObj.count)")
+        cell.queDurationLbl.text = String("\(eventObj.duration)")
 
         return cell
     }
@@ -133,5 +139,12 @@ class PresenterEventDetailVC: UITableViewController {
 //        
 //        self.tableView.reloadData()
         
+    }
+    
+    //Mark: helper functions
+    func reloadQuestionListWith(question: PresenterQueEvent) {
+        eventsArray.append(question)
+        self.tableView.reloadData()
+
     }
 }
