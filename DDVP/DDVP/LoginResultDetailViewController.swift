@@ -19,7 +19,6 @@ class LoginResultDetailViewController: UIViewController {
     
     @IBOutlet weak var userPhoto: UIImageView!
     @IBOutlet weak var photoActivity: UIActivityIndicatorView!
-    @IBOutlet weak var userId: UILabel!
     @IBOutlet weak var userEmail: UILabel!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userRole: UILabel!
@@ -30,6 +29,8 @@ class LoginResultDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        view.backgroundColor = Color.lightBackground.value
         self.navigationItem.hidesBackButton = true
         
         if pollUser?.UserProvider == UserProvider.facebook {
@@ -47,9 +48,9 @@ class LoginResultDetailViewController: UIViewController {
         }
         
         
-        alignSubviews()
+        //alignSubviews()
         
-        self.userId.text = pollUser?.Id
+       
         self.userEmail.text = pollUser?.Email
         self.userName.text = pollUser?.Name
         
@@ -61,6 +62,12 @@ class LoginResultDetailViewController: UIViewController {
         
     }
 
+    override func viewDidLayoutSubviews() {
+        // Set your constraint here
+        loginButton.center = CGPoint.init(x: logoutButton.center.x, y: logoutButton.center.y)
+        alignSubviews()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -116,17 +123,16 @@ class LoginResultDetailViewController: UIViewController {
     
     // align all subviews Horizontally Centered to view
     func alignSubviews(){
-        let x = view.center.x
-        
-        logoutButton.center = view.center
-        
-        userPhoto.center = CGPoint(x: x, y: userPhoto.center.y)
-        photoActivity.center = CGPoint(x: x, y: photoActivity.center.y)
-        userId.center = CGPoint(x: x, y: userId.center.y)
-        userEmail.center = CGPoint(x: x, y: userEmail.center.y)
-        userName.center = CGPoint(x: x, y: userName.center.y)
-        userRole.center = CGPoint(x: x, y: userRole.center.y)
-        roleSegement.center = CGPoint(x: x, y: roleSegement.center.y)
+//        let x = view.center.x
+//        
+//        logoutButton.center = view.center
+//        
+//        userPhoto.center = CGPoint(x: x, y: userPhoto.center.y)
+//        photoActivity.center = CGPoint(x: x, y: photoActivity.center.y)
+//        userEmail.center = CGPoint(x: x, y: userEmail.center.y)
+//        userName.center = CGPoint(x: x, y: userName.center.y)
+//        userRole.center = CGPoint(x: x, y: userRole.center.y)
+//        roleSegement.center = CGPoint(x: x, y: roleSegement.center.y)
         
         //user photo formatting
         userPhoto.layer.borderWidth = 3.0
