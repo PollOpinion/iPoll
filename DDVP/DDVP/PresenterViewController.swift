@@ -161,20 +161,30 @@ class PresenterViewController: UITableViewController {
     //MARK: Action Handler
     
     @IBAction func addEventTapped(_ sender: Any) {
-        let alert = UIAlertController(title: "Add Event", message: "Enter the event name", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Add Event", message: "Create an Event with event name and min number of subscribers required to publish it.", preferredStyle: UIAlertControllerStyle.alert)
         var eventNameTextField: UITextField?
         alert.addTextField { (textField: UITextField) -> Void in
             eventNameTextField = textField
-            eventNameTextField?.placeholder = "Your event name goes here..."
+            eventNameTextField?.placeholder = "Event name goes here..."
             eventNameTextField?.autocapitalizationType = UITextAutocapitalizationType.words
+            eventNameTextField?.borderStyle = UITextBorderStyle.roundedRect
         }
+        
+        var eventMinSubscReq: UITextField?
+        alert.addTextField { (textField: UITextField) -> Void in
+            eventMinSubscReq = textField
+            eventMinSubscReq?.placeholder = "Min subscribers required to publish"
+            eventMinSubscReq?.keyboardType = UIKeyboardType.numberPad
+            eventMinSubscReq?.borderStyle = UITextBorderStyle.roundedRect
+        }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) { (alertAction) -> Void in
         }
         alert.addAction(cancelAction)
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { [weak self] (alertAction) -> Void in
             
             if let eventName = eventNameTextField?.text, eventName.characters.count > 0 {
-                print(eventName)
+                print("\(eventName) - min Subcsribers required : \(eventMinSubscReq?.text)")
                 //add event to Firebase
                 MBProgressHUD.showAdded(to: (self?.view)!, animated: true)
                 FirebaseManager.sharedInstance.addEventWithName(eventName: eventName)
