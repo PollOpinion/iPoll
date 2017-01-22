@@ -73,7 +73,7 @@ class PresenterViewController: UITableViewController {
     
     func fetchEventNotification(notification: Notification) {
         MBProgressHUD.hide(for: self.view, animated: true)
-        if let eventsListArray = notification.userInfo as! [String: String]? {
+        if let eventsListArray = notification.userInfo as! [String: Any]? {
             self.eventsArray = eventsListArray.keys.sorted()
             self.tableView.reloadData()
         }
@@ -184,10 +184,13 @@ class PresenterViewController: UITableViewController {
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { [weak self] (alertAction) -> Void in
             
             if let eventName = eventNameTextField?.text, eventName.characters.count > 0 {
+                var uploadData: [String: Any] = [:]
                 print("\(eventName) - min Subcsribers required : \(eventMinSubscReq?.text)")
                 //add event to Firebase
                 MBProgressHUD.showAdded(to: (self?.view)!, animated: true)
-                FirebaseManager.sharedInstance.addEventWithName(eventName: eventName)
+                uploadData["\(eventName)"] = eventName
+                uploadData ["presenterID"] = pollUser?.Id
+                FirebaseManager.sharedInstance.addEventWithName(eventName: eventName, withData: uploadData)
             }
         }
         alert.addAction(okAction)
