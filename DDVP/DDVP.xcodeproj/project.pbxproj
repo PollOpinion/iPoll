@@ -27,6 +27,7 @@
 		E85EFCC81E33535B00C916C1 /* roboto in Resources */ = {isa = PBXBuildFile; fileRef = E85EFCC71E33535B00C916C1 /* roboto */; };
 		E85EFCCA1E3355A200C916C1 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85EFCC91E3355A200C916C1 /* FontManager.swift */; };
 		E85EFCCD1E33614A00C916C1 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E85EFCCC1E33614A00C916C1 /* MBProgressHUD.m */; };
+		E85EFCD11E33B69100C916C1 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85EFCD01E33B69100C916C1 /* ColorManager.swift */; };
 		F0FAFBE1F8B0C69D9A467D16 /* Pods_DDVP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3219DD6AFC4E41D21DE9C37B /* Pods_DDVP.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		E85EFCC91E3355A200C916C1 /* FontManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		E85EFCCB1E33614A00C916C1 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		E85EFCCC1E33614A00C916C1 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		E85EFCD01E33B69100C916C1 /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		F612758880399ED7BC44B052 /* Pods-DDVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDVP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DDVP/Pods-DDVP.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,6 +150,7 @@
 				DADC4DF41E324CC8003AD5BB /* PresenterQuestionCell.swift */,
 				DADC4DF61E324FDA003AD5BB /* PresenterEventDetailVC.swift */,
 				E85EFCC91E3355A200C916C1 /* FontManager.swift */,
+				E85EFCD01E33B69100C916C1 /* ColorManager.swift */,
 			);
 			path = DDVP;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				E85EFCC31E312D8D00C916C1 /* FirebaseManager.swift in Sources */,
 				DADC4DF51E324CC8003AD5BB /* PresenterQuestionCell.swift in Sources */,
 				D47CE7181E26281900EDEC7D /* AppDelegate.swift in Sources */,
+				E85EFCD11E33B69100C916C1 /* ColorManager.swift in Sources */,
 				DA4B9B301E3087C1003BFD61 /* PresenterViewController.swift in Sources */,
 				DA4B9B2C1E2F386F003BFD61 /* PollUser.swift in Sources */,
 				E85EFCCD1E33614A00C916C1 /* MBProgressHUD.m in Sources */,

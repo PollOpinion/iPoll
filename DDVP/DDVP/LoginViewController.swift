@@ -28,12 +28,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet weak var btnFirSignUp: UIButton!
     @IBOutlet weak var btnFirLogin: UIButton!
     
+    @IBOutlet weak var lblOR: UILabel!
     override func viewDidLoad() {
        
         super.viewDidLoad()
         
+        view.backgroundColor = Color.lightBackground.value
         view.addSubview(loginButton)
-        loginButton.center = view.center
+        
         loginButton.delegate = self
         
         btnLogout.center = view.center
@@ -53,6 +55,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        // Set your constraint here
+        loginButton.center = CGPoint.init(x: lblOR.center.x, y: lblOR.center.y+60)
+
     }
     
     //MARK: - FBSDKLoginButtonDelegate
