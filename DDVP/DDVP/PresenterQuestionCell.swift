@@ -12,7 +12,7 @@ class PresenterQuestionCell: UITableViewCell {
     
     @IBOutlet weak var queTitleLbl: UILabel!
     @IBOutlet weak var queQueLbl: UILabel!
-    @IBOutlet weak var queSubscribersCountLbl: UILabel!
+    @IBOutlet weak var queDurationLbl: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

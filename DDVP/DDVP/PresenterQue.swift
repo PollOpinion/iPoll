@@ -11,12 +11,12 @@ import Foundation
 
 enum PresenterQue: Int {
     case QueTitle = 0
-    case QuestionStr = 2
-    case VottingDuration = 3
-    case Option1 = 4
-    case Option2 = 5
-    case Option3 = 6
-    case Option4 = 7
+    case QuestionStr = 1
+    case VottingDuration = 2
+    case Option1 = 3
+    case Option2 = 4
+    case Option3 = 5
+    case Option4 = 6
     
     private func getLabelText() -> String {
         switch self {
@@ -25,7 +25,7 @@ enum PresenterQue: Int {
         case .QuestionStr:
             return "Question"
         case .VottingDuration:
-            return "Duration (in secs)"
+            return "Duration"
         case .Option1:
             return "Option 1"
         case .Option2:
@@ -34,6 +34,25 @@ enum PresenterQue: Int {
             return "Option 3"
         case .Option4:
             return "Option 4"
+        }
+    }
+    
+    func getPlaceholderString() -> String {
+        switch self {
+        case .QueTitle:
+            return "Question Title"
+        case .QuestionStr:
+            return "Question Statement"
+        case .VottingDuration:
+            return "Duration in Seconds"
+        case .Option1:
+            return "Answer text"
+        case .Option2:
+            return "Answer text"
+        case .Option3:
+            return "Answer text"
+        case .Option4:
+            return "Answer text"
         }
     }
     
@@ -72,6 +91,13 @@ enum PresenterQue: Int {
     static func getTextLabelAtIndex(index: Int) -> String {
         if let textStr = PresenterQue(rawValue: index) {
             return textStr.getLabelText()
+        }
+        return ""
+    }
+    
+    static func getPlaceholderTextAtIndex(index: Int) -> String {
+        if let textStr = PresenterQue(rawValue: index) {
+            return textStr.getPlaceholderString()
         }
         return ""
     }
