@@ -191,7 +191,7 @@ class AddQuestionVC: UITableViewController {
     
     //MARK: Action and Selector  Handler
     
-    @IBAction func removeBtnTapped(_ sender: Any) {
+    @IBAction func removeButtonTapped(_ sender: Any) {
         self.noOfExtraOptionsOn -= 1
         if self.noOfExtraOptionsOn == 1 {
             let lastIndexPath = IndexPath(row: PresenterQue.getTotalTextLabels() - 1, section: 0)
@@ -204,7 +204,7 @@ class AddQuestionVC: UITableViewController {
             
             self.tableView.reloadRows(at: [lastIndexPath], with: UITableViewRowAnimation.automatic)
             self.tableView.endUpdates()
-
+            
             self.enteredData[PresenterQue.getTotalTextLabels() - 1] = ""
         }
         else {
@@ -216,8 +216,7 @@ class AddQuestionVC: UITableViewController {
         }
     }
     
-    
-    @IBAction func saveQuestionTapped(_ sender: Any) {
+    @IBAction func saveButtonTapped(_ sender: Any) {
         
         self.tableView.endEditing(true)
         
@@ -246,10 +245,6 @@ class AddQuestionVC: UITableViewController {
         }
         
         print(eventToSave)
-        
-        
-        
-        
     }
 }
 
