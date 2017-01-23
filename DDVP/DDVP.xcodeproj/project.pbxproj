@@ -26,6 +26,8 @@
 		DADC4DFF1E34A411003AD5BB /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4DFE1E34A411003AD5BB /* TextFieldCell.swift */; };
 		DADC4E011E34A563003AD5BB /* AddQuestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4E001E34A563003AD5BB /* AddQuestionVC.swift */; };
 		DADC4E031E352A5D003AD5BB /* QuestionResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4E021E352A5D003AD5BB /* QuestionResultVC.swift */; };
+		DADC4E061E360D01003AD5BB /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4E051E360D01003AD5BB /* PieChartView.swift */; };
+		DADC4E081E360E0A003AD5BB /* ResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4E071E360E0A003AD5BB /* ResultVC.swift */; };
 		E85EFCC31E312D8D00C916C1 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85EFCC21E312D8D00C916C1 /* FirebaseManager.swift */; };
 		E85EFCC51E3131B200C916C1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85EFCC41E3131B200C916C1 /* Constants.swift */; };
 		E85EFCC81E33535B00C916C1 /* roboto in Resources */ = {isa = PBXBuildFile; fileRef = E85EFCC71E33535B00C916C1 /* roboto */; };
@@ -75,6 +77,8 @@
 		DADC4DFE1E34A411003AD5BB /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		DADC4E001E34A563003AD5BB /* AddQuestionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuestionVC.swift; sourceTree = "<group>"; };
 		DADC4E021E352A5D003AD5BB /* QuestionResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionResultVC.swift; sourceTree = "<group>"; };
+		DADC4E051E360D01003AD5BB /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChartView.swift; path = ThirdParty/PieChartView.swift; sourceTree = "<group>"; };
+		DADC4E071E360E0A003AD5BB /* ResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultVC.swift; sourceTree = "<group>"; };
 		E85EFCC21E312D8D00C916C1 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		E85EFCC41E3131B200C916C1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E85EFCC71E33535B00C916C1 /* roboto */ = {isa = PBXFileReference; lastKnownFileType = folder; path = roboto; sourceTree = "<group>"; };
@@ -163,6 +167,7 @@
 				DADC4DFE1E34A411003AD5BB /* TextFieldCell.swift */,
 				DADC4E001E34A563003AD5BB /* AddQuestionVC.swift */,
 				DADC4E021E352A5D003AD5BB /* QuestionResultVC.swift */,
+				DADC4E071E360E0A003AD5BB /* ResultVC.swift */,
 			);
 			path = DDVP;
 			sourceTree = "<group>";
@@ -174,6 +179,14 @@
 				D47CE72E1E26281A00EDEC7D /* Info.plist */,
 			);
 			path = DDVPTests;
+			sourceTree = "<group>";
+		};
+		DADC4E041E360CEE003AD5BB /* PieChart */ = {
+			isa = PBXGroup;
+			children = (
+				DADC4E051E360D01003AD5BB /* PieChartView.swift */,
+			);
+			name = PieChart;
 			sourceTree = "<group>";
 		};
 		E835867E70B0F4FB760CF798 /* Pods */ = {
@@ -207,6 +220,7 @@
 		E85EFCCF1E33616C00C916C1 /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				DADC4E041E360CEE003AD5BB /* PieChart */,
 				E85EFCCE1E33615300C916C1 /* MBProgressHUD */,
 			);
 			name = "Third Party";
@@ -428,12 +442,14 @@
 				D47CE71A1E26281900EDEC7D /* LoginViewController.swift in Sources */,
 				DADC4DF71E324FDA003AD5BB /* PresenterEventDetailVC.swift in Sources */,
 				DA4B9B341E323F39003BFD61 /* PresenterEventCell.swift in Sources */,
+				DADC4E081E360E0A003AD5BB /* ResultVC.swift in Sources */,
 				E85EFCC31E312D8D00C916C1 /* FirebaseManager.swift in Sources */,
 				DADC4DF51E324CC8003AD5BB /* PresenterQuestionCell.swift in Sources */,
 				D47CE7181E26281900EDEC7D /* AppDelegate.swift in Sources */,
 				DADC4DFF1E34A411003AD5BB /* TextFieldCell.swift in Sources */,
 				E85EFCD11E33B69100C916C1 /* ColorManager.swift in Sources */,
 				DA4B9B301E3087C1003BFD61 /* PresenterViewController.swift in Sources */,
+				DADC4E061E360D01003AD5BB /* PieChartView.swift in Sources */,
 				DADC4DFD1E349FDA003AD5BB /* PresenterQue.swift in Sources */,
 				DA4B9B2C1E2F386F003BFD61 /* PollUser.swift in Sources */,
 				E85EFCCD1E33614A00C916C1 /* MBProgressHUD.m in Sources */,
