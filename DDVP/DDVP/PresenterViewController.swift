@@ -198,5 +198,8 @@ class PresenterViewController: UITableViewController {
         self.present(alert, animated: true) { () -> Void in
             
         }
+        
+//        eventsArray.append((eventNameTextField?.text)!)
+//        self.tableView.reloadData()
     }
 }

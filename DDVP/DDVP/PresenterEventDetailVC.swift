@@ -27,6 +27,8 @@ struct PresenterQueEvent{
         self.opt3 = opt3Str ?? ""
         self.opt4 = opt4Str ?? ""
     }
+    
+    
 }
 
 class PresenterEventDetailVC: UITableViewController {
@@ -81,11 +83,11 @@ class PresenterEventDetailVC: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         print ("Questions list : Row at index \(indexPath.row) tapped")
-//        self.performSegue(withIdentifier: "segueQuestionResultVC", sender: self)
+        self.performSegue(withIdentifier: "segueShowResultVC", sender: self)
         
-        let resultsVC = QuestionResultVC.instantiateStoryboard()
-        resultsVC.channelName = "Result"
-        self.navigationController?.pushViewController(resultsVC, animated: true)
+//        let resultsVC = QuestionResultVC.instantiateStoryboard()
+//        resultsVC.channelName = "Result"
+//        self.navigationController?.pushViewController(resultsVC, animated: true)
         
     }
     
