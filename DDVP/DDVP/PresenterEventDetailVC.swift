@@ -27,6 +27,42 @@ struct PresenterQueEvent{
         self.opt3 = opt3Str ?? ""
         self.opt4 = opt4Str ?? ""
     }
+    
+    func toAnyObject() -> Any {
+        
+        var obj = [
+            "title": title,
+            "question": question,
+            "duration": duration,
+            "opt1": opt1,
+            "opt2": opt2
+        ] as [String : Any]
+        
+        if self.opt3.characters.count > 0, self.opt4.characters.count > 0 {
+            obj = [
+                "title": title,
+                "question": question,
+                "duration": duration,
+                "opt1": opt1,
+                "opt2": opt2,
+                "opt3": opt3,
+                "opt4": opt4
+            ] as [String : Any]
+        }
+        else if self.opt3.characters.count > 0, self.opt4.characters.count < 1 {
+            obj = [
+                "title": title,
+                "question": question,
+                "duration": duration,
+                "opt1": opt1,
+                "opt2": opt2,
+                "opt3": opt3
+            ] as [String : Any]
+        }
+      
+        return obj
+        
+    }
 }
 
 class PresenterEventDetailVC: UITableViewController {
