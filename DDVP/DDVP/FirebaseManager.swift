@@ -29,8 +29,9 @@ class FirebaseManager: NSObject{
     
     func fetchAllEvents(){
         let allEventsFirebase = FIRDatabase.database().reference().child(kEventsList)
-        //allEventsFirebase.queryEqual(toValue: pollUser?.Id, childKey: "presenterID")
-        allEventsFirebase.observeSingleEvent(of: FIRDataEventType.value) { (dataSnapshot: FIRDataSnapshot) in
+        
+        allEventsFirebase.queryOrdered(byChild: "presenterID").queryEqual(toValue: pollUser?.Id).observeSingleEvent(of: FIRDataEventType.value) { (dataSnapshot: FIRDataSnapshot) in
+            
             guard dataSnapshot.exists() else{
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationAllEvents), object: nil)
                 return
@@ -39,6 +40,15 @@ class FirebaseManager: NSObject{
             let channelsListArray = dataSnapshot.value as! [String: Any]
             NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationAllEvents), object: nil, userInfo: channelsListArray)
         }
+//        allEventsFirebase.observeSingleEvent(of: FIRDataEventType.value) { (dataSnapshot: FIRDataSnapshot) in
+//            guard dataSnapshot.exists() else{
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationAllEvents), object: nil)
+//                return
+//            }
+//            
+//            let channelsListArray = dataSnapshot.value as! [String: Any]
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationAllEvents), object: nil, userInfo: channelsListArray)
+//        }
         
     }
     
