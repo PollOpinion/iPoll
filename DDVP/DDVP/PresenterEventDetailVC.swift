@@ -78,6 +78,18 @@ class PresenterEventDetailVC: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        print ("Questions list : Row at index \(indexPath.row) tapped")
+//        self.performSegue(withIdentifier: "segueQuestionResultVC", sender: self)
+        
+        let resultsVC = QuestionResultVC.instantiateStoryboard()
+        resultsVC.channelName = "Result"
+        self.navigationController?.pushViewController(resultsVC, animated: true)
+        
+    }
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -122,29 +134,14 @@ class PresenterEventDetailVC: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     
-
     @IBAction func addQuestionBarBtnTapped(_ sender: Any) {
-        
         print ("addQuestionBarBtnTapped")
-        //TODO: launch another view(something similar to AddQuestionVC form PUBLISHER app) or a readymade view for PUBLISHER reference app, which will configure a question. 
-        
-
         performSegue(withIdentifier: "segueAddQuestionVC", sender: self)
-
-        
-        /// folllwoing code is for testing only
-        
-//        let eventTemp : PresenterQueEvent = PresenterQueEvent.init(titleStr: "Title", questionStr: "Question string here?", countInt: 23)
-//        eventsArray.append(eventTemp)
-//        
-//        self.tableView.reloadData()
-        
     }
     
     //Mark: helper functions
     func reloadQuestionListWith(question: PresenterQueEvent) {
         eventsArray.append(question)
         self.tableView.reloadData()
-
     }
 }
