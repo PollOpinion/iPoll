@@ -25,7 +25,6 @@
 		DADC4DFD1E349FDA003AD5BB /* PresenterQue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4DFC1E349FDA003AD5BB /* PresenterQue.swift */; };
 		DADC4DFF1E34A411003AD5BB /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4DFE1E34A411003AD5BB /* TextFieldCell.swift */; };
 		DADC4E011E34A563003AD5BB /* AddQuestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4E001E34A563003AD5BB /* AddQuestionVC.swift */; };
-		DADC4E031E352A5D003AD5BB /* QuestionResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4E021E352A5D003AD5BB /* QuestionResultVC.swift */; };
 		DADC4E061E360D01003AD5BB /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4E051E360D01003AD5BB /* PieChartView.swift */; };
 		DADC4E081E360E0A003AD5BB /* ResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC4E071E360E0A003AD5BB /* ResultVC.swift */; };
 		E85EFCC31E312D8D00C916C1 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85EFCC21E312D8D00C916C1 /* FirebaseManager.swift */; };
@@ -76,7 +75,6 @@
 		DADC4DFC1E349FDA003AD5BB /* PresenterQue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterQue.swift; sourceTree = "<group>"; };
 		DADC4DFE1E34A411003AD5BB /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		DADC4E001E34A563003AD5BB /* AddQuestionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuestionVC.swift; sourceTree = "<group>"; };
-		DADC4E021E352A5D003AD5BB /* QuestionResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionResultVC.swift; sourceTree = "<group>"; };
 		DADC4E051E360D01003AD5BB /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChartView.swift; path = ThirdParty/PieChartView.swift; sourceTree = "<group>"; };
 		DADC4E071E360E0A003AD5BB /* ResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultVC.swift; sourceTree = "<group>"; };
 		E85EFCC21E312D8D00C916C1 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 				DADC4DFC1E349FDA003AD5BB /* PresenterQue.swift */,
 				DADC4DFE1E34A411003AD5BB /* TextFieldCell.swift */,
 				DADC4E001E34A563003AD5BB /* AddQuestionVC.swift */,
-				DADC4E021E352A5D003AD5BB /* QuestionResultVC.swift */,
 				DADC4E071E360E0A003AD5BB /* ResultVC.swift */,
 			);
 			path = DDVP;
@@ -438,7 +435,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA4B9B2A1E2E358E003BFD61 /* LoginResultDetailViewController.swift in Sources */,
-				DADC4E031E352A5D003AD5BB /* QuestionResultVC.swift in Sources */,
 				D47CE71A1E26281900EDEC7D /* LoginViewController.swift in Sources */,
 				DADC4DF71E324FDA003AD5BB /* PresenterEventDetailVC.swift in Sources */,
 				DA4B9B341E323F39003BFD61 /* PresenterEventCell.swift in Sources */,

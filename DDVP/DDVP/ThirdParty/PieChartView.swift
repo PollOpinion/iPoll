@@ -3,6 +3,7 @@
 //  Pie Chart View
 //
 //  Created by Hamish Knight on 04/03/2016.
+//  Modified by Pankaj Neve on 23/01/2017.
 //  Copyright © 2016 Redonkulous Apps. All rights reserved.
 //
 
@@ -112,6 +113,10 @@ class PieChartView: UIView {
             // fill segment
             ctx?.fillPath()
             
+            ctx?.setLineWidth(4)
+            ctx?.setStrokeColor(UIColor.gray.cgColor)
+            ctx?.strokePath()
+            
             if showSegmentLabels { // do text rendering
                 
                 // get the angle midpoint
@@ -132,8 +137,8 @@ class PieChartView: UIView {
                 // get the average brightness of the color
                 let averageRGB = (colorComponents[0] + colorComponents[1] + colorComponents[2]) / 3
                 
-                // if too light, use black. If too dark, use white
-                textAttributes[NSForegroundColorAttributeName] = (averageRGB > 0.7) ? UIColor.black : UIColor.white
+                // if too light, use black. If too dark, use gray
+                textAttributes[NSForegroundColorAttributeName] = (averageRGB > 0.7) ? UIColor.black : UIColor.gray
                 
                 // the bounds that the text will occupy
                 var renderRect = CGRect(origin: .zero, size: textToRender.size(attributes: textAttributes))

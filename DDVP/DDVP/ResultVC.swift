@@ -19,7 +19,16 @@ class ResultVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        // Set your constraint here
+        pieChartView.center.x = view.center.x
+        pieChartView.frame = chartView.frame
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.pieChartFor(values: ["abc": 12], tempView: chartView)
     }
 
@@ -53,8 +62,5 @@ class ResultVC: UIViewController {
         pieChartView.segmentLabelFont = UIFont.systemFont(ofSize: 12)
         pieChartView.showSegmentValueInLabel = true
         view.addSubview(pieChartView)
-        
-        pieChartView.center.x = view.center.x
-        
     }
 }
