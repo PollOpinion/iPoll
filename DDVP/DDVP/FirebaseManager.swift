@@ -33,22 +33,15 @@ class FirebaseManager: NSObject{
         allEventsFirebase.queryOrdered(byChild: "presenterID").queryEqual(toValue: pollUser?.Id).observeSingleEvent(of: FIRDataEventType.value) { (dataSnapshot: FIRDataSnapshot) in
             
             guard dataSnapshot.exists() else{
+                //allEventsFirebase.removeObserver(withHandle: handle)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationAllEvents), object: nil)
                 return
             }
             
             let channelsListArray = dataSnapshot.value as! [String: Any]
+            //allEventsFirebase.removeObserver(withHandle: handle)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationAllEvents), object: nil, userInfo: channelsListArray)
         }
-//        allEventsFirebase.observeSingleEvent(of: FIRDataEventType.value) { (dataSnapshot: FIRDataSnapshot) in
-//            guard dataSnapshot.exists() else{
-//                NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationAllEvents), object: nil)
-//                return
-//            }
-//            
-//            let channelsListArray = dataSnapshot.value as! [String: Any]
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationAllEvents), object: nil, userInfo: channelsListArray)
-//        }
         
     }
     
