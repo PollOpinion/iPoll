@@ -245,17 +245,11 @@ class AddQuestionVC: UITableViewController {
         for quetionField in enteredData {
             print( quetionField)
         }
-        
-        print(eventToSave)
-        
-        print(eventToSave.toAnyObject())
     }
 }
 
 // MARK: TextField Delegate methods
 extension AddQuestionVC: UITextFieldDelegate {
-    
-    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let tag = textField.tag
