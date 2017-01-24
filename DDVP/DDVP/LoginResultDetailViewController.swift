@@ -30,7 +30,7 @@ class LoginResultDetailViewController: UIViewController {
         super.viewDidLoad()
         
         
-        view.backgroundColor = Color.lightBackground.value
+        view.backgroundColor = Color.presenterTheme.value
         self.navigationItem.hidesBackButton = true
         
         if pollUser?.UserProvider == UserProvider.facebook {

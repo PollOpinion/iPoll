@@ -12,6 +12,8 @@ class ParticipantViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = Color.participantTheme.value
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

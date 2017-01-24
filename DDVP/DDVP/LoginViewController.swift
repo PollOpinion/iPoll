@@ -33,7 +33,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
        
         super.viewDidLoad()
         
-        view.backgroundColor = Color.lightBackground.value
+        view.backgroundColor = Color.presenterTheme.value
+        
         view.addSubview(loginButton)
         
         loginButton.delegate = self

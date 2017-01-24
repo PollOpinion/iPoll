@@ -16,6 +16,8 @@ class PresenterViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = Color.presenterTheme.value
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -198,8 +200,5 @@ class PresenterViewController: UITableViewController {
         self.present(alert, animated: true) { () -> Void in
             
         }
-        
-//        eventsArray.append((eventNameTextField?.text)!)
-//        self.tableView.reloadData()
     }
 }

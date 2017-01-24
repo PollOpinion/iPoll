@@ -17,8 +17,9 @@ class ResultVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = Color.presenterTheme.value
 
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidLayoutSubviews() {
