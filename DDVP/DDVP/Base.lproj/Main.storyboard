@@ -171,7 +171,6 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.29019607843137252" green="0.65098039215686276" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="YKp-sR-viM" secondAttribute="trailing" priority="750" constant="32" id="8NT-hf-Bwv"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YKp-sR-viM" secondAttribute="bottom" priority="750" constant="269" id="93E-cO-Cvq"/>
@@ -273,7 +272,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.29019607843137252" green="0.65098039215686276" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="yVP-ls-Yi6" firstAttribute="top" secondItem="5nk-xX-yAN" secondAttribute="bottom" constant="8" id="265-3d-9D3"/>
                             <constraint firstItem="O2s-Bk-L55" firstAttribute="top" secondItem="yVP-ls-Yi6" secondAttribute="bottom" constant="60" id="Dsp-2l-uWT"/>
@@ -315,7 +313,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="cRR-xi-lEb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.97425732073842475" green="1" blue="0.79824674024094233" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ParticipantCell" id="fcL-ZM-gp5">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -346,7 +344,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="DdB-cS-OqL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.2901960784" green="0.65098039220000004" blue="0.49019607840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventCell" id="sO7-cX-VKv" customClass="PresenterEventCell" customModule="DDVP" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -364,7 +362,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.2901960784" green="0.65098039220000004" blue="0.49019607840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="eventName" destination="YYY-l2-TD9" id="cNx-pZ-Mlf"/>
                                 </connections>
@@ -398,7 +395,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="110" sectionHeaderHeight="28" sectionFooterHeight="28" id="8Il-1D-iSc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.2901960784" green="0.65098039220000004" blue="0.49019607840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PresenterQueCell" rowHeight="110" id="k04-W9-IXt" customClass="PresenterQuestionCell" customModule="DDVP" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="110"/>
@@ -452,7 +449,6 @@
                                         <constraint firstItem="jOA-2K-0D3" firstAttribute="leading" secondItem="wqu-zZ-63M" secondAttribute="leadingMargin" constant="11" id="xEq-sG-rpf"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.2901960784" green="0.65098039220000004" blue="0.49019607840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="queDurationLbl" destination="5EF-Zs-aIE" id="iOT-pn-gz9"/>
                                     <outlet property="queQueLbl" destination="jOA-2K-0D3" id="4ka-ms-2Ct"/>
@@ -489,7 +485,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" id="qeg-jE-Iz0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.2901960784" green="0.65098039220000004" blue="0.49019607840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextFieldCell" rowHeight="65" id="vbJ-Jg-7O4" customClass="TextFieldCell" customModule="DDVP" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="65"/>
@@ -534,7 +530,6 @@
                                         <constraint firstItem="v9P-G5-l7n" firstAttribute="leading" secondItem="d9B-Nb-B4t" secondAttribute="leading" constant="20" id="zxY-Df-3SC"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.2901960784" green="0.65098039220000004" blue="0.49019607840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="descLabel" destination="Y9k-3u-EUt" id="YAs-mC-nA2"/>
                                     <outlet property="removeBtn" destination="v9P-G5-l7n" id="Rw0-yJ-au4"/>
@@ -634,7 +629,6 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.2901960784" green="0.65098039220000004" blue="0.49019607840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="72U-eY-bI6" firstAttribute="leading" secondItem="IQQ-Js-5qN" secondAttribute="leading" id="0h5-u7-5EM"/>
                             <constraint firstItem="Ymy-SM-oMv" firstAttribute="trailing" secondItem="daS-h2-Ild" secondAttribute="trailingMargin" id="2Kd-sj-DfV"/>

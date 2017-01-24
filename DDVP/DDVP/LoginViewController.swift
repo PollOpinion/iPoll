@@ -33,7 +33,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
        
         super.viewDidLoad()
         
-        view.backgroundColor = Color.presenterTheme.value
+        roleSegment.addTarget(self, action: #selector(LoginViewController.roleChanged), for: .valueChanged)
+        self.roleChanged()
         
         view.addSubview(loginButton)
         
@@ -272,6 +273,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         pollUser = nil
         
+        self.roleSegment.selectedSegmentIndex = 0
+        roleChanged()
+        
         self.navigationController?.popViewController(animated: true)
         
         
@@ -304,6 +308,23 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 self.fireBaseLoginComplete(user: fireBaseUser!, loginProvider: provider)
             })
+        }
+    }
+    
+    //MARK: segment value changed delegate
+    
+    func roleChanged() {
+        print("Role Changed... ")
+        
+        switch self.roleSegment.selectedSegmentIndex {
+        case 0:
+            view.backgroundColor = Color.presenterTheme.value
+            break
+        case 1:
+            view.backgroundColor = Color.participantTheme.value
+            break
+        default:
+            break
         }
     }
 }
