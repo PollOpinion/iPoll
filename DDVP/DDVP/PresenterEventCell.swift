@@ -15,6 +15,8 @@ class PresenterEventCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.backgroundColor = Color.presenterTheme.value
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
