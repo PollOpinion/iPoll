@@ -13,6 +13,7 @@ class PresenterViewController: UITableViewController {
     @IBOutlet weak var barBtnAddEvent: UIBarButtonItem!
     
     var eventsArray = [String]()
+    var eventName : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +89,7 @@ class PresenterViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         print ("Row at index \(indexPath.row) tapped")
+        self.eventName = self.eventsArray[indexPath.row]
         self.performSegue(withIdentifier: "seguePresenterEventDetailsVC", sender: self)
     }
     
@@ -150,15 +152,20 @@ class PresenterViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "seguePresenterEventDetailsVC" {
+            let nextScene =  segue.destination as! PresenterEventDetailVC
+            nextScene.eventName = self.eventName
+        }
     }
-    */
+    
 
     
     //MARK: Action Handler
