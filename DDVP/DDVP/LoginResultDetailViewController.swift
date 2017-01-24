@@ -29,8 +29,8 @@ class LoginResultDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        roleSegement.addTarget(self, action: #selector(LoginResultDetailViewController.roleChanged), for: .valueChanged)
         
-        view.backgroundColor = Color.lightBackground.value
         self.navigationItem.hidesBackButton = true
         
         if pollUser?.UserProvider == UserProvider.facebook {
@@ -187,10 +187,12 @@ class LoginResultDetailViewController: UIViewController {
         if pollUser?.LoginRole == UserRole.presenter{
             roleStr = "Presenter"
             self.roleSegement.selectedSegmentIndex = 0
+            self.roleChanged()
         }
         else{
             roleStr = "Participant"
             self.roleSegement.selectedSegmentIndex = 1
+            self.roleChanged()
         }
         
         print("You are logged in as \(roleStr)")
@@ -206,5 +208,22 @@ class LoginResultDetailViewController: UIViewController {
             }
         }
         return nil
+    }
+    
+    //MARK: segment value changed delegate
+    
+    func roleChanged() {
+        print("Role Changed... ")
+        
+        switch self.roleSegement.selectedSegmentIndex {
+        case 0:
+            view.backgroundColor = Color.presenterTheme.value
+            break
+        case 1:
+            view.backgroundColor = Color.participantTheme.value
+            break
+        default:
+            break
+        }
     }
 }

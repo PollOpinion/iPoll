@@ -22,6 +22,11 @@ enum Color {
     
     case darkBackground
     case lightBackground
+    
+    case presenterTheme
+    case participantTheme
+    case firebaseTheme
+    
     case intermidiateBackground
     
     case darkText
@@ -54,6 +59,14 @@ extension Color {
             instanceColor = UIColor(hexString: "#999966")
         case .lightBackground:
             instanceColor = UIColor(hexString: "#4AA67D")
+            
+        case .presenterTheme:
+            instanceColor = UIColor(hexString: "#4DA49E")
+        case .participantTheme:
+            instanceColor = UIColor(hexString: "#8C6CB1")
+        case .firebaseTheme:
+            instanceColor = UIColor(hexString: "#D35349")
+            
         case .intermidiateBackground:
             instanceColor = UIColor(hexString: "#3D8CC4")
         case .darkText:
