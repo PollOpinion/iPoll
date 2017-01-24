@@ -69,6 +69,7 @@ class PresenterEventDetailVC: UITableViewController {
     
     
     var eventsArray = [Any] ()
+    var eventName : String = ""
     
 
     override func viewDidLoad() {
@@ -79,8 +80,8 @@ class PresenterEventDetailVC: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        self.tableView.reloadData()
+        self.addObservers()
+        //self.tableView.reloadData()
         
     }
 
@@ -89,6 +90,40 @@ class PresenterEventDetailVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    // MARK: Private methods
+    private func addObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(self.addedQuestionNotification(notification:)), name: NSNotification.Name(rawValue: kNotificationUploadedQuestion), object: nil)
+        
+    }
+    
+    // MARK: Selector methods
+    func addedQuestionNotification(notification: Notification) {
+        MBProgressHUD.hide(for: self.view, animated: true)
+        if let userInfo = notification.userInfo as! [String: AnyObject]?,
+            let isUploaded = userInfo["isUploaded"] as! Bool?{
+            guard isUploaded else {
+                if let error = userInfo["error"] as! NSError? {
+                    self.eventsArray.removeLast()
+                    //Show ALert
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+                    let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { (alertAction) -> Void in
+                    }
+                    alert.addAction(okAction)
+                    self.present(alert, animated: true) { () -> Void in
+                        
+                    }
+                }
+                return
+            }
+            self.tableView.reloadData()
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -178,6 +213,9 @@ class PresenterEventDetailVC: UITableViewController {
     //Mark: helper functions
     func reloadQuestionListWith(question: PresenterQueEvent) {
         eventsArray.append(question)
-        self.tableView.reloadData()
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        let uploadData : [String : Any] = question.toAnyObject() as! [String : Any];
+        FirebaseManager.sharedInstance.uploadQuestionAtChannel(eventName: self.eventName, withData: uploadData)
+        //self.tableView.reloadData()
     }
 }
