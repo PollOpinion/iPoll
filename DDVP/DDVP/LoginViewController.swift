@@ -71,10 +71,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         print("FB login did complete")
         
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        
-        firebaseLogin(provider: UserProvider.facebook)
-        
+        if result.isCancelled {
+            print("FB login was cancelled by the user")
+        }
+        else{
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            firebaseLogin(provider: UserProvider.facebook)
+        }
     }
     
     
@@ -86,6 +89,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func loginButtonWillLogin(_ loginButton: FBSDKLoginButton!) -> Bool {
+        
+        print ("loginButtonWillLogin")
+        
         return true
     }
     
