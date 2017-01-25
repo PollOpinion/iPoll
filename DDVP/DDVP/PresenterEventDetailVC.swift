@@ -28,6 +28,16 @@ struct PresenterQueEvent{
         self.opt4 = opt4Str ?? ""
     }
     
+    static func toArrayofPresenterQueEvent(fromArray: [[String : Any]]) -> [PresenterQueEvent]{
+        var presenterQueEventArray = [PresenterQueEvent]()
+        for dict in fromArray{
+            let duration  = Int((dict["duration"] as! Int?)!)
+            let que  = self.init(titleStr: dict["title"] as! String?, questionStr: dict["question"] as! String?, durationInt: duration, opt1Str: dict["opt1"] as! String?, opt2Str: dict["opt2"] as! String?, opt3Str: dict["opt3"] as! String?, opt4Str: dict["opt4"] as! String?)
+            presenterQueEventArray.append(que)
+        }
+        return presenterQueEventArray
+    }
+    
     func toAnyObject() -> Any {
         
         var obj = [
@@ -68,7 +78,7 @@ struct PresenterQueEvent{
 class PresenterEventDetailVC: UITableViewController {
     
     
-    var eventsArray = [Any] ()
+    var eventsArray = [PresenterQueEvent] ()
     var eventName : String = ""
     
 
@@ -83,6 +93,7 @@ class PresenterEventDetailVC: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.addObservers()
+        self.listenToQuestions()
         //self.tableView.reloadData()
         
     }
@@ -101,7 +112,14 @@ class PresenterEventDetailVC: UITableViewController {
     private func addObservers() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(self.addedQuestionNotification(notification:)), name: NSNotification.Name(rawValue: kNotificationUploadedQuestion), object: nil)
+        notificationCenter.addObserver(self, selector: #selector(self.fetchQuestionNotification(notification:)), name: NSNotification.Name(rawValue: kNotificationFetchedQuestions), object: nil)
         
+    }
+    
+    private func listenToQuestions() {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        FirebaseManager.sharedInstance.fetchAllQuestionsInChannel(eventName: eventName)
+      
     }
     
     // MARK: Selector methods
@@ -125,6 +143,23 @@ class PresenterEventDetailVC: UITableViewController {
             }
             self.tableView.reloadData()
         }
+    }
+    
+    func fetchQuestionNotification(notification: Notification) {
+        MBProgressHUD.hide(for: self.view, animated: true)
+        if let userInfo = notification.userInfo as! [String: [String: Any]]? {
+            
+            let receivedQuestionArray  = Array(userInfo.values).sorted{
+                (Int((($0)[kKeyQuestionId] as! Int?)!) > Int((($1)[kKeyQuestionId] as! Int?)!))
+            }
+            var questionsArray  = PresenterQueEvent.toArrayofPresenterQueEvent(fromArray: receivedQuestionArray)
+            self.eventsArray = (questionsArray as! [PresenterQueEvent]?)!
+            
+        }
+        else{
+            self.eventsArray = []
+        }
+        self.tableView.reloadData()
     }
     // MARK: - Table view data source
 
