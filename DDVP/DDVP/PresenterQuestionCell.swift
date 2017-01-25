@@ -10,6 +10,7 @@ import UIKit
 
 class PresenterQuestionCell: UITableViewCell {
     
+    @IBOutlet weak var publishButton: UIButton!
     @IBOutlet weak var queTitleLbl: UILabel!
     @IBOutlet weak var queQueLbl: UILabel!
     @IBOutlet weak var queDurationLbl: UILabel!
@@ -25,5 +26,5 @@ class PresenterQuestionCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }

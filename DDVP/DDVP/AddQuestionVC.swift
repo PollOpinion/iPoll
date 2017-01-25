@@ -190,6 +190,36 @@ class AddQuestionVC: UITableViewController {
         return nil
     }
     
+    func questionAction(sender: Any) {
+        
+        let barButton:UIBarButtonItem = sender as! UIBarButtonItem
+        let action:Int = barButton.tag
+        print("Question bar button tapped (Save = 1000, Publish = 1001), button tag ID : \(action)")
+        
+        self.tableView.endEditing(true)
+        
+        let textLabelsCount = PresenterQue.getTotalTextLabels()
+        let isAddButtonOn = self.noOfExtraOptionsOn < 2
+        var countCurrentText = textLabelsCount
+        if isAddButtonOn {
+            countCurrentText = textLabelsCount - (2 - self.noOfExtraOptionsOn) + (self.isAddButtonOn ? 1 : 0)
+        }
+        
+        let durationVal:Int = Int(enteredData[2]) ?? -1
+        
+        let newQuestion : PresenterQueEvent = PresenterQueEvent.init(titleStr: enteredData[0], questionStr: enteredData[1], durationInt: durationVal, opt1Str:enteredData[3], opt2Str:enteredData[4], opt3Str:enteredData[5], opt4Str:enteredData[6] )
+        
+        
+        let questionListVC: PresenterEventDetailVC = self.backViewController() as! PresenterEventDetailVC
+        questionListVC.reloadQuestionListWith(question: newQuestion, actionID:action)
+        self.navigationController?.popViewController(animated: true)
+        
+        //#warning : for testing
+        for quetionField in enteredData {
+            print( quetionField)
+        }
+    }
+    
     
     //MARK: Action and Selector  Handler
     
@@ -220,42 +250,18 @@ class AddQuestionVC: UITableViewController {
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         
-        self.tableView.endEditing(true)
-        
-        print(enteredData)
-        
-        let textLabelsCount = PresenterQue.getTotalTextLabels()
-        let isAddButtonOn = self.noOfExtraOptionsOn < 2
-        var countCurrentText = textLabelsCount
-        if isAddButtonOn {
-            countCurrentText = textLabelsCount - (2 - self.noOfExtraOptionsOn) + (self.isAddButtonOn ? 1 : 0)
-        }
-        
-        
-        let durationVal:Int = Int(enteredData[2]) ?? -1
-        
-        let eventToSave : PresenterQueEvent = PresenterQueEvent.init(titleStr: enteredData[0], questionStr: enteredData[1], durationInt: durationVal, opt1Str:enteredData[3], opt2Str:enteredData[4], opt3Str:enteredData[5], opt4Str:enteredData[6] )
-        
-        
-        let questionListVC: PresenterEventDetailVC = self.backViewController() as! PresenterEventDetailVC
-        questionListVC.reloadQuestionListWith(question: eventToSave)
-        self.navigationController?.popViewController(animated: true)
-        
-        //#warning : for testing
-        for quetionField in enteredData {
-            print( quetionField)
-        }
-        
-        print(eventToSave)
-        
-        print(eventToSave.toAnyObject())
+        questionAction(sender: sender)
     }
+    
+    @IBAction func publishButtonTapped(_ sender: Any) {
+        
+        questionAction(sender: sender)
+    }
+    
 }
 
 // MARK: TextField Delegate methods
 extension AddQuestionVC: UITextFieldDelegate {
-    
-    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let tag = textField.tag

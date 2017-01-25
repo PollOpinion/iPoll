@@ -25,7 +25,7 @@ enum PresenterQue: Int {
         case .QuestionStr:
             return "Question"
         case .VottingDuration:
-            return "Duration"
+            return "Expires in"
         case .Option1:
             return "Option 1"
         case .Option2:

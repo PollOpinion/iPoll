@@ -80,12 +80,13 @@ class PresenterEventDetailVC: UITableViewController {
     
     var eventsArray = [PresenterQueEvent] ()
     var eventName : String = ""
-    
-
+    var currentSelectedRow:Int = 0
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = Color.presenterTheme.value
+        self.navigationItem.title = eventName
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -162,7 +163,6 @@ class PresenterEventDetailVC: UITableViewController {
         self.tableView.reloadData()
     }
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -182,42 +182,38 @@ class PresenterEventDetailVC: UITableViewController {
         cell.queTitleLbl.text = eventObj.title
         cell.queQueLbl.text = eventObj.question
         cell.queDurationLbl.text = String("\(eventObj.duration)")
+        cell.publishButton.tag = indexPath.row
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        print ("Questions list : Row at index \(indexPath.row) tapped")
+        self.currentSelectedRow = indexPath.row
+        print ("Questions list : Row at index \(currentSelectedRow) tapped")
+        
         self.performSegue(withIdentifier: "segueShowResultVC", sender: self)
-        
-//        let resultsVC = QuestionResultVC.instantiateStoryboard()
-//        resultsVC.channelName = "Result"
-//        self.navigationController?.pushViewController(resultsVC, animated: true)
-        
     }
     
-    
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+    
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            eventsArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            self.deleteQuestionFromFirebase(atIndex: indexPath.row)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
-
+    
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
@@ -240,6 +236,24 @@ class PresenterEventDetailVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "segueShowResultVC" {
+            
+            print ( segue.destination )
+            
+            let selectedQuestion:PresenterQueEvent = eventsArray[currentSelectedRow] as! PresenterQueEvent
+            
+            let resultvc:ResultVC = segue.destination as! ResultVC
+            resultvc.questionObj = selectedQuestion.toAnyObject() as! [String : Any]
+            resultvc.ansCount = [10, 25, 3, 17]   //TODO : pass actual values here later
+            
+            
+        }
+        else if segue.identifier == "segueAddQuestionVC" {
+            
+            print ( segue.destination )
+        }
+        
     }
     
     @IBAction func addQuestionBarBtnTapped(_ sender: Any) {
@@ -247,12 +261,52 @@ class PresenterEventDetailVC: UITableViewController {
         performSegue(withIdentifier: "segueAddQuestionVC", sender: self)
     }
     
+    @IBAction func publishRowButtonTapped(_ sender: Any) {
+        
+        let btn:UIButton = sender as! UIButton
+        let currentSelectedRowIndex = btn.tag
+        
+        self.publishQuestionAtFrirebase(question: eventsArray[currentSelectedRowIndex] as! PresenterQueEvent)
+        
+        
+        
+    }
     //Mark: helper functions
-    func reloadQuestionListWith(question: PresenterQueEvent) {
+    func reloadQuestionListWith(question: PresenterQueEvent, actionID:Int) {
         eventsArray.append(question)
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let uploadData : [String : Any] = question.toAnyObject() as! [String : Any];
-        FirebaseManager.sharedInstance.uploadQuestionAtChannel(eventName: self.eventName, withData: uploadData)
+        
+        switch actionID {
+        case 1000: //save question
+            print("Save question")
+            FirebaseManager.sharedInstance.uploadQuestionAtChannel(eventName: self.eventName, withData: uploadData)
+            
+            break
+        case 1001: // publish question
+            print("Save and publish question")
+            //TODO : publish already saved quesrion here by using it's Question ID, and remove below line of code.
+            FirebaseManager.sharedInstance.uploadQuestionAtChannel(eventName: self.eventName, withData: uploadData)
+            
+            self.publishQuestionAtFrirebase(question: question)
+            
+            break
+        default:
+            break
+        }
+        
         //self.tableView.reloadData()
+        
+    }
+    
+    func deleteQuestionFromFirebase(atIndex:Int) {
+        // TODO : delete Question from  Firebase
+        print("TODO : delete Question from  Firebase")
+    }
+    
+    func publishQuestionAtFrirebase(question: PresenterQueEvent) {
+        //TODO : 
+        
+        print( "publish question \(question)")
     }
 }

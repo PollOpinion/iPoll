@@ -113,9 +113,8 @@ class PieChartView: UIView {
             // fill segment
             ctx?.fillPath()
             
-            ctx?.setLineWidth(4)
-            ctx?.setStrokeColor(UIColor.gray.cgColor)
-            ctx?.strokePath()
+//            ctx?.setStrokeColor(UIColor.blue.cgColor)
+//            ctx?.strokePath()
             
             if showSegmentLabels { // do text rendering
                 
