@@ -70,11 +70,13 @@ class PresenterEventDetailVC: UITableViewController {
     
     var eventsArray = [Any] ()
     var eventName : String = ""
+    var currentSelectedRow:Int = 0
  
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = Color.presenterTheme.value
+        self.navigationItem.title = eventName
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -82,8 +84,6 @@ class PresenterEventDetailVC: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.addObservers()
-        //self.tableView.reloadData()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -125,8 +125,8 @@ class PresenterEventDetailVC: UITableViewController {
             self.tableView.reloadData()
         }
     }
+    
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -153,13 +153,10 @@ class PresenterEventDetailVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        print ("Questions list : Row at index \(indexPath.row) tapped")
+        self.currentSelectedRow = indexPath.row
+        print ("Questions list : Row at index \(currentSelectedRow) tapped")
+        
         self.performSegue(withIdentifier: "segueShowResultVC", sender: self)
-        
-//        let resultsVC = QuestionResultVC.instantiateStoryboard()
-//        resultsVC.channelName = "Result"
-//        self.navigationController?.pushViewController(resultsVC, animated: true)
-        
     }
     
     // Override to support conditional editing of the table view.
@@ -203,6 +200,24 @@ class PresenterEventDetailVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "segueShowResultVC" {
+            
+            print ( segue.destination )
+            
+            let selectedQuestion:PresenterQueEvent = eventsArray[currentSelectedRow] as! PresenterQueEvent
+            
+            let resultvc:ResultVC = segue.destination as! ResultVC
+            resultvc.questionObj = selectedQuestion.toAnyObject() as! [String : Any]
+            resultvc.ansCount = [10, 25, 3, 17]   //TODO : pass actual values here later
+            
+            
+        }
+        else if segue.identifier == "segueAddQuestionVC" {
+            
+            print ( segue.destination )
+        }
+        
     }
     
     @IBAction func addQuestionBarBtnTapped(_ sender: Any) {

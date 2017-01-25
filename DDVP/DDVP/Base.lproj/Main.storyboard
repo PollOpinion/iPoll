@@ -682,6 +682,12 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="chartView" destination="B7Y-d6-m65" id="5SD-jH-rrB"/>
+                        <outlet property="option1Lbl" destination="La0-8n-0Cj" id="jqO-fE-dAJ"/>
+                        <outlet property="option2Lbl" destination="72U-eY-bI6" id="VXP-71-w8l"/>
+                        <outlet property="option3Lbl" destination="IQQ-Js-5qN" id="Zet-7R-td4"/>
+                        <outlet property="option4Lbl" destination="wxg-lX-CmU" id="c0y-ou-RPL"/>
+                        <outlet property="questionLbl" destination="Ymy-SM-oMv" id="Bzg-0B-W58"/>
+                        <outlet property="timeLeftLbl" destination="xJ9-iw-Cij" id="cWQ-dp-Uc4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jsU-iI-6lW" userLabel="First Responder" sceneMemberID="firstResponder"/>

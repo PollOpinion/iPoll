@@ -10,23 +10,30 @@ import UIKit
 
 class ResultVC: UIViewController {
     
+    @IBOutlet weak var questionLbl: UILabel!
+    @IBOutlet weak var timeLeftLbl: UILabel!
+    @IBOutlet weak var option1Lbl: UILabel!
+    @IBOutlet weak var option2Lbl: UILabel!
+    @IBOutlet weak var option3Lbl: UILabel!
+    @IBOutlet weak var option4Lbl: UILabel!
     let pieChartView = PieChartView()
-
-    @IBOutlet weak var chartView: UIView!
+    var questionObj:[String : Any] = [:]
+    var ansCount = [Int]()
     
+    
+    @IBOutlet weak var chartView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = Color.presenterTheme.value
-
+        self.fillInQuestionDetails()
     }
     
     override func viewDidLayoutSubviews() {
         // Set your constraint here
         pieChartView.center.x = view.center.x
         pieChartView.frame = chartView.frame
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,16 +59,65 @@ class ResultVC: UIViewController {
     
     func pieChartFor(values: Any, tempView: UIView){
         
+        let colorArr = [UIColor.orange, UIColor.green, UIColor.cyan, UIColor.yellow ]
         pieChartView.frame = tempView.frame
         
         pieChartView.segments = [
-            Segment(color: UIColor.orange, name:"Option 1", value: 313),
-            Segment(color: UIColor.green, name:"Option 2", value: 67),
-            Segment(color: UIColor.cyan, name:"Option 3", value: 113),
-            Segment(color: UIColor.yellow, name:"Option 4", value: 87)
+            Segment(color: colorArr[0], name:self.option1Lbl.text!, value: CGFloat(ansCount[0])),
+            Segment(color: colorArr[1], name:self.option2Lbl.text!, value: CGFloat(ansCount[1])),
+            Segment(color: colorArr[2], name:self.option3Lbl.text!, value: CGFloat(ansCount[2])),
+            Segment(color: colorArr[3], name:self.option4Lbl.text!, value: CGFloat(ansCount[3]))
         ]
+        
         pieChartView.segmentLabelFont = UIFont.systemFont(ofSize: 12)
         pieChartView.showSegmentValueInLabel = true
         view.addSubview(pieChartView)
+    }
+    
+    func fillInQuestionDetails() {
+        
+        if let questionStr = questionObj["question"] as! String? {
+            self.questionLbl.text = questionStr
+        }
+        else{
+            self.questionLbl.text = ""
+        }
+        
+        if let option1Str = questionObj["opt1"] as! String? {
+            self.option1Lbl.text = option1Str
+        }
+        else{
+            self.option1Lbl.text = ""
+        }
+        
+        if let option2Str = questionObj["opt2"] as! String? {
+            self.option2Lbl.text = option2Str
+        }
+        else{
+            self.option2Lbl.text = ""
+        }
+        
+        if let option3Str = questionObj["opt3"] as! String? {
+            self.option3Lbl.text = option3Str
+        }
+        else{
+            self.option3Lbl.text = ""
+        }
+        
+        if let option4Str = questionObj["opt4"] as! String? {
+            self.option4Lbl.text = option4Str
+        }
+        else{
+            self.option4Lbl.text = ""
+        }
+        
+        let expiresIn:Int = questionObj["duration"] as! Int
+        if expiresIn > 0  {
+            self.timeLeftLbl.text = String(format:"Expires in \(expiresIn) sec.")
+        }
+        else{
+            self.timeLeftLbl.text = "Expires in time not set for this question"
+        }
+       
     }
 }
