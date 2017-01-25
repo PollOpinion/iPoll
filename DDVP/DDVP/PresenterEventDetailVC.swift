@@ -211,12 +211,28 @@ class PresenterEventDetailVC: UITableViewController {
     }
     
     //Mark: helper functions
-    func reloadQuestionListWith(question: PresenterQueEvent) {
+    func reloadQuestionListWith(question: PresenterQueEvent, actionID:Int) {
         eventsArray.append(question)
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let uploadData : [String : Any] = question.toAnyObject() as! [String : Any];
-        FirebaseManager.sharedInstance.uploadQuestionAtChannel(eventName: self.eventName, withData: uploadData)
+        
+        switch actionID {
+        case 1000: //save question
+            FirebaseManager.sharedInstance.uploadQuestionAtChannel(eventName: self.eventName, withData: uploadData)
+            
+            break
+        case 1001: // publish question
+            print("publish que")
+            //TODO : publish already saved quesrion here by using it's Question ID, and remove below line of code.
+            FirebaseManager.sharedInstance.uploadQuestionAtChannel(eventName: self.eventName, withData: uploadData)
+            
+            break
+        default:
+            break
+        }
+        
         //self.tableView.reloadData()
+        
     }
     
     func deleteQuestionFromFirebase(atIndex:Int) {
