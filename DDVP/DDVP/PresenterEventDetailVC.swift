@@ -70,8 +70,7 @@ class PresenterEventDetailVC: UITableViewController {
     
     var eventsArray = [Any] ()
     var eventName : String = ""
-    
-
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -147,6 +146,7 @@ class PresenterEventDetailVC: UITableViewController {
         cell.queTitleLbl.text = eventObj.title
         cell.queQueLbl.text = eventObj.question
         cell.queDurationLbl.text = String("\(eventObj.duration)")
+        cell.publishButton.tag = indexPath.row
 
         return cell
     }
@@ -210,6 +210,16 @@ class PresenterEventDetailVC: UITableViewController {
         performSegue(withIdentifier: "segueAddQuestionVC", sender: self)
     }
     
+    @IBAction func publishRowButtonTapped(_ sender: Any) {
+        
+        let btn:UIButton = sender as! UIButton
+        let currentSelectedRowIndex = btn.tag
+        
+        self.publishQuestionAtFrirebase(question: eventsArray[currentSelectedRowIndex] as! PresenterQueEvent)
+        
+        
+        
+    }
     //Mark: helper functions
     func reloadQuestionListWith(question: PresenterQueEvent, actionID:Int) {
         eventsArray.append(question)
@@ -218,13 +228,16 @@ class PresenterEventDetailVC: UITableViewController {
         
         switch actionID {
         case 1000: //save question
+            print("Save question")
             FirebaseManager.sharedInstance.uploadQuestionAtChannel(eventName: self.eventName, withData: uploadData)
             
             break
         case 1001: // publish question
-            print("publish que")
+            print("Save and publish question")
             //TODO : publish already saved quesrion here by using it's Question ID, and remove below line of code.
             FirebaseManager.sharedInstance.uploadQuestionAtChannel(eventName: self.eventName, withData: uploadData)
+            
+            self.publishQuestionAtFrirebase(question: question)
             
             break
         default:
@@ -238,5 +251,11 @@ class PresenterEventDetailVC: UITableViewController {
     func deleteQuestionFromFirebase(atIndex:Int) {
         // TODO : delete Question from  Firebase
         print("TODO : delete Question from  Firebase")
+    }
+    
+    func publishQuestionAtFrirebase(question: PresenterQueEvent) {
+        //TODO : 
+        
+        print( "publish question \(question)")
     }
 }
