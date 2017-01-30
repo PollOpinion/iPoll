@@ -24,9 +24,7 @@ class FirebaseManager: NSObject{
         //self.stopListeningToOnlineUsersCount()
     }
     
-    // MARK: Public methods
     // MARK: Event methods
-    
     func fetchAllEvents(){
         let allEventsFirebase = FIRDatabase.database().reference().child(kEventsList)
         
@@ -61,6 +59,36 @@ class FirebaseManager: NSObject{
              NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationAddedEvents), object: nil, userInfo: userInfo)
         }
     }
+    
+    func deleteEvent(eventName: String) {
+        
+        let firebaseEvent = FIRDatabase.database().reference().child(kEventsList).child(eventName)
+        
+        firebaseEvent.removeValue { (error, dataReference) in
+            if error != nil{
+                print("Delete Event \(eventName) error : \(error)")
+            }
+            else{
+                print("Event \(eventName) deleted sucessfully.")
+                self.deleteQuizForEvent(name: eventName)
+            }
+        }
+    }
+    
+    func deleteQuizForEvent(name: String){
+        let childName = name + kEventsQuiz
+        let firebaseEvent = FIRDatabase.database().reference().child(childName)
+        
+        firebaseEvent.removeValue { (error, dataReference) in
+            if error != nil{
+                print("Delete Quiz \(childName) error : \(error)")
+            }
+            else{
+                print("\(childName) deleted sucessfully.")
+            }
+        }
+    }
+
     
     // MARK: Question methods
     func uploadQuestionAtEvent(eventName: String, withData data: [String: Any]) {

@@ -142,11 +142,7 @@ class PresenterViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            eventsArray.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            self.deleteEventFromFirebase(atIndex: indexPath.row)
-           
+            self.deleteEvent(forRowAt: indexPath)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
@@ -225,8 +221,31 @@ class PresenterViewController: UITableViewController {
         }
     }
     
+    //MARK : helper functions
+    
+    func deleteEvent(forRowAt indexPath: IndexPath) {
+        
+        let alert = UIAlertController(title: "Delete \(eventsArray[indexPath.row])", message: "Deleting an event would lead to delete all of the questions under this event. Do you really want to delete an event?", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) { (alertAction) -> Void in
+        }
+        alert.addAction(cancelAction)
+        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) { [weak self] (alertAction) -> Void in
+            
+            // Delete the row from the data source as well as form firebase
+            self?.deleteEventFromFirebase(atIndex: indexPath.row)
+            self?.eventsArray.remove(at: indexPath.row)
+            self?.tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        }
+        alert.addAction(okAction)
+        
+        self.present(alert, animated: true) { () -> Void in
+        }
+    }
+    
     func deleteEventFromFirebase(atIndex:Int) {
-        // TODO : delete event from  Firebase
-        print("TODO : delete event from  Firebase")
+        
+        FirebaseManager.sharedInstance.deleteEvent(eventName: self.eventsArray[atIndex])
     }
 }
