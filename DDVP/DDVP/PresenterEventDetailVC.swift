@@ -78,7 +78,7 @@ struct PresenterQueEvent{
 class PresenterEventDetailVC: UITableViewController {
     
     
-    var eventsArray = [PresenterQueEvent] ()
+    var questionArray = [PresenterQueEvent] ()
     var eventName : String = ""
     var currentSelectedRow:Int = 0
  
@@ -119,7 +119,7 @@ class PresenterEventDetailVC: UITableViewController {
     
     private func listenToQuestions() {
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        FirebaseManager.sharedInstance.fetchAllQuestionsInChannel(eventName: eventName)
+        FirebaseManager.sharedInstance.fetchAllQuestionsInEvent(eventName: eventName)
       
     }
     
@@ -130,7 +130,7 @@ class PresenterEventDetailVC: UITableViewController {
             let isUploaded = userInfo["isUploaded"] as! Bool?{
             guard isUploaded else {
                 if let error = userInfo["error"] as! NSError? {
-                    self.eventsArray.removeLast()
+                    self.questionArray.removeLast()
                     //Show ALert
                     let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
                     let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { (alertAction) -> Void in
@@ -154,11 +154,11 @@ class PresenterEventDetailVC: UITableViewController {
                 (Int((($0)[kKeyQuestionId] as! Int?)!) > Int((($1)[kKeyQuestionId] as! Int?)!))
             }
             var questionsArray  = PresenterQueEvent.toArrayofPresenterQueEvent(fromArray: receivedQuestionArray)
-            self.eventsArray = (questionsArray as! [PresenterQueEvent]?)!
+            self.questionArray = (questionsArray as! [PresenterQueEvent]?)!
             
         }
         else{
-            self.eventsArray = []
+            self.questionArray = []
         }
         self.tableView.reloadData()
     }
@@ -170,7 +170,7 @@ class PresenterEventDetailVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.eventsArray.count
+        return self.questionArray.count
     }
 
     
@@ -178,7 +178,7 @@ class PresenterEventDetailVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PresenterQueCell", for: indexPath) as! PresenterQuestionCell
 
         // Configure the cell...
-        let eventObj : PresenterQueEvent = self.eventsArray[indexPath.row] as! PresenterQueEvent
+        let eventObj : PresenterQueEvent = self.questionArray[indexPath.row] as! PresenterQueEvent
         cell.queTitleLbl.text = eventObj.title
         cell.queQueLbl.text = eventObj.question
         cell.queDurationLbl.text = String("\(eventObj.duration)")
@@ -206,7 +206,7 @@ class PresenterEventDetailVC: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            eventsArray.remove(at: indexPath.row)
+            questionArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             self.deleteQuestionFromFirebase(atIndex: indexPath.row)
         } else if editingStyle == .insert {
@@ -241,7 +241,7 @@ class PresenterEventDetailVC: UITableViewController {
             
             print ( segue.destination )
             
-            let selectedQuestion:PresenterQueEvent = eventsArray[currentSelectedRow] as! PresenterQueEvent
+            let selectedQuestion:PresenterQueEvent = questionArray[currentSelectedRow] as! PresenterQueEvent
             
             let resultvc:ResultVC = segue.destination as! ResultVC
             resultvc.questionObj = selectedQuestion.toAnyObject() as! [String : Any]
@@ -266,27 +266,27 @@ class PresenterEventDetailVC: UITableViewController {
         let btn:UIButton = sender as! UIButton
         let currentSelectedRowIndex = btn.tag
         
-        self.publishQuestionAtFrirebase(question: eventsArray[currentSelectedRowIndex] as! PresenterQueEvent)
+        self.publishQuestionAtFrirebase(question: questionArray[currentSelectedRowIndex] as! PresenterQueEvent)
         
         
         
     }
     //Mark: helper functions
     func reloadQuestionListWith(question: PresenterQueEvent, actionID:Int) {
-        eventsArray.append(question)
+        questionArray.append(question)
         MBProgressHUD.showAdded(to: self.view, animated: true)
         let uploadData : [String : Any] = question.toAnyObject() as! [String : Any];
         
         switch actionID {
         case 1000: //save question
             print("Save question")
-            FirebaseManager.sharedInstance.uploadQuestionAtChannel(eventName: self.eventName, withData: uploadData)
+            FirebaseManager.sharedInstance.uploadQuestionAtEvent(eventName: self.eventName, withData: uploadData)
             
             break
         case 1001: // publish question
             print("Save and publish question")
             //TODO : publish already saved quesrion here by using it's Question ID, and remove below line of code.
-            FirebaseManager.sharedInstance.uploadQuestionAtChannel(eventName: self.eventName, withData: uploadData)
+            FirebaseManager.sharedInstance.uploadQuestionAtEvent(eventName: self.eventName, withData: uploadData)
             
             self.publishQuestionAtFrirebase(question: question)
             

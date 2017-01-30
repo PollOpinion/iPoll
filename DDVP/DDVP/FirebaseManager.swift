@@ -38,9 +38,9 @@ class FirebaseManager: NSObject{
                 return
             }
             
-            let channelsListArray = dataSnapshot.value as! [String: Any]
+            let eventsListArray = dataSnapshot.value as! [String: Any]
             //allEventsFirebase.removeObserver(withHandle: handle)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationAllEvents), object: nil, userInfo: channelsListArray)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationAllEvents), object: nil, userInfo: eventsListArray)
         }
         
     }
@@ -63,7 +63,7 @@ class FirebaseManager: NSObject{
     }
     
     // MARK: Question methods
-    func uploadQuestionAtChannel(eventName: String, withData data: [String: Any]) {
+    func uploadQuestionAtEvent(eventName: String, withData data: [String: Any]) {
         var uploadData = data
         uploadData[kKeyQuestionId] = FIRServerValue.timestamp()
         
@@ -83,7 +83,7 @@ class FirebaseManager: NSObject{
     }
     
     
-    func fetchAllQuestionsInChannel(eventName: String) {
+    func fetchAllQuestionsInEvent(eventName: String) {
         let questionsFirebase = FIRDatabase.database().reference().child(eventName + kEventsQuiz)
         
         questionsFirebase.queryOrderedByKey().observeSingleEvent(of: FIRDataEventType.value) { (dataSnapshot: FIRDataSnapshot) in

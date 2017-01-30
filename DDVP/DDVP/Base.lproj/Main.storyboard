@@ -339,7 +339,7 @@
             </objects>
             <point key="canvasLocation" x="2862" y="549"/>
         </scene>
-        <!--Presenter-->
+        <!--My Events-->
         <scene sceneID="Od9-Pr-9qR">
             <objects>
                 <tableViewController id="44W-Tu-Wnd" customClass="PresenterViewController" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
@@ -374,7 +374,7 @@
                             <outlet property="delegate" destination="44W-Tu-Wnd" id="dU5-FI-Gxx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Presenter" id="YGl-KE-DW9">
+                    <navigationItem key="navigationItem" title="My Events" id="YGl-KE-DW9">
                         <barButtonItem key="rightBarButtonItem" title="+" id="cBy-hx-YGB">
                             <connections>
                                 <action selector="addEventTapped:" destination="44W-Tu-Wnd" id="cqQ-83-aR1"/>
@@ -390,7 +390,7 @@
             </objects>
             <point key="canvasLocation" x="2862" y="-289"/>
         </scene>
-        <!--Events-->
+        <!--Event Name-->
         <scene sceneID="nIj-1S-itV">
             <objects>
                 <tableViewController id="495-lb-Qk8" customClass="PresenterEventDetailVC" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
@@ -422,7 +422,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5EF-Zs-aIE">
-                                            <rect key="frame" x="111" y="78" width="100" height="21"/>
+                                            <rect key="frame" x="111" y="84.5" width="100" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="Qql-4T-emq"/>
                                             </constraints>
@@ -431,7 +431,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expires In : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uls-2M-17Z">
-                                            <rect key="frame" x="19" y="78" width="84" height="21"/>
+                                            <rect key="frame" x="19" y="84.5" width="84" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="84" id="2mv-bv-S7M"/>
                                             </constraints>
@@ -480,7 +480,7 @@
                             <outlet property="delegate" destination="495-lb-Qk8" id="IBF-E6-0iV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Events" id="X1A-Bc-e8h" userLabel="Event Details">
+                    <navigationItem key="navigationItem" title="Event Name" id="X1A-Bc-e8h" userLabel="Event Details">
                         <barButtonItem key="rightBarButtonItem" title="+" id="i7a-a7-0bo">
                             <connections>
                                 <action selector="addQuestionBarBtnTapped:" destination="495-lb-Qk8" id="G6O-GH-NSI"/>
@@ -698,7 +698,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="PublishQuestion" width="30" height="30"/>
+        <image name="PublishQuestion" width="44" height="44"/>
         <image name="userIcon" width="400" height="277"/>
     </resources>
 </document>
