@@ -98,16 +98,15 @@ class PresenterViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        var numOfSections: Int = 0
+        let numOfSections: Int = 1
         if self.eventsArray.count > 0 {
             tableView.separatorStyle = .singleLine
-            numOfSections            = 1
             tableView.backgroundView = nil
         }
         else
         {
             let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-            noDataLabel.text          = "No data available"
+            noDataLabel.text          = "No events available"
             noDataLabel.textColor     = UIColor.black
             noDataLabel.textAlignment = .center
             tableView.backgroundView  = noDataLabel

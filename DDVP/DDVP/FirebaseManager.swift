@@ -89,8 +89,23 @@ class FirebaseManager: NSObject{
         }
     }
 
-    
     // MARK: Question methods
+    
+    func deleteQuestionWith(questionId: String, fromEvent eventName: String){
+        let event = eventName + kEventsQuiz
+        let firebaseEvent = FIRDatabase.database().reference().child(event).child(questionId)
+        
+        firebaseEvent.removeValue { (error, dataReference) in
+            if error != nil{
+                print("Delete Question \(event) >> \(questionId) error : \(error)")
+            }
+            else{
+                print("Question at \(event) >> \(questionId) deleted sucessfully.")
+            }
+        }
+    }
+    
+    
     func uploadQuestionAtEvent(eventName: String, withData data: [String: Any]) {
         var uploadData = data
         uploadData[kKeyQuestionId] = FIRServerValue.timestamp()
