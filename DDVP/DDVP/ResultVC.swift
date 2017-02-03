@@ -18,7 +18,7 @@ class ResultVC: UIViewController {
     @IBOutlet weak var option4Lbl: UILabel!
     let pieChartView = PieChartView()
     var questionObj:[String : Any] = [:]
-    var ansCount = [Int]()
+    var answers = [String:Int]()
     
     
     @IBOutlet weak var chartView: UIView!
@@ -59,22 +59,30 @@ class ResultVC: UIViewController {
     
     func pieChartFor(values: Any, tempView: UIView){
         
-        let colorArr = [UIColor.orange, UIColor.green, UIColor.cyan, UIColor.yellow ]
+        let colorArr = [UIColor.orange, UIColor.green, UIColor.cyan, UIColor.yellow, UIColor.blue, UIColor.brown, UIColor.red ]
         pieChartView.frame = tempView.frame
         
-        pieChartView.segments = [
-            Segment(color: colorArr[0], name:self.option1Lbl.text!, value: CGFloat(ansCount[0])),
-            Segment(color: colorArr[1], name:self.option2Lbl.text!, value: CGFloat(ansCount[1])),
-            Segment(color: colorArr[2], name:self.option3Lbl.text!, value: CGFloat(ansCount[2])),
-            Segment(color: colorArr[3], name:self.option4Lbl.text!, value: CGFloat(ansCount[3]))
-        ]
-        
+        var i=0
+        for ans in answers {
+            pieChartView.segments.append(Segment(color: colorArr[i], name:ans.key , value: CGFloat(ans.value)))
+            i += 1
+        }
         pieChartView.segmentLabelFont = UIFont.systemFont(ofSize: 12)
         pieChartView.showSegmentValueInLabel = true
         view.addSubview(pieChartView)
     }
     
     func fillInQuestionDetails() {
+        
+        if let screenTitle = questionObj["title"] as! String? {
+            
+            if screenTitle.characters.count > 0 {
+                self.navigationItem.title = screenTitle
+            }
+            else{
+                self.navigationItem.title = "Result"
+            }
+        }
         
         if let questionStr = questionObj["question"] as! String? {
             self.questionLbl.text = questionStr

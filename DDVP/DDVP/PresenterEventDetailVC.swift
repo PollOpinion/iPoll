@@ -259,7 +259,15 @@ class PresenterEventDetailVC: UITableViewController {
             
             let resultvc:ResultVC = segue.destination as! ResultVC
             resultvc.questionObj = selectedQuestion.toAnyObject() as! [String : Any]
-            resultvc.ansCount = [10, 25, 3, 17]   //TODO : pass actual values here later
+            resultvc.answers = [selectedQuestion.opt1 : 100, selectedQuestion.opt2 : 79]
+            
+            if selectedQuestion.opt3.characters.count > 0 {
+                resultvc.answers[selectedQuestion.opt3 ] =  120
+            }
+            
+            if selectedQuestion.opt4.characters.count > 0 {
+                resultvc.answers[selectedQuestion.opt4 ] = 180 
+            }
             
             
         }
