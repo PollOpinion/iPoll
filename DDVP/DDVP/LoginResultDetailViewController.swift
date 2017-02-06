@@ -92,10 +92,10 @@ class LoginResultDetailViewController: UIViewController {
             //At a time keep any one of the following
             
             //1. Presenter scene as a table list
-            self.performSegue(withIdentifier: "seguePresenterVC", sender: nil)
+//            self.performSegue(withIdentifier: "seguePresenterVC", sender: nil)
             
             //2. Presenter scene as a collection view
-//            self.performSegue(withIdentifier: "seguePresenterCVC", sender: self)
+            self.performSegue(withIdentifier: "seguePresenterCVC", sender: self)
         }
         else{ //participant
             self.performSegue(withIdentifier: "segueParticipantVC", sender: self)

@@ -374,6 +374,13 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bet-Af-ymD" userLabel="x">
+                                            <rect key="frame" x="82" y="2" width="22" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <state key="normal" image="remove_delete_exit_close"/>
+                                        </button>
                                     </subviews>
                                 </view>
                                 <connections>
@@ -772,6 +779,7 @@
     </scenes>
     <resources>
         <image name="presenter-event-holder" width="1016" height="1018"/>
+        <image name="remove_delete_exit_close" width="256" height="256"/>
         <image name="userIcon" width="400" height="277"/>
     </resources>
     <inferredMetricsTieBreakers>
