@@ -220,29 +220,29 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="402"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userIcon" translatesAutoresizingMaskIntoConstraints="NO" id="eUb-At-Wdd" userLabel="photo">
-                                        <rect key="frame" x="63" y="0.0" width="250" height="250"/>
+                                        <rect key="frame" x="62.5" y="0.0" width="250" height="250"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="GhN-5N-Fmc"/>
                                             <constraint firstAttribute="height" constant="250" id="slI-06-Dbw"/>
                                         </constraints>
                                     </imageView>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="dMc-Sy-DMj" userLabel="photoActivity">
-                                        <rect key="frame" x="178" y="264" width="20" height="0.0"/>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="dMc-Sy-DMj" userLabel="photoActivity">
+                                        <rect key="frame" x="177.5" y="258.5" width="20" height="20"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJP-Gf-z7i" userLabel="email">
-                                        <rect key="frame" x="173" y="265" width="30" height="21"/>
+                                        <rect key="frame" x="173" y="287" width="29.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGf-tC-iZl" userLabel="name">
-                                        <rect key="frame" x="173" y="302" width="30" height="21"/>
+                                        <rect key="frame" x="173" y="315.5" width="29.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are logged in as" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kss-ey-zn2">
-                                        <rect key="frame" x="110" y="338" width="155" height="21"/>
+                                        <rect key="frame" x="110.5" y="344.5" width="154.5" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="3cg-Be-KZV"/>
                                         </constraints>
@@ -304,6 +304,7 @@
                         <outlet property="userRole" destination="kss-ey-zn2" id="8wz-nb-bra"/>
                         <segue destination="44W-Tu-Wnd" kind="show" identifier="seguePresenterVC" id="quo-Gp-iwi"/>
                         <segue destination="Swc-fy-stp" kind="show" identifier="segueParticipantVC" id="zqF-ke-DVf"/>
+                        <segue destination="I7X-Cy-m0X" kind="show" identifier="seguePresenterCVC" id="tGc-c8-f4w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eP9-hk-XZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -340,6 +341,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kya-aH-uEE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2862" y="549"/>
+        </scene>
+        <!--Presenter EventsCVC-->
+        <scene sceneID="JbI-IN-bhk">
+            <objects>
+                <collectionViewController id="I7X-Cy-m0X" customClass="PresenterEventsCVC" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="uEn-SY-Op0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nbu-6g-cJ8">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="e9v-tq-Eq8">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="I7X-Cy-m0X" id="5PQ-sz-6b3"/>
+                            <outlet property="delegate" destination="I7X-Cy-m0X" id="0eM-HZ-6rQ"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="irC-VX-Gxh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2863" y="-989"/>
         </scene>
         <!--Events-->
         <scene sceneID="Od9-Pr-9qR">
@@ -595,7 +630,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ffF-A2-WCn" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jtA-JS-lqf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jtA-JS-lqf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

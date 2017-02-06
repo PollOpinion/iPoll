@@ -89,10 +89,11 @@ class LoginResultDetailViewController: UIViewController {
     @IBAction func nextBarBtnTapped(_ sender: Any) {
         
         if pollUser?.LoginRole == UserRole.presenter {
-            self.performSegue(withIdentifier: "seguePresenterVC", sender: nil)
+//            self.performSegue(withIdentifier: "seguePresenterVC", sender: nil)
+            self.performSegue(withIdentifier: "seguePresenterCVC", sender: self)
         }
         else{ //participant
-            self.performSegue(withIdentifier: "segueParticipantVC", sender: nil)
+            self.performSegue(withIdentifier: "segueParticipantVC", sender: self)
         }
         
     }
