@@ -16,6 +16,7 @@
 		D47CE72D1E26281A00EDEC7D /* DDVPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47CE72C1E26281A00EDEC7D /* DDVPTests.swift */; };
 		D47CE7461E28B18500EDEC7D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D47CE7451E28B18500EDEC7D /* GoogleService-Info.plist */; };
 		DA3BF1B91E44A5BB0025C7C4 /* PresenterEventsCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3BF1B81E44A5BB0025C7C4 /* PresenterEventsCVC.swift */; };
+		DA3BF1BB1E4877970025C7C4 /* PresenterEventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3BF1BA1E4877970025C7C4 /* PresenterEventCollectionCell.swift */; };
 		DA4B9B2A1E2E358E003BFD61 /* LoginResultDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B291E2E358E003BFD61 /* LoginResultDetailViewController.swift */; };
 		DA4B9B2C1E2F386F003BFD61 /* PollUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B2B1E2F386F003BFD61 /* PollUser.swift */; };
 		DA4B9B2E1E30875D003BFD61 /* ParticipantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B2D1E30875D003BFD61 /* ParticipantViewController.swift */; };
@@ -67,6 +68,7 @@
 		D47CE7451E28B18500EDEC7D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8BF37A9C3C7FD84FA88983B /* Pods-DDVPTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDVPTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DDVPTests/Pods-DDVPTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DA3BF1B81E44A5BB0025C7C4 /* PresenterEventsCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterEventsCVC.swift; sourceTree = "<group>"; };
+		DA3BF1BA1E4877970025C7C4 /* PresenterEventCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterEventCollectionCell.swift; sourceTree = "<group>"; };
 		DA4B9B291E2E358E003BFD61 /* LoginResultDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginResultDetailViewController.swift; sourceTree = "<group>"; };
 		DA4B9B2B1E2F386F003BFD61 /* PollUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollUser.swift; sourceTree = "<group>"; };
 		DA4B9B2D1E30875D003BFD61 /* ParticipantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				DADC4E001E34A563003AD5BB /* AddQuestionVC.swift */,
 				DADC4E071E360E0A003AD5BB /* ResultVC.swift */,
 				DA3BF1B81E44A5BB0025C7C4 /* PresenterEventsCVC.swift */,
+				DA3BF1BA1E4877970025C7C4 /* PresenterEventCollectionCell.swift */,
 			);
 			path = DDVP;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				DADC4DF71E324FDA003AD5BB /* PresenterEventDetailVC.swift in Sources */,
 				DA4B9B341E323F39003BFD61 /* PresenterEventCell.swift in Sources */,
 				DADC4E081E360E0A003AD5BB /* ResultVC.swift in Sources */,
+				DA3BF1BB1E4877970025C7C4 /* PresenterEventCollectionCell.swift in Sources */,
 				E85EFCC31E312D8D00C916C1 /* FirebaseManager.swift in Sources */,
 				DADC4DF51E324CC8003AD5BB /* PresenterQuestionCell.swift in Sources */,
 				D47CE7181E26281900EDEC7D /* AppDelegate.swift in Sources */,
