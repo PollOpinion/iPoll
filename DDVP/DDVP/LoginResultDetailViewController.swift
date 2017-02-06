@@ -89,7 +89,12 @@ class LoginResultDetailViewController: UIViewController {
     @IBAction func nextBarBtnTapped(_ sender: Any) {
         
         if pollUser?.LoginRole == UserRole.presenter {
+            //At a time keep any one of the following
+            
+            //1. Presenter scene as a table list
             self.performSegue(withIdentifier: "seguePresenterVC", sender: nil)
+            
+            //2. Presenter scene as a collection view
 //            self.performSegue(withIdentifier: "seguePresenterCVC", sender: self)
         }
         else{ //participant
