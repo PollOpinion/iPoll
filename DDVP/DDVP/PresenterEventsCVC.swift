@@ -9,6 +9,7 @@
 import UIKit
 
 private let reuseIdentifier = "presenterEventCell"
+var touchPoint:CGPoint? = nil
 
 class PresenterEventsCVC: UICollectionViewController, UIGestureRecognizerDelegate {
     
@@ -17,13 +18,19 @@ class PresenterEventsCVC: UICollectionViewController, UIGestureRecognizerDelegat
     var eventsArray = [String]()
     var eventName : String = ""
     var displayDeleteButton:Bool = true
-
+    var shakeIconsAnim:Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView?.backgroundColor = Color.presenterTheme.value
         self.addObservers()
         self.listAllEvents()
+        
+        // This will be helpful to restore the animation when clicked outside the cell
+        let tap:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(PresenterEventsCVC.handleTap))
+        tap.delegate = self;
+        self.collectionView?.addGestureRecognizer(tap);
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,7 +84,7 @@ class PresenterEventsCVC: UICollectionViewController, UIGestureRecognizerDelegat
         cell.deleteButton.isHidden = self.displayDeleteButton
         cell.deleteButton.tag = indexPath.row
         
-        let lpgr:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: Selector(("handleLongPress")))
+        let lpgr:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(PresenterEventsCVC.handleLongPress))
         lpgr.delegate = self
         lpgr.minimumPressDuration = 0.5
         lpgr.delaysTouchesBegan = true
@@ -169,9 +176,57 @@ class PresenterEventsCVC: UICollectionViewController, UIGestureRecognizerDelegat
     
     func handleLongPress(){
         
-        if self.displayDeleteButton { // enable delete biutton for event cell
-            self.displayDeleteButton = false
-            self.collectionView?.reloadData()
+//        if self.displayDeleteButton { // enable delete biutton for event cell
+//            self.displayDeleteButton = false
+//            self.collectionView?.reloadData()
+//        }
+        
+        // Loop through the collectionView's visible cells
+        for item in self.collectionView!.visibleCells as! [PresenterEventCollectionCell] {
+            let indexPath: IndexPath = self.collectionView!.indexPath(for: item )!
+            let cell: PresenterEventCollectionCell = self.collectionView!.cellForItem(at: indexPath) as! PresenterEventCollectionCell!
+            cell.deleteButton.isHidden = false // show all of the delete buttons
+            cell.shakeIcons()
+        }
+        
+        self.shakeIconsAnim = true
+        
+    }
+    
+    func handleTap(gestureRec : UITapGestureRecognizer){
+        
+        if self.shakeIconsAnim == true {
+            
+            // Loop through the collectionView's visible cells
+            for item in self.collectionView!.visibleCells as! [PresenterEventCollectionCell] {
+                let indexPath: IndexPath = self.collectionView!.indexPath(for: item )!
+                let cell: PresenterEventCollectionCell = self.collectionView!.cellForItem(at: indexPath) as! PresenterEventCollectionCell!
+                cell.deleteButton.isHidden = true // show all of the delete buttons
+                cell.stopShakingIcons()
+            }
+            
+            self.displayDeleteButton = true
+            self.shakeIconsAnim = false
+            
+        }
+        else{
+            
+            if (gestureRec.state != UIGestureRecognizerState.ended) {
+                return;
+            }
+            touchPoint = gestureRec.location(in: self.collectionView);
+            
+            let indexPath = self.collectionView?.indexPathForItem(at: touchPoint!)
+            
+            if indexPath != nil{
+                print("Pass on the gesture for \(indexPath?.row)")
+                self.collectionView(self.collectionView!, didSelectItemAt: indexPath!)
+                
+            } else {
+                print("Could not find index path as - Tapped outside")
+                // Do nothing
+                
+            }
         }
     }
 
