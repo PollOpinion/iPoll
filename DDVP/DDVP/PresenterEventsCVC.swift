@@ -10,26 +10,18 @@ import UIKit
 
 private let reuseIdentifier = "presenterEventCell"
 
-class PresenterEventsCVC: UICollectionViewController {
+class PresenterEventsCVC: UICollectionViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var btnAddEvent: UIBarButtonItem!
     
     var eventsArray = [String]()
     var eventName : String = ""
+    var displayDeleteButton:Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView?.backgroundColor = Color.presenterTheme.value
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        // self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
-        
         self.addObservers()
         self.listAllEvents()
     }
@@ -37,6 +29,14 @@ class PresenterEventsCVC: UICollectionViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.displayDeleteButton = true
+        self.collectionView?.reloadData()
     }
 
    
@@ -73,6 +73,15 @@ class PresenterEventsCVC: UICollectionViewController {
         // Configure the cell
     
         cell.eventName.text = eventsArray[indexPath.row]
+       
+        cell.deleteButton.isHidden = self.displayDeleteButton
+        cell.deleteButton.tag = indexPath.row
+        
+        let lpgr:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: Selector(("handleLongPress")))
+        lpgr.delegate = self
+        lpgr.minimumPressDuration = 0.5
+        lpgr.delaysTouchesBegan = true
+        cell.addGestureRecognizer(lpgr)
         return cell
     }
 
@@ -109,8 +118,10 @@ class PresenterEventsCVC: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
+        print ("Selected Index: \(indexPath.row) ")
     }
     */
+ 
     
     // MARK: Private methods
     private func addObservers() {
@@ -155,6 +166,14 @@ class PresenterEventsCVC: UICollectionViewController {
         }
         
     }
+    
+    func handleLongPress(){
+        
+        if self.displayDeleteButton { // enable delete biutton for event cell
+            self.displayDeleteButton = false
+            self.collectionView?.reloadData()
+        }
+    }
 
     
     //MARK : Action handler 
@@ -197,4 +216,46 @@ class PresenterEventsCVC: UICollectionViewController {
             
         }
     }
+    
+    @IBAction func deleteEventTapped(_ sender: Any) {
+        
+        let btn:UIButton = sender as! UIButton
+        print("Delete Event at index \(btn.tag)")
+        
+        self.deleteEvent(forRowAt: btn.tag)
+    }
+    
+    //MARK : helper functions
+    
+    func deleteEvent(forRowAt index: Int) {
+        
+        let alert = UIAlertController(title: "Delete \(eventsArray[index])", message: "Deleting an event would lead to delete all of the questions under this event. Do you really want to delete an event?", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) { (alertAction) -> Void in
+            
+            self.displayDeleteButton = true
+            self.collectionView?.reloadData()
+        }
+        alert.addAction(cancelAction)
+        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) { [weak self] (alertAction) -> Void in
+            
+            // Delete the row from the data source as well as form firebase
+            self?.deleteEventFromFirebase(atIndex: index)
+            self?.eventsArray.remove(at: index)
+            
+            self?.displayDeleteButton = true
+            self?.collectionView?.reloadData()
+            
+        }
+        alert.addAction(okAction)
+        
+        self.present(alert, animated: true) { () -> Void in
+        }
+    }
+    
+    func deleteEventFromFirebase(atIndex:Int) {
+        
+        FirebaseManager.sharedInstance.deleteEvent(eventName: self.eventsArray[atIndex])
+    }
+    
 }

@@ -294,6 +294,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 if error != nil {
                     print("Error while logging into firebase using custom user. Error :\n ", error!)
                     self.displayAlert(titleStr:"iPoll Login Error", messageStr: (error?.localizedDescription)!)
+                    
+                    self.logoutFirebaseAndReset()
+                    
                     return
                 }
                 
@@ -309,6 +312,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 if error != nil {
                     print("Error while logging into firebase using facebook user. Error :\n ", error!)
                     self.displayAlert(titleStr:"Facebook Login Error",  messageStr: (error?.localizedDescription)!)
+                    
+                    self.logoutFirebaseAndReset()
+                    
                     return
                 }
                 

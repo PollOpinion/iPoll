@@ -380,10 +380,14 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <state key="normal" image="remove_delete_exit_close"/>
+                                            <connections>
+                                                <action selector="deleteEventTapped:" destination="I7X-Cy-m0X" eventType="touchUpInside" id="Azk-3L-YLi"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </view>
                                 <connections>
+                                    <outlet property="deleteButton" destination="Bet-Af-ymD" id="4wX-iL-hWy"/>
                                     <outlet property="eventImage" destination="sIu-a0-owM" id="HpX-2g-R0W"/>
                                     <outlet property="eventName" destination="wP4-On-QGT" id="BrK-ra-aq3"/>
                                 </connections>

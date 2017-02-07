@@ -12,4 +12,5 @@ class PresenterEventCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var eventImage: UIImageView!
     @IBOutlet weak var eventName: UILabel!
+    @IBOutlet weak var deleteButton: UIButton!
 }
