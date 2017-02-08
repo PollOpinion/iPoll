@@ -3,7 +3,7 @@
 //  DDVP
 //
 //  Created by Krunal Soni on 19/01/17.
-//  Copyright © 2017 CTS. All rights reserved.
+//  Copyright © 2017. All rights reserved.
 //
 
 import Foundation

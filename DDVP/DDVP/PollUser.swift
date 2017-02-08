@@ -3,7 +3,7 @@
 //  DDVP
 //
 //  Created by Pankaj Neve on 18/01/17.
-//  Copyright © 2017 CTS. All rights reserved.
+//  Copyright © 2017. All rights reserved.
 //
 
 import Foundation
