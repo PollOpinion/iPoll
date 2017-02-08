@@ -12,7 +12,9 @@ import Firebase
 
 var pollUser : PollUser?
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UIViewControllerTransitioningDelegate {
+    
+    let transition = CircularTransition()
     
     let loginButton: FBSDKLoginButton = {
         let button = FBSDKLoginButton()
@@ -20,6 +22,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         return button
     }()
     
+    @IBOutlet weak var aboutButton: UIButton!
     @IBOutlet weak var roleSegment: UISegmentedControl!
     @IBOutlet weak var btnLogout: UIButton!
     @IBOutlet weak var firLoginView: UIView!
@@ -205,11 +208,17 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
         
-//        if let loginResultVC:LoginResultDetailViewController = segue.destination as? LoginResultDetailViewController {
-//        
-//        loginResultVC.fbEmail.text = "email"
-//        loginResultVC.fbName.text = "name"
-//        }
+        if let profileVC:LoginResultDetailViewController = segue.destination as? LoginResultDetailViewController{
+            
+            profileVC.loginButton.delegate = self
+        }
+        
+        if let aboutVC:AboutVC = segue.destination as? AboutVC {
+        
+        aboutVC.transitioningDelegate = self
+        aboutVC.modalPresentationStyle = .custom
+        
+        }
         
      }
     
@@ -229,6 +238,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         let x = view.center.x
         
         firLoginView.center = CGPoint(x: x, y: firLoginView.center.y)
+        
+        aboutButton.layer.cornerRadius = aboutButton.layer.frame.width / 2
     }
     
     //Not in use currently
@@ -338,6 +349,24 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         default:
             break
         }
+    }
+    
+    //MARK : transition delegate
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        transition.transitionMode = .present
+        transition.startingPoint = aboutButton.center
+        transition.circleColor = aboutButton.backgroundColor!
+        return transition
+    
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        transition.transitionMode = .dismiss
+        transition.startingPoint = aboutButton.center
+        transition.circleColor = aboutButton.backgroundColor!
+        return transition
     }
 }
 

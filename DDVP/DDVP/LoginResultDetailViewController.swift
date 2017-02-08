@@ -39,8 +39,8 @@ class LoginResultDetailViewController: UIViewController {
             
             view.addSubview(loginButton)
             loginButton.center = view.center
-            let loginViewController: LoginViewController = self.backViewController() as! LoginViewController
-            loginButton.delegate = loginViewController
+//            let loginViewController: LoginViewController = self.backViewController() as! LoginViewController
+//            loginButton.delegate = loginViewController
         }
         else {
             logoutButton.isHidden = false
@@ -122,7 +122,7 @@ class LoginResultDetailViewController: UIViewController {
     
     @IBAction func logoutTapped(_ sender: Any) {
         
-        let loginViewController: LoginViewController = self.backViewController() as! LoginViewController
+        let loginViewController: LoginViewController = loginButton.delegate as! LoginViewController
         loginViewController.btnLogoutTapped(self)
     }
     //MARK: - Helper Functions

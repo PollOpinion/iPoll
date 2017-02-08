@@ -174,6 +174,16 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zKL-v2-Td6">
+                                <rect key="frame" x="164" y="537" width="46" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                <state key="normal" title="iPoll"/>
+                                <connections>
+                                    <segue destination="EWD-b2-9Qo" kind="show" id="NAl-JJ-TYM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="YKp-sR-viM" secondAttribute="trailing" priority="750" constant="32" id="8NT-hf-Bwv"/>
@@ -189,6 +199,7 @@
                     <navigationItem key="navigationItem" title="iPoll Login" id="skd-t5-Q71"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
+                        <outlet property="aboutButton" destination="zKL-v2-Td6" id="dpA-i9-zTl"/>
                         <outlet property="btnFirLogin" destination="WBk-Pq-zTT" id="Uw5-m2-gKB"/>
                         <outlet property="btnFirSignUp" destination="SII-uW-lSt" id="Tnf-Zg-zyR"/>
                         <outlet property="btnLogout" destination="6pj-j0-QiI" id="WTq-ji-Apf"/>
@@ -203,6 +214,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1053.5999999999999" y="112.89355322338831"/>
+        </scene>
+        <!--About-->
+        <scene sceneID="acw-BH-zJU">
+            <objects>
+                <viewController id="EWD-b2-9Qo" customClass="AboutVC" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Uns-M6-TYD"/>
+                        <viewControllerLayoutGuide type="bottom" id="FsB-ec-SNM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="E4Y-bk-7k5">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vfa-Dr-BW3">
+                                <rect key="frame" x="164" y="537" width="46" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.4068180347" blue="0.84358808289999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="EWD-b2-9Qo" eventType="touchUpInside" id="H6y-dy-fJH"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="About" id="92R-dt-un3"/>
+                    <connections>
+                        <outlet property="closeButton" destination="Vfa-Dr-BW3" id="nNE-on-xdb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8kn-87-r84" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1053" y="813"/>
         </scene>
         <!--Profile-->
         <scene sceneID="UtA-ep-k06">
@@ -668,6 +715,7 @@
         <!--Navigation Controller-->
         <scene sceneID="X6A-0t-81N">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hMb-dp-nRg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ffF-A2-WCn" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jtA-JS-lqf">
@@ -679,7 +727,6 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ZLC-Mu-qIk"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hMb-dp-nRg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="116" y="113.79310344827587"/>
         </scene>

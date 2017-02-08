@@ -17,6 +17,8 @@
 		D47CE7461E28B18500EDEC7D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D47CE7451E28B18500EDEC7D /* GoogleService-Info.plist */; };
 		DA3BF1B91E44A5BB0025C7C4 /* PresenterEventsCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3BF1B81E44A5BB0025C7C4 /* PresenterEventsCVC.swift */; };
 		DA3BF1BB1E4877970025C7C4 /* PresenterEventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3BF1BA1E4877970025C7C4 /* PresenterEventCollectionCell.swift */; };
+		DA3BF1BD1E4AD40A0025C7C4 /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3BF1BC1E4AD40A0025C7C4 /* AboutVC.swift */; };
+		DA3BF1BF1E4ADBEB0025C7C4 /* CircularTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3BF1BE1E4ADBEB0025C7C4 /* CircularTransition.swift */; };
 		DA4B9B2A1E2E358E003BFD61 /* LoginResultDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B291E2E358E003BFD61 /* LoginResultDetailViewController.swift */; };
 		DA4B9B2C1E2F386F003BFD61 /* PollUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B2B1E2F386F003BFD61 /* PollUser.swift */; };
 		DA4B9B2E1E30875D003BFD61 /* ParticipantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B2D1E30875D003BFD61 /* ParticipantViewController.swift */; };
@@ -69,6 +71,8 @@
 		D8BF37A9C3C7FD84FA88983B /* Pods-DDVPTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDVPTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DDVPTests/Pods-DDVPTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DA3BF1B81E44A5BB0025C7C4 /* PresenterEventsCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterEventsCVC.swift; sourceTree = "<group>"; };
 		DA3BF1BA1E4877970025C7C4 /* PresenterEventCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterEventCollectionCell.swift; sourceTree = "<group>"; };
+		DA3BF1BC1E4AD40A0025C7C4 /* AboutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
+		DA3BF1BE1E4ADBEB0025C7C4 /* CircularTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircularTransition.swift; path = TransitionAnimation/CircularTransition.swift; sourceTree = "<group>"; };
 		DA4B9B291E2E358E003BFD61 /* LoginResultDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginResultDetailViewController.swift; sourceTree = "<group>"; };
 		DA4B9B2B1E2F386F003BFD61 /* PollUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollUser.swift; sourceTree = "<group>"; };
 		DA4B9B2D1E30875D003BFD61 /* ParticipantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 		D47CE7161E26281900EDEC7D /* DDVP */ = {
 			isa = PBXGroup;
 			children = (
+				DA3BF1C21E4ADC6E0025C7C4 /* TransitionAnimation */,
 				E85EFCCF1E33616C00C916C1 /* Third Party */,
 				E85EFCC61E33534500C916C1 /* Resources */,
 				D47CE7441E28A8E900EDEC7D /* DDVP.entitlements */,
@@ -171,6 +176,7 @@
 				DADC4E071E360E0A003AD5BB /* ResultVC.swift */,
 				DA3BF1B81E44A5BB0025C7C4 /* PresenterEventsCVC.swift */,
 				DA3BF1BA1E4877970025C7C4 /* PresenterEventCollectionCell.swift */,
+				DA3BF1BC1E4AD40A0025C7C4 /* AboutVC.swift */,
 			);
 			path = DDVP;
 			sourceTree = "<group>";
@@ -182,6 +188,14 @@
 				D47CE72E1E26281A00EDEC7D /* Info.plist */,
 			);
 			path = DDVPTests;
+			sourceTree = "<group>";
+		};
+		DA3BF1C21E4ADC6E0025C7C4 /* TransitionAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				DA3BF1BE1E4ADBEB0025C7C4 /* CircularTransition.swift */,
+			);
+			name = TransitionAnimation;
 			sourceTree = "<group>";
 		};
 		DADC4E041E360CEE003AD5BB /* PieChart */ = {
@@ -456,10 +470,12 @@
 				DADC4E061E360D01003AD5BB /* PieChartView.swift in Sources */,
 				DADC4DFD1E349FDA003AD5BB /* PresenterQue.swift in Sources */,
 				DA4B9B2C1E2F386F003BFD61 /* PollUser.swift in Sources */,
+				DA3BF1BF1E4ADBEB0025C7C4 /* CircularTransition.swift in Sources */,
 				E85EFCCD1E33614A00C916C1 /* MBProgressHUD.m in Sources */,
 				DA4B9B2E1E30875D003BFD61 /* ParticipantViewController.swift in Sources */,
 				E85EFCCA1E3355A200C916C1 /* FontManager.swift in Sources */,
 				DADC4E011E34A563003AD5BB /* AddQuestionVC.swift in Sources */,
+				DA3BF1BD1E4AD40A0025C7C4 /* AboutVC.swift in Sources */,
 				E85EFCC51E3131B200C916C1 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
