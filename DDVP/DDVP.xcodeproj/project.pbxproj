@@ -19,6 +19,7 @@
 		DA3BF1BB1E4877970025C7C4 /* PresenterEventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3BF1BA1E4877970025C7C4 /* PresenterEventCollectionCell.swift */; };
 		DA3BF1BD1E4AD40A0025C7C4 /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3BF1BC1E4AD40A0025C7C4 /* AboutVC.swift */; };
 		DA3BF1BF1E4ADBEB0025C7C4 /* CircularTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3BF1BE1E4ADBEB0025C7C4 /* CircularTransition.swift */; };
+		DA3BF2021E4B1B1B0025C7C4 /* iPollAbout.htm in Resources */ = {isa = PBXBuildFile; fileRef = DA3BF2011E4B1B1B0025C7C4 /* iPollAbout.htm */; };
 		DA4B9B2A1E2E358E003BFD61 /* LoginResultDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B291E2E358E003BFD61 /* LoginResultDetailViewController.swift */; };
 		DA4B9B2C1E2F386F003BFD61 /* PollUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B2B1E2F386F003BFD61 /* PollUser.swift */; };
 		DA4B9B2E1E30875D003BFD61 /* ParticipantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B9B2D1E30875D003BFD61 /* ParticipantViewController.swift */; };
@@ -73,6 +74,7 @@
 		DA3BF1BA1E4877970025C7C4 /* PresenterEventCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterEventCollectionCell.swift; sourceTree = "<group>"; };
 		DA3BF1BC1E4AD40A0025C7C4 /* AboutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
 		DA3BF1BE1E4ADBEB0025C7C4 /* CircularTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircularTransition.swift; path = TransitionAnimation/CircularTransition.swift; sourceTree = "<group>"; };
+		DA3BF2011E4B1B1B0025C7C4 /* iPollAbout.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = iPollAbout.htm; sourceTree = "<group>"; };
 		DA4B9B291E2E358E003BFD61 /* LoginResultDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginResultDetailViewController.swift; sourceTree = "<group>"; };
 		DA4B9B2B1E2F386F003BFD61 /* PollUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollUser.swift; sourceTree = "<group>"; };
 		DA4B9B2D1E30875D003BFD61 /* ParticipantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				E85EFCCF1E33616C00C916C1 /* Third Party */,
 				E85EFCC61E33534500C916C1 /* Resources */,
 				D47CE7441E28A8E900EDEC7D /* DDVP.entitlements */,
+				DA3BF2011E4B1B1B0025C7C4 /* iPollAbout.htm */,
 				D47CE7171E26281900EDEC7D /* AppDelegate.swift */,
 				D47CE7191E26281900EDEC7D /* LoginViewController.swift */,
 				DA4B9B291E2E358E003BFD61 /* LoginResultDetailViewController.swift */,
@@ -341,6 +344,7 @@
 			files = (
 				E85EFCC81E33535B00C916C1 /* roboto in Resources */,
 				D47CE7221E26281900EDEC7D /* LaunchScreen.storyboard in Resources */,
+				DA3BF2021E4B1B1B0025C7C4 /* iPollAbout.htm in Resources */,
 				D47CE7461E28B18500EDEC7D /* GoogleService-Info.plist in Resources */,
 				D47CE71F1E26281900EDEC7D /* Assets.xcassets in Resources */,
 				D47CE71D1E26281900EDEC7D /* Main.storyboard in Resources */,

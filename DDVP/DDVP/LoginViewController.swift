@@ -216,6 +216,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UIViewCon
         if let aboutVC:AboutVC = segue.destination as? AboutVC {
         
         aboutVC.transitioningDelegate = self
+        aboutVC.view.backgroundColor = aboutButton.backgroundColor
         aboutVC.modalPresentationStyle = .custom
         
         }
