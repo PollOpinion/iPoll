@@ -310,21 +310,19 @@ class PresenterEventDetailVC: UITableViewController {
     func reloadQuestionListWith(question: PollQuestion, actionID:Int) {
         
 //        MBProgressHUD.showAdded(to: self.view, animated: true)
-        let uploadData : [String : Any] = question.toAnyObject() as! [String : Any];
+        var uploadData : [String : Any] = question.toAnyObject() as! [String : Any];
         
         switch actionID {
         case 1000: //save question
             print("Save question")
+            uploadData["isPublished"] = "NO"
             FirebaseManager.sharedInstance.uploadQuestionAtEvent(eventName: self.eventName, withData: uploadData)
-            
             break
         case 1001: // publish question
             print("Save and publish question")
             //TODO : publish already saved quesrion here by using it's Question ID, and remove below line of code.
+            uploadData["isPublished"] = "YES"
             FirebaseManager.sharedInstance.uploadQuestionAtEvent(eventName: self.eventName, withData: uploadData)
-            
-            self.publishQuestionAtFrirebase(question: question)
-            
             break
         default:
             break
@@ -363,8 +361,10 @@ class PresenterEventDetailVC: UITableViewController {
     }
     
     func publishQuestionAtFrirebase(question: PollQuestion) {
-        //TODO : 
-        
         print( "publish question \(question)")
+        var uploadData : [String : Any] = question.toAnyObject() as! [String : Any];
+        uploadData["isPublished"] = "YES"
+        FirebaseManager.sharedInstance.uploadQuestionAtEvent(eventName: self.eventName, withData: uploadData)
+        
     }
 }
