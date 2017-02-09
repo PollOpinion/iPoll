@@ -16,15 +16,18 @@ class ResultVC: UIViewController {
     @IBOutlet weak var option2Lbl: UILabel!
     @IBOutlet weak var option3Lbl: UILabel!
     @IBOutlet weak var option4Lbl: UILabel!
+    @IBOutlet weak var chartView: UIView!
+    @IBOutlet weak var submitAnswerButton: UIBarButtonItem!
+    
     let pieChartView = PieChartView()
     var questionObj:[String : Any] = [:]
     var answers = [String:Int]()
-    
-    
-    @IBOutlet weak var chartView: UIView!
-    
+    var selectedAnswerOption = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.hideBarButton(barButton: submitAnswerButton, hide: true)
         
         if pollUser?.LoginRole == UserRole.presenter{
             view.backgroundColor = Color.presenterTheme.value
@@ -33,6 +36,8 @@ class ResultVC: UIViewController {
         else { //participant
             view.backgroundColor = Color.participantTheme.value
             pieChartView.isHidden = true
+            
+            configureOptionLbl()
         }
         
         self.fillInQuestionDetails()
@@ -64,6 +69,7 @@ class ResultVC: UIViewController {
     }
     */
 
+    // MARK: - supporting functions
     
     func pieChartFor(values: Any, tempView: UIView){
         
@@ -100,28 +106,28 @@ class ResultVC: UIViewController {
         }
         
         if let option1Str = questionObj["opt1"] as! String? {
-            self.option1Lbl.text = option1Str
+            self.option1Lbl.text = " " + option1Str
         }
         else{
             self.option1Lbl.text = ""
         }
         
         if let option2Str = questionObj["opt2"] as! String? {
-            self.option2Lbl.text = option2Str
+            self.option2Lbl.text = " " + option2Str
         }
         else{
             self.option2Lbl.text = ""
         }
         
         if let option3Str = questionObj["opt3"] as! String? {
-            self.option3Lbl.text = option3Str
+            self.option3Lbl.text = " " + option3Str
         }
         else{
             self.option3Lbl.text = ""
         }
         
         if let option4Str = questionObj["opt4"] as! String? {
-            self.option4Lbl.text = option4Str
+            self.option4Lbl.text = " " + option4Str
         }
         else{
             self.option4Lbl.text = ""
@@ -136,4 +142,88 @@ class ResultVC: UIViewController {
         }
        
     }
+    
+    func configureOptionLbl() {
+        
+        
+        let lbls = [option1Lbl, option2Lbl, option3Lbl, option4Lbl]
+        
+        for lbl in lbls {
+            
+            lbl?.backgroundColor = UIColor(hexString: "#ff8000")
+            lbl?.textColor = UIColor.white
+            lbl?.layer.borderColor = UIColor.gray.cgColor;
+            lbl?.layer.borderWidth = 1.0;
+            lbl?.layer.cornerRadius = 5.0;
+            lbl?.layer.masksToBounds = true
+            lbl?.isUserInteractionEnabled = true
+            
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ResultVC.labelTapped))
+            lbl?.addGestureRecognizer(gestureRecognizer)
+        }
+
+    }
+    
+    func highlightSelectedAnswerOption(at position:CGPoint) -> Int{
+        
+        var selectedAnswer:Int = 0
+
+        let lbls = [option1Lbl, option2Lbl, option3Lbl, option4Lbl]
+        var indx = 0
+        for lbl in lbls {
+            let lblFrame = lbl?.frame
+            
+            if lblFrame?.contains(position) == true {
+                lbl?.backgroundColor = UIColor(hexString: "#00ff00")
+                lbl?.textColor = UIColor.blue
+                lbl?.layer.borderColor = UIColor(hexString: "#009900").cgColor;
+                
+                selectedAnswer = indx
+            }
+            else{
+                lbl?.backgroundColor = UIColor(hexString: "#ff8000")
+                lbl?.textColor = UIColor.white
+                lbl?.layer.borderColor = UIColor.gray.cgColor;
+            }
+            indx += 1
+        }
+        
+        return selectedAnswer+1
+    }
+    
+    func hideBarButton(barButton:UIBarButtonItem, hide:Bool) {
+        barButton.isEnabled = !hide
+        
+        if hide == true {
+            barButton.tintColor = UIColor.clear
+        }
+        else{
+            barButton.tintColor = self.navigationItem.backBarButtonItem?.tintColor
+        }
+        
+    }
+    
+    // MARK: - Selector Handlers
+    
+    func labelTapped(gestureRec : UITapGestureRecognizer){
+        
+        if submitAnswerButton.isEnabled == false {
+            self.hideBarButton(barButton: submitAnswerButton, hide: false)
+        }
+       
+        if gestureRec.state == UIGestureRecognizerState.ended {
+            let position = gestureRec.location(in: self.view)
+            selectedAnswerOption =  highlightSelectedAnswerOption(at: position)
+        }
+        
+    }
+    
+    @IBAction func submitAnswerButtonTapped(_ sender: Any) {
+        
+        //TODO: send the slected answer to firebase and hide the submit button.
+        
+        print ("Selected Answer Option = Option\(selectedAnswerOption)")
+        
+    }
+    
 }
