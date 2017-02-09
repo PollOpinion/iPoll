@@ -28,9 +28,11 @@ class ResultVC: UIViewController {
         
         if pollUser?.LoginRole == UserRole.presenter{
             view.backgroundColor = Color.presenterTheme.value
+            pieChartView.isHidden = false
         }
         else { //participant
             view.backgroundColor = Color.participantTheme.value
+            pieChartView.isHidden = true
         }
         
         self.fillInQuestionDetails()
