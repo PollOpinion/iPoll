@@ -152,8 +152,8 @@ class PresenterEventDetailVC: UITableViewController {
             let receivedQuestionArray  = Array(userInfo.values).sorted{
                 (Int((($0)[kKeyQuestionId] as! Int?)!) > Int((($1)[kKeyQuestionId] as! Int?)!))
             }
-            var questionsArray  = PollQuestion.toArrayofPollQuestion(fromArray: receivedQuestionArray)
-            self.questionArray = (questionsArray as! [PollQuestion]?)!
+            let questionsArray  = PollQuestion.toArrayofPollQuestion(fromArray: receivedQuestionArray)
+            self.questionArray = (questionsArray as [PollQuestion]?)!
             
             self.fireBaseQueIdArray = Array(userInfo.keys).sorted {($0) > ($1)}
             
@@ -194,7 +194,7 @@ class PresenterEventDetailVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PresenterQueCell", for: indexPath) as! PresenterQuestionCell
 
         // Configure the cell...
-        let eventObj : PollQuestion = self.questionArray[indexPath.row] as! PollQuestion
+        let eventObj : PollQuestion = self.questionArray[indexPath.row] 
         cell.queTitleLbl.text = eventObj.title
         cell.queQueLbl.text = eventObj.question
         cell.queDurationLbl.text = String("\(eventObj.duration)")
@@ -255,7 +255,7 @@ class PresenterEventDetailVC: UITableViewController {
             
             print ( segue.destination )
             
-            let selectedQuestion:PollQuestion = questionArray[currentSelectedRow] as! PollQuestion
+            let selectedQuestion:PollQuestion = questionArray[currentSelectedRow] 
             
             let resultvc:ResultVC = segue.destination as! ResultVC
             resultvc.questionObj = selectedQuestion.toAnyObject() as! [String : Any]
@@ -288,7 +288,7 @@ class PresenterEventDetailVC: UITableViewController {
         let btn:UIButton = sender as! UIButton
         let currentSelectedRowIndex = btn.tag
         
-        self.publishQuestionAtFrirebase(question: questionArray[currentSelectedRowIndex] as! PollQuestion)
+        self.publishQuestionAtFrirebase(question: questionArray[currentSelectedRowIndex] )
         
         
         

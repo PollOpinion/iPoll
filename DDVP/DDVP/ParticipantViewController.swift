@@ -9,82 +9,90 @@
 import UIKit
 
 class ParticipantViewController: UITableViewController {
+    
+     var eventsArray = [String]()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = Color.participantTheme.value
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        addObservers()
+        listenToEventsForParticipant()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    // MARK: Private methods
+    private func addObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(self.fetchQuizEvents(notification:)), name: NSNotification.Name(rawValue: kNotificationFetchedEventsForParticipants), object: nil)
+        
+    }
+    
+    private func listenToEventsForParticipant() {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        FirebaseManager.sharedInstance.fetchAllEventForParticipant()
+        
+    }
+    
+    //MARK : selector methods
+    func fetchQuizEvents(notification: Notification) {
+        MBProgressHUD.hide(for: self.view, animated: true)
+        if let eventsListArray = notification.userInfo as! [String: Any]? {
+            self.eventsArray = eventsListArray.keys.sorted()
+            self.eventsArray.removeLast()
+            self.tableView.reloadData()
+        }
+        
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        let numOfSections: Int = 1
+        if self.eventsArray.count > 0 {
+            tableView.separatorStyle = .singleLine
+            tableView.backgroundView = nil
+        }
+        else
+        {
+            let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+            noDataLabel.text          = "No events available"
+            noDataLabel.textColor     = UIColor.black
+            noDataLabel.textAlignment = .center
+            tableView.backgroundView  = noDataLabel
+            tableView.separatorStyle  = .none
+        }
+        return numOfSections
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.eventsArray.count
     }
 
-    /*
+  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ParticipantEventCell", for: indexPath) as! ParticipantEventTableViewCell
 
-        // Configure the cell...
+        let eventName = eventsArray[indexPath.row]
+        let eventNameParts = eventName.components(separatedBy: "_quiz")
+        cell.eventName.text = eventNameParts[0]
 
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
+    
+ 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -92,6 +100,6 @@ class ParticipantViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+
 
 }

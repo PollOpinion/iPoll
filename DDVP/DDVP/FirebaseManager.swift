@@ -88,6 +88,23 @@ class FirebaseManager: NSObject{
             }
         }
     }
+    
+    func fetchAllEventForParticipant() {
+        let eventsForParticipant = FIRDatabase.database().reference()
+        
+        eventsForParticipant.queryOrderedByKey().observeSingleEvent(of: FIRDataEventType.value) { (dataSnapshot: FIRDataSnapshot) in
+            
+            guard dataSnapshot.exists() else{
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationFetchedEventsForParticipants), object: nil)
+                return
+            }
+            
+            let events_quiz = dataSnapshot.value as! [String : Any]
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue:kNotificationFetchedEventsForParticipants), object: nil, userInfo: events_quiz)
+        }
+        
+    }
 
     // MARK: Question methods
     
