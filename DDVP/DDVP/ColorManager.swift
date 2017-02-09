@@ -61,9 +61,9 @@ extension Color {
             instanceColor = UIColor(hexString: "#4AA67D")
             
         case .presenterTheme:
-            instanceColor = UIColor(hexString: "#4DA49E")
+            instanceColor = UIColor(hexString: "#00cccc")
         case .participantTheme:
-            instanceColor = UIColor(hexString: "#8C6CB1")
+            instanceColor = UIColor(hexString: "#C299ff")
         case .firebaseTheme:
             instanceColor = UIColor(hexString: "#D35349")
             

@@ -26,7 +26,13 @@ class ResultVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = Color.presenterTheme.value
+        if pollUser?.LoginRole == UserRole.presenter{
+            view.backgroundColor = Color.presenterTheme.value
+        }
+        else { //participant
+            view.backgroundColor = Color.participantTheme.value
+        }
+        
         self.fillInQuestionDetails()
     }
     

@@ -78,6 +78,7 @@ struct PollQuestion{
 class PresenterEventDetailVC: UITableViewController {
     
     
+    @IBOutlet weak var addQuestionButton: UIBarButtonItem!
     var questionArray = [PollQuestion] ()
     var fireBaseQueIdArray = [String] ()
     var eventName : String = ""
@@ -86,14 +87,17 @@ class PresenterEventDetailVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = Color.presenterTheme.value
+        if pollUser?.LoginRole == UserRole.presenter{
+            view.backgroundColor = Color.presenterTheme.value
+        }
+        else { //participant
+            view.backgroundColor = Color.participantTheme.value
+            addQuestionButton.isEnabled = false
+            addQuestionButton.tintColor = UIColor.clear
+        }
+        
         self.navigationItem.title = eventName
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.addObservers()
         self.listenToQuestions()
     }
@@ -108,7 +112,7 @@ class PresenterEventDetailVC: UITableViewController {
     }
     
     
-    // MARK: Private methods
+    // MARK: - Private methods
     private func addObservers() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(self.addedQuestionNotification(notification:)), name: NSNotification.Name(rawValue: kNotificationUploadedQuestion), object: nil)
@@ -164,6 +168,7 @@ class PresenterEventDetailVC: UITableViewController {
         }
         self.tableView.reloadData()
     }
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -198,7 +203,14 @@ class PresenterEventDetailVC: UITableViewController {
         cell.queTitleLbl.text = eventObj.title
         cell.queQueLbl.text = eventObj.question
         cell.queDurationLbl.text = String("\(eventObj.duration)")
-        cell.publishButton.tag = indexPath.row
+        
+        if pollUser?.LoginRole == UserRole.presenter{
+            cell.publishButton.tag = indexPath.row
+        }
+        else{ // participant
+            cell.publishButton.isHidden = true
+        }
+        
 
         return cell
     }
@@ -278,6 +290,8 @@ class PresenterEventDetailVC: UITableViewController {
         
     }
     
+    // MARK  : - Action Handlers
+    
     @IBAction func addQuestionBarBtnTapped(_ sender: Any) {
         print ("addQuestionBarBtnTapped")
         performSegue(withIdentifier: "segueAddQuestionVC", sender: self)
@@ -289,11 +303,10 @@ class PresenterEventDetailVC: UITableViewController {
         let currentSelectedRowIndex = btn.tag
         
         self.publishQuestionAtFrirebase(question: questionArray[currentSelectedRowIndex] )
-        
-        
-        
     }
-    //Mark: helper functions
+    
+    // MARK: - Helper Functions
+    
     func reloadQuestionListWith(question: PollQuestion, actionID:Int) {
         
 //        MBProgressHUD.showAdded(to: self.view, animated: true)

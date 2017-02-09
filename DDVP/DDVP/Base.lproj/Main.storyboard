@@ -382,8 +382,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oi-am-MOS">
-                                            <rect key="frame" x="8" y="8" width="359" height="27"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <rect key="frame" x="19" y="8" width="337" height="27"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -392,6 +392,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="eventName" destination="4oi-am-MOS" id="KWs-F0-nUQ"/>
+                                    <segue destination="495-lb-Qk8" kind="show" identifier="segueParticipantEventToQuestion" id="fVR-2J-ebX"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -650,6 +651,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="addQuestionButton" destination="i7a-a7-0bo" id="aIZ-Zz-8vF"/>
                         <segue destination="lzb-Fz-lQQ" kind="show" identifier="segueAddQuestionVC" id="X38-nS-NIl"/>
                         <segue destination="cz1-y7-x8r" kind="show" identifier="segueShowResultVC" id="XMB-x2-Fsr"/>
                     </connections>
@@ -864,6 +866,6 @@
         <image name="userIcon" width="400" height="277"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TfD-jm-JGf"/>
+        <segue reference="fVR-2J-ebX"/>
     </inferredMetricsTieBreakers>
 </document>

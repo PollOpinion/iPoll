@@ -18,7 +18,13 @@ class PresenterQuestionCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.backgroundColor = Color.presenterTheme.value
+        
+        if pollUser?.LoginRole == UserRole.presenter{
+            self.backgroundColor = Color.presenterTheme.value
+        }
+        else { //participant
+            self.backgroundColor = Color.participantTheme.value
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
