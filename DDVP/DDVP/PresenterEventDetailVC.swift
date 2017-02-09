@@ -226,7 +226,13 @@ class PresenterEventDetailVC: UITableViewController {
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        var canEdit = false
+        
+        if pollUser?.LoginRole == UserRole.presenter{
+            canEdit = true
+        }
+        
+        return canEdit
     }
     
 
@@ -239,22 +245,6 @@ class PresenterEventDetailVC: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
     // MARK: - Navigation
 
@@ -299,10 +289,24 @@ class PresenterEventDetailVC: UITableViewController {
     
     @IBAction func publishRowButtonTapped(_ sender: Any) {
         
-        let btn:UIButton = sender as! UIButton
-        let currentSelectedRowIndex = btn.tag
+        let alert = UIAlertController(title: "Publish", message: "Publishing a question will enable it to visible for all user to react on it. Do you really want to publish a question now?", preferredStyle: UIAlertControllerStyle.alert)
         
-        self.publishQuestionAtFrirebase(question: questionArray[currentSelectedRowIndex] )
+        let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) { (alertAction) -> Void in
+        }
+        alert.addAction(cancelAction)
+        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) { [weak self] (alertAction) -> Void in
+            
+            // Publish the question at firebase
+            let btn:UIButton = sender as! UIButton
+            let currentSelectedRowIndex = btn.tag
+            self?.publishQuestionAtFrirebase(question: (self?.questionArray[currentSelectedRowIndex])! )
+        }
+        alert.addAction(okAction)
+        
+        self.present(alert, animated: true) { () -> Void in
+        }
+        
+        
     }
     
     // MARK: - Helper Functions
