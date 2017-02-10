@@ -28,6 +28,7 @@ class ResultVC: UIViewController {
         super.viewDidLoad()
         
         self.hideBarButton(barButton: submitAnswerButton, hide: true)
+        self.fillInQuestionDetails()
         
         if pollUser?.LoginRole == UserRole.presenter{
             view.backgroundColor = Color.presenterTheme.value
@@ -39,8 +40,6 @@ class ResultVC: UIViewController {
             
             configureOptionLbl()
         }
-        
-        self.fillInQuestionDetails()
     }
     
     override func viewDidLayoutSubviews() {
@@ -106,28 +105,28 @@ class ResultVC: UIViewController {
         }
         
         if let option1Str = questionObj["opt1"] as! String? {
-            self.option1Lbl.text = " " + option1Str
+            self.option1Lbl.text = "  " + option1Str
         }
         else{
             self.option1Lbl.text = ""
         }
         
         if let option2Str = questionObj["opt2"] as! String? {
-            self.option2Lbl.text = " " + option2Str
+            self.option2Lbl.text = "  " + option2Str
         }
         else{
             self.option2Lbl.text = ""
         }
         
         if let option3Str = questionObj["opt3"] as! String? {
-            self.option3Lbl.text = " " + option3Str
+            self.option3Lbl.text = "  " + option3Str
         }
         else{
             self.option3Lbl.text = ""
         }
         
         if let option4Str = questionObj["opt4"] as! String? {
-            self.option4Lbl.text = " " + option4Str
+            self.option4Lbl.text = "  " + option4Str
         }
         else{
             self.option4Lbl.text = ""
@@ -154,9 +153,12 @@ class ResultVC: UIViewController {
             lbl?.textColor = UIColor.white
             lbl?.layer.borderColor = UIColor.gray.cgColor;
             lbl?.layer.borderWidth = 1.0;
-            lbl?.layer.cornerRadius = 5.0;
+            lbl?.layer.cornerRadius = 8.0;
             lbl?.layer.masksToBounds = true
             lbl?.isUserInteractionEnabled = true
+            if (lbl?.text?.characters.count)! <= 0 {
+                lbl?.isHidden = true
+            }
             
             let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ResultVC.labelTapped))
             lbl?.addGestureRecognizer(gestureRecognizer)
