@@ -18,11 +18,14 @@ class ResultVC: UIViewController {
     @IBOutlet weak var option4Lbl: UILabel!
     @IBOutlet weak var chartView: UIView!
     @IBOutlet weak var submitAnswerButton: UIBarButtonItem!
+    @IBOutlet weak var image: UIImageView!
     
     let pieChartView = PieChartView()
     var questionObj:[String : Any] = [:]
     var answers = [String:Int]()
     var selectedAnswerOption = 0
+    var zoom = true
+    let interval = TimeInterval(8.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,13 +42,19 @@ class ResultVC: UIViewController {
             pieChartView.isHidden = true
             
             configureOptionLbl()
+            
+            image.isHidden = false
+            startAnimation()
+
         }
     }
     
     override func viewDidLayoutSubviews() {
         // Set your constraint here
-        pieChartView.center.x = view.center.x
+//        pieChartView.center.x = view.center.x
         pieChartView.frame = chartView.frame
+        
+        image.frame = pieChartView.frame
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -203,6 +212,28 @@ class ResultVC: UIViewController {
             barButton.tintColor = self.navigationItem.backBarButtonItem?.tintColor
         }
         
+    }
+    
+    func startAnimation() {
+        Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(ResultVC.startImageAnimation), userInfo: nil, repeats: true);
+    }
+    
+    func startImageAnimation () {
+        
+        if zoom == true {
+            
+            UIView.animate(withDuration: interval) {
+                self.image.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+            }
+            zoom = false
+        }
+        else{
+            UIView.animate(withDuration: interval) {
+                self.image.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            }
+            
+            zoom = true
+        }
     }
     
     // MARK: - Selector Handlers
