@@ -19,12 +19,6 @@ class PresenterViewController: UITableViewController {
         super.viewDidLoad()
         
         view.backgroundColor = Color.presenterTheme.value
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         self.addObservers()
         self.listAllEvents()
@@ -49,8 +43,6 @@ class PresenterViewController: UITableViewController {
        MBProgressHUD.showAdded(to: self.view, animated: true)
        FirebaseManager.sharedInstance.fetchAllEvents()
     }
-    
-    
     
     // MARK: Selector methods
     func addedEventNotification(notification: Notification) {
@@ -83,7 +75,6 @@ class PresenterViewController: UITableViewController {
 
     }
     
-    
     // MARK: - Table View Delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -92,7 +83,6 @@ class PresenterViewController: UITableViewController {
         self.eventName = self.eventsArray[indexPath.row]
         self.performSegue(withIdentifier: "seguePresenterEventDetailsVC", sender: self)
     }
-    
     
     // MARK: - Table view data source
 
@@ -120,7 +110,6 @@ class PresenterViewController: UITableViewController {
         return self.eventsArray.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as! PresenterEventCell
         
@@ -135,8 +124,6 @@ class PresenterViewController: UITableViewController {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    
-
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
