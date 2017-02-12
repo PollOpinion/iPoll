@@ -39,8 +39,6 @@ class LoginResultDetailViewController: UIViewController {
             
             view.addSubview(loginButton)
             loginButton.center = view.center
-//            let loginViewController: LoginViewController = self.backViewController() as! LoginViewController
-//            loginButton.delegate = loginViewController
         }
         else {
             logoutButton.isHidden = false

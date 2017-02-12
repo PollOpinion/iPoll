@@ -36,25 +36,19 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UIViewCon
        
         super.viewDidLoad()
         
-        roleSegment.addTarget(self, action: #selector(LoginViewController.roleChanged), for: .valueChanged)
-        self.roleChanged()
+        let overlapingView = UIView(frame: (self.view.frame))
+        overlapingView.frame = self.view.frame
+        overlapingView.center = self.view.center
+        overlapingView.backgroundColor = Color.presenterTheme.value
+        self.view.addSubview(overlapingView)
+        self.view.bringSubview(toFront: overlapingView)
         
-        view.addSubview(loginButton)
-        
-        loginButton.delegate = self
-        
-        btnLogout.center = view.center
-        btnLogout.isHidden = true
-        
-        if (FBSDKAccessToken.current()) != nil{
-            firebaseLogin(provider: UserProvider.facebook)
+        animateScreen { (sucess:Bool) in
+            if sucess == true{
+                overlapingView.removeFromSuperview()
+                self.loadLoginScreen()
+            }
         }
-        else{
-            print("Auto fb login failed...")
-        }
-        
-        alignSubviews()
-       
     }
     
     override func didReceiveMemoryWarning() {
@@ -368,6 +362,49 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UIViewCon
         transition.startingPoint = aboutButton.center
         transition.circleColor = aboutButton.backgroundColor!
         return transition
+    }
+    
+    func animateScreen(completion: ((Bool) -> Swift.Void)? = nil) {
+        
+        let splashScreen = UIImageView(frame: (self.view.frame))
+        splashScreen.image = UIImage(named: "Default")
+        self.view.addSubview(splashScreen)
+        self.view.bringSubview(toFront: splashScreen)
+        
+        splashScreen.layer.anchorPoint = CGPoint(x: 0.1, y: 1.0)
+        splashScreen.frame = (self.view.frame)
+        
+        UIView.animate(withDuration: TimeInterval(10.0), animations:
+            {
+                splashScreen.layer.transform = CATransform3DRotate(CATransform3DIdentity, -(CGFloat)(M_PI_2), 0, 1, 0)
+                splashScreen.transform = CGAffineTransform(rotationAngle: 270.0)
+                splashScreen.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
+                splashScreen.center = self.view.center
+        }) { (finish:Bool) in
+            splashScreen.removeFromSuperview()
+            completion!(finish)
+        }
+    }
+    
+    func loadLoginScreen() {
+        self.roleSegment.addTarget(self, action: #selector(LoginViewController.roleChanged), for: .valueChanged)
+        self.roleChanged()
+        
+        self.view.addSubview(self.loginButton)
+        
+        self.loginButton.delegate = self
+        
+        self.btnLogout.center = self.view.center
+        self.btnLogout.isHidden = true
+        
+        if (FBSDKAccessToken.current()) != nil{
+            self.firebaseLogin(provider: UserProvider.facebook)
+        }
+        else{
+            print("Auto fb login failed...")
+        }
+        
+        self.alignSubviews()
     }
 }
 
