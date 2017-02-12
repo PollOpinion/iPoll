@@ -371,15 +371,17 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UIViewCon
         self.view.addSubview(splashScreen)
         self.view.bringSubview(toFront: splashScreen)
         
-        splashScreen.layer.anchorPoint = CGPoint(x: 0.1, y: 1.0)
-        splashScreen.frame = (self.view.frame)
-        
-        UIView.animate(withDuration: TimeInterval(10.0), animations:
+        UIView.animate(withDuration: TimeInterval(5.0), animations:
             {
+                self.view.transform = CGAffineTransform(scaleX: 10.0, y: 10.0)
+//                splashScreen.layer.anchorPoint = CGPoint(x: 0.1, y: 1.0)
+//                splashScreen.frame = (self.view.frame)
                 splashScreen.layer.transform = CATransform3DRotate(CATransform3DIdentity, -(CGFloat)(M_PI_2), 0, 1, 0)
                 splashScreen.transform = CGAffineTransform(rotationAngle: 270.0)
                 splashScreen.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
                 splashScreen.center = self.view.center
+                self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                
         }) { (finish:Bool) in
             splashScreen.removeFromSuperview()
             completion!(finish)
