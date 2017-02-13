@@ -26,6 +26,9 @@ class QuestionAnswerVC: UIViewController {
     var selectedAnswerOption = 0
     var zoom = true
     let interval = TimeInterval(8.0)
+    var timeLeft = 0
+    var expiryTimer : Timer = Timer()
+    var animationTimer : Timer = Timer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,13 +42,12 @@ class QuestionAnswerVC: UIViewController {
         }
         else { //participant
             view.backgroundColor = Color.participantTheme.value
-            pieChartView.isHidden = true
             
             configureOptionLbl()
-            
             image.isHidden = false
             startAnimation()
-
+            
+            pieChartView.isHidden = true
         }
     }
     
@@ -66,17 +68,6 @@ class QuestionAnswerVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     // MARK: - supporting functions
     
     func pieChartFor(values: Any, tempView: UIView){
@@ -143,7 +134,10 @@ class QuestionAnswerVC: UIViewController {
         
         let expiresIn:Int = questionObj["duration"] as! Int
         if expiresIn > 0  {
+            timeLeft = expiresIn
             self.timeLeftLbl.text = String(format:"Expires in \(expiresIn) sec.")
+
+            expiryTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(QuestionAnswerVC.updateTimeLeft), userInfo: nil, repeats: true);
         }
         else{
             self.timeLeftLbl.text = "Expires in time not set for this question"
@@ -152,7 +146,6 @@ class QuestionAnswerVC: UIViewController {
     }
     
     func configureOptionLbl() {
-        
         
         let lbls = [option1Lbl, option2Lbl, option3Lbl, option4Lbl]
         
@@ -215,13 +208,19 @@ class QuestionAnswerVC: UIViewController {
     }
     
     func startAnimation() {
-        Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(QuestionAnswerVC.startImageAnimation), userInfo: nil, repeats: true);
+        animationTimer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(QuestionAnswerVC.animateImage), userInfo: nil, repeats: true);
+        animationTimer.fire()
     }
     
-    func startImageAnimation () {
+    func stopAnimation() {
+        animationTimer.invalidate()
+    }
+    
+    func animateImage () {
+        
+        print(Date())
         
         if zoom == true {
-            
             UIView.animate(withDuration: interval) {
                 self.image.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
             }
@@ -231,9 +230,22 @@ class QuestionAnswerVC: UIViewController {
             UIView.animate(withDuration: interval) {
                 self.image.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             }
-            
             zoom = true
         }
+    }
+    
+    func updateTimeLeft(){
+        timeLeft -= 1
+        
+        if timeLeft == 0 {
+            self.timeLeftLbl.textColor = UIColor.red
+            self.timeLeftLbl.text = String(format:"This poll is already expired")
+            expiryTimer.invalidate()
+        }
+        else{
+            self.timeLeftLbl.text = String(format:"Expires in \(timeLeft) sec.")
+        }
+        
     }
     
     // MARK: - Selector Handlers
