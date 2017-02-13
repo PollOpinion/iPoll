@@ -259,7 +259,7 @@
         <!--Profile-->
         <scene sceneID="UtA-ep-k06">
             <objects>
-                <viewController id="0Ws-bu-gVh" customClass="LoginResultDetailViewController" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0Ws-bu-gVh" customClass="ProfileVC" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5nk-xX-yAN"/>
                         <viewControllerLayoutGuide type="bottom" id="gSw-je-ghA"/>
@@ -409,7 +409,7 @@
         <scene sceneID="JbI-IN-bhk">
             <objects>
                 <collectionViewController id="I7X-Cy-m0X" customClass="PresenterEventsCVC" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="uEn-SY-Op0">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="uEn-SY-Op0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="nbu-6g-cJ8">
@@ -751,7 +751,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ffF-A2-WCn" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jtA-JS-lqf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jtA-JS-lqf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
