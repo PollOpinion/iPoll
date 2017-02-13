@@ -1,5 +1,5 @@
 //
-//  PresenterQue.swift
+//  Question.swift
 //  DDVP
 //
 //  Created by Pankaj Neve on 22/01/17.
@@ -9,10 +9,10 @@
 import Foundation
 
 
-enum PresenterQue: Int {
+enum Question: Int {
     case QueTitle = 0
     case QuestionStr = 1
-    case VottingDuration = 2
+    case VotingDuration = 2
     case Option1 = 3
     case Option2 = 4
     case Option3 = 5
@@ -24,7 +24,7 @@ enum PresenterQue: Int {
             return "Title"
         case .QuestionStr:
             return "Question"
-        case .VottingDuration:
+        case .VotingDuration:
             return "Expires in"
         case .Option1:
             return "Option 1"
@@ -43,7 +43,7 @@ enum PresenterQue: Int {
             return "Question Title"
         case .QuestionStr:
             return "Question Statement"
-        case .VottingDuration:
+        case .VotingDuration:
             return "Duration in Seconds"
         case .Option1:
             return "Answer text"
@@ -62,7 +62,7 @@ enum PresenterQue: Int {
             return "Title"
         case .QuestionStr:
             return "Question"
-        case .VottingDuration:
+        case .VotingDuration:
             return "Duration"
         case .Option1:
             return "Option 1"
@@ -79,31 +79,31 @@ enum PresenterQue: Int {
         switch self {
         case .QueTitle, .QuestionStr, .Option1, .Option2, .Option3, .Option4:
             return false
-        case .VottingDuration:
+        case .VotingDuration:
             return true
         }
     }
     
     static func getTotalTextLabels() -> Int {
-        return PresenterQue.Option4.rawValue + 1
+        return Question.Option4.rawValue + 1
     }
     
     static func getTextLabelAtIndex(index: Int) -> String {
-        if let textStr = PresenterQue(rawValue: index) {
+        if let textStr = Question(rawValue: index) {
             return textStr.getLabelText()
         }
         return ""
     }
     
     static func getPlaceholderTextAtIndex(index: Int) -> String {
-        if let textStr = PresenterQue(rawValue: index) {
+        if let textStr = Question(rawValue: index) {
             return textStr.getPlaceholderString()
         }
         return ""
     }
     
     static func isInputNumberAtIndex(index: Int) -> Bool {
-        if let txt = PresenterQue(rawValue: index) {
+        if let txt = Question(rawValue: index) {
             return txt.isInputNumber()
         }
         return false
