@@ -259,7 +259,7 @@
         <!--Profile-->
         <scene sceneID="UtA-ep-k06">
             <objects>
-                <viewController id="0Ws-bu-gVh" customClass="ProfileVC" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0Ws-bu-gVh" customClass="LoginResultDetailViewController" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5nk-xX-yAN"/>
                         <viewControllerLayoutGuide type="bottom" id="gSw-je-ghA"/>
