@@ -196,7 +196,7 @@ class PresenterEventDetailVC: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PresenterQueCell", for: indexPath) as! PresenterQuestionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PresenterQueCell", for: indexPath) as! PollQuestionCell
 
         // Configure the cell...
         let eventObj : PollQuestion = self.questionArray[indexPath.row] 
@@ -220,7 +220,7 @@ class PresenterEventDetailVC: UITableViewController {
         self.currentSelectedRow = indexPath.row
         print ("Questions list : Row at index \(currentSelectedRow) tapped")
         
-        self.performSegue(withIdentifier: "segueShowResultVC", sender: self)
+        self.performSegue(withIdentifier: "segueShowQuestionAnswerVC", sender: self)
     }
     
     // Override to support conditional editing of the table view.
@@ -253,22 +253,22 @@ class PresenterEventDetailVC: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        if segue.identifier == "segueShowResultVC" {
+        if segue.identifier == "segueShowQuestionAnswerVC" {
             
             print ( segue.destination )
             
             let selectedQuestion:PollQuestion = questionArray[currentSelectedRow] 
             
-            let resultvc:ResultVC = segue.destination as! ResultVC
-            resultvc.questionObj = selectedQuestion.toAnyObject() as! [String : Any]
-            resultvc.answers = [selectedQuestion.opt1 : 100, selectedQuestion.opt2 : 79]
+            let QuestionAnswerVC:QuestionAnswerVC = segue.destination as! QuestionAnswerVC
+            QuestionAnswerVC.questionObj = selectedQuestion.toAnyObject() as! [String : Any]
+            QuestionAnswerVC.answers = [selectedQuestion.opt1 : 100, selectedQuestion.opt2 : 79]
             
             if selectedQuestion.opt3.characters.count > 0 {
-                resultvc.answers[selectedQuestion.opt3 ] =  120
+                QuestionAnswerVC.answers[selectedQuestion.opt3 ] =  120
             }
             
             if selectedQuestion.opt4.characters.count > 0 {
-                resultvc.answers[selectedQuestion.opt4 ] = 180 
+                QuestionAnswerVC.answers[selectedQuestion.opt4 ] = 180 
             }
             
             

@@ -1,5 +1,5 @@
 //
-//  PresenterQuestionCell.swift
+//  PollQuestionCell.swift
 //  DDVP
 //
 //  Created by Pankaj Neve on 20/01/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PresenterQuestionCell: UITableViewCell {
+class PollQuestionCell: UITableViewCell {
     
     @IBOutlet weak var publishButton: UIButton!
     @IBOutlet weak var queTitleLbl: UILabel!

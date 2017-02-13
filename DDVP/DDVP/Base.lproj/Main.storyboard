@@ -272,29 +272,29 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="402"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userIcon" translatesAutoresizingMaskIntoConstraints="NO" id="eUb-At-Wdd" userLabel="photo">
-                                        <rect key="frame" x="62.5" y="0.0" width="250" height="250"/>
+                                        <rect key="frame" x="63" y="0.0" width="250" height="250"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="GhN-5N-Fmc"/>
                                             <constraint firstAttribute="height" constant="250" id="slI-06-Dbw"/>
                                         </constraints>
                                     </imageView>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="dMc-Sy-DMj" userLabel="photoActivity">
-                                        <rect key="frame" x="177.5" y="258.5" width="20" height="20"/>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="dMc-Sy-DMj" userLabel="photoActivity">
+                                        <rect key="frame" x="178" y="264" width="20" height="0.0"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJP-Gf-z7i" userLabel="email">
-                                        <rect key="frame" x="173" y="287" width="29.5" height="20.5"/>
+                                        <rect key="frame" x="173" y="265" width="30" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGf-tC-iZl" userLabel="name">
-                                        <rect key="frame" x="173" y="315.5" width="29.5" height="20.5"/>
+                                        <rect key="frame" x="173" y="302" width="30" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are logged in as" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kss-ey-zn2">
-                                        <rect key="frame" x="110.5" y="344.5" width="154.5" height="21"/>
+                                        <rect key="frame" x="110" y="338" width="155" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="3cg-Be-KZV"/>
                                         </constraints>
@@ -409,7 +409,7 @@
         <scene sceneID="JbI-IN-bhk">
             <objects>
                 <collectionViewController id="I7X-Cy-m0X" customClass="PresenterEventsCVC" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="uEn-SY-Op0">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="uEn-SY-Op0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="nbu-6g-cJ8">
@@ -552,7 +552,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PresenterQueCell" rowHeight="110" id="k04-W9-IXt" customClass="PresenterQuestionCell" customModule="DDVP" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PresenterQueCell" rowHeight="110" id="k04-W9-IXt" customClass="PollQuestionCell" customModule="DDVP" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k04-W9-IXt" id="wqu-zZ-63M">
@@ -655,7 +655,7 @@
                     <connections>
                         <outlet property="addQuestionButton" destination="i7a-a7-0bo" id="aIZ-Zz-8vF"/>
                         <segue destination="lzb-Fz-lQQ" kind="show" identifier="segueAddQuestionVC" id="X38-nS-NIl"/>
-                        <segue destination="cz1-y7-x8r" kind="show" identifier="segueShowResultVC" id="XMB-x2-Fsr"/>
+                        <segue destination="cz1-y7-x8r" kind="show" identifier="segueShowQuestionAnswerVC" id="XMB-x2-Fsr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nol-Td-0Ac" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -751,7 +751,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ffF-A2-WCn" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jtA-JS-lqf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jtA-JS-lqf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -767,7 +767,7 @@
         <!--Result-->
         <scene sceneID="M8o-rA-4SY">
             <objects>
-                <viewController id="cz1-y7-x8r" customClass="ResultVC" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cz1-y7-x8r" customClass="QuestionAnswerVC" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NLq-bE-xmu"/>
                         <viewControllerLayoutGuide type="bottom" id="usV-zY-8zA"/>

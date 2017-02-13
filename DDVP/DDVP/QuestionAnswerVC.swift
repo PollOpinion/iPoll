@@ -1,5 +1,5 @@
 //
-//  ResultVC.swift
+//  QuestionAnswerVC.swift
 //  DDVP
 //
 //  Created by Pankaj Neve on 23/01/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ResultVC: UIViewController {
+class QuestionAnswerVC: UIViewController {
     
     @IBOutlet weak var questionLbl: UILabel!
     @IBOutlet weak var timeLeftLbl: UILabel!
@@ -169,7 +169,7 @@ class ResultVC: UIViewController {
                 lbl?.isHidden = true
             }
             
-            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ResultVC.labelTapped))
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(QuestionAnswerVC.labelTapped))
             lbl?.addGestureRecognizer(gestureRecognizer)
         }
 
@@ -215,7 +215,7 @@ class ResultVC: UIViewController {
     }
     
     func startAnimation() {
-        Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(ResultVC.startImageAnimation), userInfo: nil, repeats: true);
+        Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(QuestionAnswerVC.startImageAnimation), userInfo: nil, repeats: true);
     }
     
     func startImageAnimation () {
