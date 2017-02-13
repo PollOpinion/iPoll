@@ -196,7 +196,7 @@ class EventQuestionListVC: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PresenterQueCell", for: indexPath) as! PollQuestionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PollQueCell", for: indexPath) as! PollQuestionCell
 
         // Configure the cell...
         let eventObj : PollQuestion = self.questionArray[indexPath.row] 

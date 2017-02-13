@@ -12,7 +12,7 @@ class AddQuestionVC: UITableViewController {
     
     var noOfExtraOptionsOn = 0
     var isAddButtonOn = false
-    var enteredData = [String](repeating: "", count: PresenterQue.getTotalTextLabels())
+    var enteredData = [String](repeating: "", count: Question.getTotalTextLabels())
 
 
     override func viewDidLoad() {
@@ -44,7 +44,7 @@ class AddQuestionVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let textLabelsCount = PresenterQue.getTotalTextLabels()
+        let textLabelsCount = Question.getTotalTextLabels()
         self.isAddButtonOn = self.noOfExtraOptionsOn < 2
         let count = textLabelsCount - (2 - self.noOfExtraOptionsOn) + (self.isAddButtonOn ? 1 : 0)
         return count
@@ -64,22 +64,22 @@ class AddQuestionVC: UITableViewController {
         }
         else {
             let textCell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell") as! TextFieldCell?
-            textCell?.descLabel.text = PresenterQue.getTextLabelAtIndex(index: indexPath.row)
-            textCell?.textField.placeholder = PresenterQue.getPlaceholderTextAtIndex(index: indexPath.row)
+            textCell?.descLabel.text = Question.getTextLabelAtIndex(index: indexPath.row)
+            textCell?.textField.placeholder = Question.getPlaceholderTextAtIndex(index: indexPath.row)
             textCell?.textField.text = self.enteredData[indexPath.row]
             
             var isRemoveBtnHidden = true
             if self.noOfExtraOptionsOn > 0 {
-                if self.noOfExtraOptionsOn == 2 && indexPath.row == PresenterQue.getTotalTextLabels() - 1 {
+                if self.noOfExtraOptionsOn == 2 && indexPath.row == Question.getTotalTextLabels() - 1 {
                     isRemoveBtnHidden = false
                 }
-                else if self.noOfExtraOptionsOn == 1 && indexPath.row == PresenterQue.getTotalTextLabels() - 2 {
+                else if self.noOfExtraOptionsOn == 1 && indexPath.row == Question.getTotalTextLabels() - 2 {
                     isRemoveBtnHidden = false
                 }
             }
             
             textCell?.removeBtn.isHidden = isRemoveBtnHidden
-            textCell?.textField.keyboardType = PresenterQue.isInputNumberAtIndex(index: indexPath.row) ? UIKeyboardType.numbersAndPunctuation : UIKeyboardType.asciiCapable
+            textCell?.textField.keyboardType = Question.isInputNumberAtIndex(index: indexPath.row) ? UIKeyboardType.numbersAndPunctuation : UIKeyboardType.asciiCapable
             textCell?.textField.tag = indexPath.row
             textCell?.textField.delegate = self
             cell = textCell
@@ -164,7 +164,7 @@ class AddQuestionVC: UITableViewController {
     
     // MARK: Helper functions
     private func getNoOfTextFieldCells() -> Int {
-        let currentTextLabels = PresenterQue.getTotalTextLabels() - (2 - self.noOfExtraOptionsOn)
+        let currentTextLabels = Question.getTotalTextLabels() - (2 - self.noOfExtraOptionsOn)
         return currentTextLabels
     }
     
@@ -192,7 +192,7 @@ class AddQuestionVC: UITableViewController {
         
         self.tableView.endEditing(true)
         
-        let textLabelsCount = PresenterQue.getTotalTextLabels()
+        let textLabelsCount = Question.getTotalTextLabels()
         let isAddButtonOn = self.noOfExtraOptionsOn < 2
         var countCurrentText = textLabelsCount
         if isAddButtonOn {
@@ -220,9 +220,9 @@ class AddQuestionVC: UITableViewController {
     @IBAction func removeButtonTapped(_ sender: Any) {
         self.noOfExtraOptionsOn -= 1
         if self.noOfExtraOptionsOn == 1 {
-            let lastIndexPath = IndexPath(row: PresenterQue.getTotalTextLabels() - 1, section: 0)
+            let lastIndexPath = IndexPath(row: Question.getTotalTextLabels() - 1, section: 0)
             
-            if let cell:TextFieldCell = tableView.cellForRow(at: IndexPath(row:PresenterQue.getTotalTextLabels() - 2, section: 0)) as? TextFieldCell {
+            if let cell:TextFieldCell = tableView.cellForRow(at: IndexPath(row:Question.getTotalTextLabels() - 2, section: 0)) as? TextFieldCell {
                 cell.removeBtn.isHidden = false
             }
             
@@ -231,14 +231,14 @@ class AddQuestionVC: UITableViewController {
             self.tableView.reloadRows(at: [lastIndexPath], with: UITableViewRowAnimation.automatic)
             self.tableView.endUpdates()
             
-            self.enteredData[PresenterQue.getTotalTextLabels() - 1] = ""
+            self.enteredData[Question.getTotalTextLabels() - 1] = ""
         }
         else {
             self.tableView.beginUpdates()
-            self.tableView.deleteRows(at: [IndexPath(row: PresenterQue.getTotalTextLabels() - 2, section: 0)], with: UITableViewRowAnimation.automatic)
+            self.tableView.deleteRows(at: [IndexPath(row: Question.getTotalTextLabels() - 2, section: 0)], with: UITableViewRowAnimation.automatic)
             
             self.tableView.endUpdates()
-            self.enteredData[PresenterQue.getTotalTextLabels() - 2] = ""
+            self.enteredData[Question.getTotalTextLabels() - 2] = ""
         }
     }
     
@@ -259,7 +259,7 @@ extension AddQuestionVC: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let tag = textField.tag
-        let currentTextLabels = PresenterQue.getTotalTextLabels() - (2 - self.noOfExtraOptionsOn)
+        let currentTextLabels = Question.getTotalTextLabels() - (2 - self.noOfExtraOptionsOn)
         if tag < currentTextLabels {
             if let textField = self.view.viewWithTag(tag + 1) as! UITextField? {
                 textField.becomeFirstResponder()
