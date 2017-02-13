@@ -764,7 +764,7 @@
             </objects>
             <point key="canvasLocation" x="116" y="113.79310344827587"/>
         </scene>
-        <!--Result-->
+        <!--QuestionAnswer-->
         <scene sceneID="M8o-rA-4SY">
             <objects>
                 <viewController id="cz1-y7-x8r" customClass="QuestionAnswerVC" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
@@ -776,8 +776,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Dice-1" translatesAutoresizingMaskIntoConstraints="NO" id="JOh-Wh-qug">
-                                <rect key="frame" x="10" y="500" width="100" height="100"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="spinning-wheel" translatesAutoresizingMaskIntoConstraints="NO" id="JOh-Wh-qug">
+                                <rect key="frame" x="10" y="500" width="130" height="130"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question text here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ymy-SM-oMv">
@@ -865,7 +865,7 @@
                             <constraint firstItem="72U-eY-bI6" firstAttribute="top" secondItem="La0-8n-0Cj" secondAttribute="bottom" constant="8" id="ySR-BZ-mtR"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Result" id="5Gq-IG-5sE">
+                    <navigationItem key="navigationItem" title="QuestionAnswer" id="5Gq-IG-5sE">
                         <barButtonItem key="rightBarButtonItem" title="Submit" id="E0H-Xc-zy6">
                             <connections>
                                 <action selector="submitAnswerButtonTapped:" destination="cz1-y7-x8r" id="3AQ-zp-o9X"/>
@@ -891,10 +891,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Dice-1" width="600" height="557"/>
         <image name="presenter-event-holder" width="1016" height="1018"/>
         <image name="question_icon" width="300" height="300"/>
         <image name="remove_delete_exit_close" width="256" height="256"/>
+        <image name="spinning-wheel" width="271" height="277"/>
         <image name="userIcon" width="400" height="277"/>
     </resources>
     <inferredMetricsTieBreakers>

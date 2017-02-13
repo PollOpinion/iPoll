@@ -25,7 +25,7 @@ class QuestionAnswerVC: UIViewController {
     var answers = [String:Int]()
     var selectedAnswerOption = 0
     var zoom = true
-    let interval = TimeInterval(8.0)
+    let animationInterval = TimeInterval(1.0)
     var timeLeft = 0
     var expiryTimer : Timer = Timer()
     var animationTimer : Timer = Timer()
@@ -53,10 +53,8 @@ class QuestionAnswerVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         // Set your constraint here
-//        pieChartView.center.x = view.center.x
         pieChartView.frame = chartView.frame
-        
-        image.frame = pieChartView.frame
+        image.center = chartView.center
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -208,7 +206,7 @@ class QuestionAnswerVC: UIViewController {
     }
     
     func startAnimation() {
-        animationTimer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(QuestionAnswerVC.animateImage), userInfo: nil, repeats: true);
+        animationTimer = Timer.scheduledTimer(timeInterval: animationInterval, target: self, selector: #selector(QuestionAnswerVC.animateImage), userInfo: nil, repeats: true);
         animationTimer.fire()
     }
     
@@ -221,14 +219,16 @@ class QuestionAnswerVC: UIViewController {
         print(Date())
         
         if zoom == true {
-            UIView.animate(withDuration: interval) {
-                self.image.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+            UIView.animate(withDuration: animationInterval) {
+//                self.image.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                self.image.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
             }
             zoom = false
         }
         else{
-            UIView.animate(withDuration: interval) {
-                self.image.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            UIView.animate(withDuration: animationInterval) {
+//                self.image.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                self.image.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI * 2))
             }
             zoom = true
         }
@@ -241,6 +241,7 @@ class QuestionAnswerVC: UIViewController {
             self.timeLeftLbl.textColor = UIColor.red
             self.timeLeftLbl.text = String(format:"This poll is already expired")
             expiryTimer.invalidate()
+            stopAnimation()
         }
         else{
             self.timeLeftLbl.text = String(format:"Expires in \(timeLeft) sec.")
