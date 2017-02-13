@@ -54,8 +54,8 @@ class PresenterEventsCVC: UICollectionViewController, UIGestureRecognizerDelegat
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         
-        if segue.identifier == "segueToPresenterQuestionList" {
-            let nextScene =  segue.destination as! PresenterEventDetailVC
+        if segue.identifier == "segueToPollQuestionList" {
+            let nextScene =  segue.destination as! EventQuestionListVC
             nextScene.eventName = self.eventName
         }
     }
@@ -109,7 +109,7 @@ class PresenterEventsCVC: UICollectionViewController, UIGestureRecognizerDelegat
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print ("Cell at index \(indexPath.row) tapped")
         self.eventName = self.eventsArray[indexPath.row]
-        self.performSegue(withIdentifier: "segueToPresenterQuestionList", sender: self)
+        self.performSegue(withIdentifier: "segueToPollQuestionList", sender: self)
     }
  
 

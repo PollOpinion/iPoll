@@ -1,5 +1,5 @@
 //
-//  PresenterEventDetailVC.swift
+//  EventQuestionListVC.swift
 //  DDVP
 //
 //  Created by Pankaj Neve on 20/01/17.
@@ -75,7 +75,7 @@ struct PollQuestion{
     }
 }
 
-class PresenterEventDetailVC: UITableViewController {
+class EventQuestionListVC: UITableViewController {
     
     
     @IBOutlet weak var addQuestionButton: UIBarButtonItem!

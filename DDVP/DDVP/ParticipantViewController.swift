@@ -101,7 +101,7 @@ class ParticipantViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "segueParticipantEventToQuestion" {
-            let nextScene =  segue.destination as! PresenterEventDetailVC
+            let nextScene =  segue.destination as! EventQuestionListVC
             let name = eventsArray[(self.tableView.indexPathForSelectedRow?.row)!]
             
             nextScene.eventName = name.components(separatedBy: "_quiz")[0]

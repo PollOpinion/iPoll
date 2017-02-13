@@ -204,7 +204,7 @@ class AddQuestionVC: UITableViewController {
         let newQuestion : PollQuestion = PollQuestion.init(titleStr: enteredData[0], questionStr: enteredData[1], durationInt: durationVal, opt1Str:enteredData[3], opt2Str:enteredData[4], opt3Str:enteredData[5], opt4Str:enteredData[6] )
         
         
-        let questionListVC: PresenterEventDetailVC = self.backViewController() as! PresenterEventDetailVC
+        let questionListVC: EventQuestionListVC = self.backViewController() as! EventQuestionListVC
         questionListVC.reloadQuestionListWith(question: newQuestion, actionID:action)
         self.navigationController?.popViewController(animated: true)
         

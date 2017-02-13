@@ -1,5 +1,5 @@
 //
-//  LoginResultDetailViewController.swift
+//  ProfileVC.swift
 //  DDVP
 //
 //  Created by Pankaj Neve on 17/01/17.
@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKLoginKit
 
-class LoginResultDetailViewController: UIViewController {
+class ProfileVC: UIViewController {
     
     let loginButton: FBSDKLoginButton = {
         let button = FBSDKLoginButton()
@@ -29,7 +29,7 @@ class LoginResultDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        roleSegement.addTarget(self, action: #selector(LoginResultDetailViewController.roleChanged), for: .valueChanged)
+        roleSegement.addTarget(self, action: #selector(ProfileVC.roleChanged), for: .valueChanged)
         
         self.navigationItem.hidesBackButton = true
         

@@ -202,7 +202,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UIViewCon
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
         
-        if let profileVC:LoginResultDetailViewController = segue.destination as? LoginResultDetailViewController{
+        if let profileVC:ProfileVC = segue.destination as? ProfileVC{
             
             profileVC.loginButton.delegate = self
         }

@@ -142,7 +142,7 @@ class PresenterViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "seguePresenterEventDetailsVC" {
-            let nextScene =  segue.destination as! PresenterEventDetailVC
+            let nextScene =  segue.destination as! EventQuestionListVC
             nextScene.eventName = self.eventName
         }
     }
