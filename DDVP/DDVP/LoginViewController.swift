@@ -288,7 +288,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UIViewCon
         self.roleSegment.selectedSegmentIndex = 0
         roleChanged()
         
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
         
         
     }

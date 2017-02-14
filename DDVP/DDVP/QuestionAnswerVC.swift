@@ -24,8 +24,11 @@ class QuestionAnswerVC: UIViewController {
     var questionObj:[String : Any] = [:]
     var answers = [String:Int]()
     var selectedAnswerOption = 0
-    var zoom = true
-    let interval = TimeInterval(8.0)
+    let animationInterval = TimeInterval(2.0)
+    var timeLeft = 0
+    var countdownTimer : Timer = Timer()
+    var animationTimer : Timer = Timer()
+    var gestureRecognizer = UITapGestureRecognizer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,22 +42,19 @@ class QuestionAnswerVC: UIViewController {
         }
         else { //participant
             view.backgroundColor = Color.participantTheme.value
-            pieChartView.isHidden = true
             
-            configureOptionLbl()
-            
+            configureOptionLbl(withInteraction: true)
             image.isHidden = false
             startAnimation()
-
+            
+            pieChartView.isHidden = true
         }
     }
     
     override func viewDidLayoutSubviews() {
         // Set your constraint here
-//        pieChartView.center.x = view.center.x
         pieChartView.frame = chartView.frame
-        
-        image.frame = pieChartView.frame
+        image.center = chartView.center
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,17 +66,6 @@ class QuestionAnswerVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     // MARK: - supporting functions
     
     func pieChartFor(values: Any, tempView: UIView){
@@ -143,7 +132,10 @@ class QuestionAnswerVC: UIViewController {
         
         let expiresIn:Int = questionObj["duration"] as! Int
         if expiresIn > 0  {
+            timeLeft = expiresIn
             self.timeLeftLbl.text = String(format:"Expires in \(expiresIn) sec.")
+
+            countdownTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(QuestionAnswerVC.updateTimeLeft), userInfo: nil, repeats: true);
         }
         else{
             self.timeLeftLbl.text = "Expires in time not set for this question"
@@ -151,8 +143,7 @@ class QuestionAnswerVC: UIViewController {
        
     }
     
-    func configureOptionLbl() {
-        
+    func configureOptionLbl(withInteraction enalbeInteraction:Bool) {
         
         let lbls = [option1Lbl, option2Lbl, option3Lbl, option4Lbl]
         
@@ -164,13 +155,18 @@ class QuestionAnswerVC: UIViewController {
             lbl?.layer.borderWidth = 1.0;
             lbl?.layer.cornerRadius = 8.0;
             lbl?.layer.masksToBounds = true
-            lbl?.isUserInteractionEnabled = true
+            lbl?.isUserInteractionEnabled = enalbeInteraction
             if (lbl?.text?.characters.count)! <= 0 {
                 lbl?.isHidden = true
             }
             
-            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(QuestionAnswerVC.labelTapped))
-            lbl?.addGestureRecognizer(gestureRecognizer)
+            if enalbeInteraction == true {
+                let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(QuestionAnswerVC.labelTapped))
+                lbl?.addGestureRecognizer(gestureRecognizer)
+            }
+            else{
+                lbl?.removeGestureRecognizer(gestureRecognizer)
+            }
         }
 
     }
@@ -215,25 +211,38 @@ class QuestionAnswerVC: UIViewController {
     }
     
     func startAnimation() {
-        Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(QuestionAnswerVC.startImageAnimation), userInfo: nil, repeats: true);
+        animationTimer = Timer.scheduledTimer(timeInterval: animationInterval, target: self, selector: #selector(QuestionAnswerVC.animateImage), userInfo: nil, repeats: true);
+        animationTimer.fire()
     }
     
-    func startImageAnimation () {
-        
-        if zoom == true {
-            
-            UIView.animate(withDuration: interval) {
-                self.image.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+    func stopAnimation() {
+        animationTimer.invalidate()
+        //stopping an animation means poll is expired , hence disable submit button and reset all of the answers to default state and also do not allow user to tap/select an answer
+        hideBarButton(barButton: submitAnswerButton, hide: true)
+        configureOptionLbl(withInteraction: false)
+    }
+    
+    func animateImage () {
+        print("Image Animation Timer \(Date())")
+            UIView.animate(withDuration: animationInterval) {
+                self.image.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
+                self.image.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI * 2))
             }
-            zoom = false
+    }
+    
+    func updateTimeLeft(){
+        timeLeft -= 1
+        
+        if timeLeft == 0 {
+            self.timeLeftLbl.textColor = UIColor.red
+            self.timeLeftLbl.text = String(format:"This poll is already expired")
+            countdownTimer.invalidate()
+            stopAnimation()
         }
         else{
-            UIView.animate(withDuration: interval) {
-                self.image.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            }
-            
-            zoom = true
+            self.timeLeftLbl.text = String(format:"Expires in \(timeLeft) sec.")
         }
+        
     }
     
     // MARK: - Selector Handlers
