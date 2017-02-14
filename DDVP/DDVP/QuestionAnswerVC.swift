@@ -24,11 +24,11 @@ class QuestionAnswerVC: UIViewController {
     var questionObj:[String : Any] = [:]
     var answers = [String:Int]()
     var selectedAnswerOption = 0
-    var zoom = true
-    let animationInterval = TimeInterval(1.0)
+    let animationInterval = TimeInterval(2.0)
     var timeLeft = 0
-    var expiryTimer : Timer = Timer()
+    var countdownTimer : Timer = Timer()
     var animationTimer : Timer = Timer()
+    var gestureRecognizer = UITapGestureRecognizer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ class QuestionAnswerVC: UIViewController {
         else { //participant
             view.backgroundColor = Color.participantTheme.value
             
-            configureOptionLbl()
+            configureOptionLbl(withInteraction: true)
             image.isHidden = false
             startAnimation()
             
@@ -135,7 +135,7 @@ class QuestionAnswerVC: UIViewController {
             timeLeft = expiresIn
             self.timeLeftLbl.text = String(format:"Expires in \(expiresIn) sec.")
 
-            expiryTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(QuestionAnswerVC.updateTimeLeft), userInfo: nil, repeats: true);
+            countdownTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(QuestionAnswerVC.updateTimeLeft), userInfo: nil, repeats: true);
         }
         else{
             self.timeLeftLbl.text = "Expires in time not set for this question"
@@ -143,7 +143,7 @@ class QuestionAnswerVC: UIViewController {
        
     }
     
-    func configureOptionLbl() {
+    func configureOptionLbl(withInteraction enalbeInteraction:Bool) {
         
         let lbls = [option1Lbl, option2Lbl, option3Lbl, option4Lbl]
         
@@ -155,13 +155,18 @@ class QuestionAnswerVC: UIViewController {
             lbl?.layer.borderWidth = 1.0;
             lbl?.layer.cornerRadius = 8.0;
             lbl?.layer.masksToBounds = true
-            lbl?.isUserInteractionEnabled = true
+            lbl?.isUserInteractionEnabled = enalbeInteraction
             if (lbl?.text?.characters.count)! <= 0 {
                 lbl?.isHidden = true
             }
             
-            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(QuestionAnswerVC.labelTapped))
-            lbl?.addGestureRecognizer(gestureRecognizer)
+            if enalbeInteraction == true {
+                let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(QuestionAnswerVC.labelTapped))
+                lbl?.addGestureRecognizer(gestureRecognizer)
+            }
+            else{
+                lbl?.removeGestureRecognizer(gestureRecognizer)
+            }
         }
 
     }
@@ -212,26 +217,17 @@ class QuestionAnswerVC: UIViewController {
     
     func stopAnimation() {
         animationTimer.invalidate()
+        //stopping an animation means poll is expired , hence disable submit button and reset all of the answers to default state and also do not allow user to tap/select an answer
+        hideBarButton(barButton: submitAnswerButton, hide: true)
+        configureOptionLbl(withInteraction: false)
     }
     
     func animateImage () {
-        
-        print(Date())
-        
-        if zoom == true {
+        print("Image Animation Timer \(Date())")
             UIView.animate(withDuration: animationInterval) {
-//                self.image.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
                 self.image.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
-            }
-            zoom = false
-        }
-        else{
-            UIView.animate(withDuration: animationInterval) {
-//                self.image.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 self.image.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI * 2))
             }
-            zoom = true
-        }
     }
     
     func updateTimeLeft(){
@@ -240,7 +236,7 @@ class QuestionAnswerVC: UIViewController {
         if timeLeft == 0 {
             self.timeLeftLbl.textColor = UIColor.red
             self.timeLeftLbl.text = String(format:"This poll is already expired")
-            expiryTimer.invalidate()
+            countdownTimer.invalidate()
             stopAnimation()
         }
         else{
