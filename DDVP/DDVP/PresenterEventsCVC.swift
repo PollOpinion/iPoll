@@ -64,8 +64,21 @@ class PresenterEventsCVC: UICollectionViewController, UIGestureRecognizerDelegat
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        let numOfSections: Int = 1
+        if self.eventsArray.count > 0 {
+
+            collectionView.backgroundView = nil
+        }
+        else
+        {
+            let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
+            noDataLabel.text          = "No events available"
+            noDataLabel.textColor     = UIColor.black
+            noDataLabel.textAlignment = .center
+            collectionView.backgroundView  = noDataLabel
+
+        }
+        return numOfSections
     }
 
 

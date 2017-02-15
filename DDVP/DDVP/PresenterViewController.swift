@@ -87,7 +87,7 @@ class PresenterViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+
         let numOfSections: Int = 1
         if self.eventsArray.count > 0 {
             tableView.separatorStyle = .singleLine

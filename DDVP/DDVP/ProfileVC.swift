@@ -38,17 +38,14 @@ class ProfileVC: UIViewController {
             logoutButton.isHidden = true
             
             view.addSubview(loginButton)
-            loginButton.center = view.center
+
         }
         else {
             logoutButton.isHidden = false
+            logoutButton.layer.cornerRadius = 3.0
             
         }
         
-        
-        //alignSubviews()
-        
-       
         self.userEmail.text = pollUser?.Email
         self.userName.text = pollUser?.Name
         
@@ -63,6 +60,7 @@ class ProfileVC: UIViewController {
     override func viewDidLayoutSubviews() {
         // Set your constraint here
         loginButton.center = CGPoint.init(x: logoutButton.center.x, y: logoutButton.center.y)
+        logoutButton.frame = loginButton.frame
         alignSubviews()
     }
     
@@ -116,21 +114,10 @@ class ProfileVC: UIViewController {
     
     // align all subviews Horizontally Centered to view
     func alignSubviews(){
-//        let x = view.center.x
-//        
-//        logoutButton.center = view.center
-//        
-//        userPhoto.center = CGPoint(x: x, y: userPhoto.center.y)
-//        photoActivity.center = CGPoint(x: x, y: photoActivity.center.y)
-//        userEmail.center = CGPoint(x: x, y: userEmail.center.y)
-//        userName.center = CGPoint(x: x, y: userName.center.y)
-//        userRole.center = CGPoint(x: x, y: userRole.center.y)
-//        roleSegement.center = CGPoint(x: x, y: roleSegement.center.y)
         
         //user photo formatting
         userPhoto.layer.borderWidth = 3.0
-//        userPhoto.layer.borderColor = UIColor.white.cgColor
-        userPhoto.layer.borderColor = UIColor.green.cgColor
+        userPhoto.layer.borderColor = UIColor.lightGray.cgColor
         userPhoto.layer.cornerRadius = userPhoto.frame.size.width/2
         userPhoto.clipsToBounds = true
     }
