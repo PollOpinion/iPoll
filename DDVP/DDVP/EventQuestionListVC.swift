@@ -77,6 +77,7 @@ struct PollQuestion{
 
 class EventQuestionListVC: UITableViewController {
     
+    let scRect:CGRect = UIScreen.main.bounds
     
     @IBOutlet weak var addQuestionButton: UIBarButtonItem!
     var questionArray = [PollQuestion] ()
@@ -223,6 +224,22 @@ class EventQuestionListVC: UITableViewController {
         self.performSegue(withIdentifier: "segueShowQuestionAnswerVC", sender: self)
     }
     
+    
+    // MARK: Animation Cell with Spring Damping
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.center = CGPoint(x: scRect.width / 2, y: scRect.height / 2)
+        cell.contentView.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+        
+        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.6, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            cell.frame = CGRect(x: 0, y: cell.frame.origin.y, width: cell.frame.size.width, height: cell.frame.size.height)
+            
+            cell.contentView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            
+        }, completion: { finished in
+            
+        })
+    }
+
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
