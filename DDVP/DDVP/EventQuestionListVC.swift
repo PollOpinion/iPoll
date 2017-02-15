@@ -227,6 +227,8 @@ class EventQuestionListVC: UITableViewController {
     
     // MARK: Animation Cell with Spring Damping
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+//        Animation - 1 
         cell.contentView.center = CGPoint(x: scRect.width / 2, y: scRect.height / 2)
         cell.contentView.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
         
@@ -238,6 +240,34 @@ class EventQuestionListVC: UITableViewController {
         }, completion: { finished in
             
         })
+        
+//        Animation - 2
+        
+        //1. Setup the CATransform3D structure
+        
+//        var rotation: CATransform3D = CATransform3DRotate(CATransform3D(), CGFloat(M_PI), 0.0, 0.7, 0.4)
+//        rotation.m34 = 1.0 / -600;
+//        
+//        
+//
+//        
+//        //2. Define the initial state (Before the animation)
+//        cell.layer.shadowColor = UIColor.black.cgColor;
+//        cell.layer.shadowOffset = CGSize(width: 10, height: 10)
+//        cell.alpha = 0;
+//        
+//        cell.layer.transform = rotation;
+//        cell.layer.anchorPoint = CGPoint(x: 0, y: 0.5)
+//        
+//        
+//        //3. Define the final state (After the animation) and commit the animation
+//        UIView.beginAnimations("rotation", context: nil)
+//        UIView.setAnimationDuration(0.8)
+//        cell.layer.transform = CATransform3DIdentity;
+//        cell.alpha = 1;
+//        cell.layer.shadowOffset = CGSize(width:0, height:0);
+//        UIView.commitAnimations()
+
     }
 
     // Override to support conditional editing of the table view.
