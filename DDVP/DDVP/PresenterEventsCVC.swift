@@ -13,6 +13,8 @@ var touchPoint:CGPoint? = nil
 
 class PresenterEventsCVC: UICollectionViewController, UIGestureRecognizerDelegate {
     
+    let scRect:CGRect = UIScreen.main.bounds
+    
     @IBOutlet weak var btnAddEvent: UIBarButtonItem!
     
     var eventsArray = [String]()
@@ -105,19 +107,34 @@ class PresenterEventsCVC: UICollectionViewController, UIGestureRecognizerDelegat
         return cell
     }
 
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
+    // MARK: Animation Cell with Spring Damping
     
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        //        Animation - 1
+        
+//        cell.contentView.center = CGPoint(x: scRect.width / 2, y: scRect.height / 2)
+//        cell.contentView.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+//        
+//        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.6, options: UIViewAnimationOptions.curveEaseIn, animations: {
+//            cell.layer.transform = CATransform3DIdentity
+//            cell.contentView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//            
+//        }, completion: { finished in
+//            
+//        })
+        
+        //        Animation - 2
+        
+//        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, -500, 50, 100)
+//        cell.layer.transform = rotationTransform
+//        
+//        UIView.animate(withDuration: 1.0) {
+//            cell.layer.transform = CATransform3DIdentity
+//        }
+        
+        
     }
-    */
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print ("Cell at index \(indexPath.row) tapped")

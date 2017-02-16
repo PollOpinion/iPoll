@@ -334,13 +334,28 @@
                                     <action selector="logoutTapped:" destination="0Ws-bu-gVh" eventType="touchUpInside" id="W9B-QB-pym"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQB-Na-PQl">
+                                <rect key="frame" x="65" y="72" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="VF0-b6-w9d"/>
+                                    <constraint firstAttribute="width" constant="44" id="iLM-5X-fy2"/>
+                                </constraints>
+                                <state key="normal" image="bucket_icon_camera"/>
+                                <connections>
+                                    <action selector="updateProfilePicButtonTapped:" destination="0Ws-bu-gVh" eventType="touchUpInside" id="Fm5-6u-MyB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="yVP-ls-Yi6" firstAttribute="top" secondItem="5nk-xX-yAN" secondAttribute="bottom" constant="8" id="265-3d-9D3"/>
+                            <constraint firstItem="gSw-je-ghA" firstAttribute="top" secondItem="xQB-Na-PQl" secondAttribute="bottom" constant="551" id="3x8-0y-ROV"/>
+                            <constraint firstItem="xQB-Na-PQl" firstAttribute="top" secondItem="5nk-xX-yAN" secondAttribute="bottom" constant="8" id="7GX-Fh-wbX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xQB-Na-PQl" secondAttribute="trailing" constant="250" id="9JJ-mh-4Vb"/>
                             <constraint firstAttribute="trailing" secondItem="yVP-ls-Yi6" secondAttribute="trailing" id="ajG-1N-LeY"/>
                             <constraint firstItem="O2s-Bk-L55" firstAttribute="centerX" secondItem="yVP-ls-Yi6" secondAttribute="centerX" id="awr-jg-Lup"/>
                             <constraint firstItem="yVP-ls-Yi6" firstAttribute="leading" secondItem="DHY-Jp-UFf" secondAttribute="leading" id="e1Q-JK-uVl"/>
                             <constraint firstItem="gSw-je-ghA" firstAttribute="top" secondItem="O2s-Bk-L55" secondAttribute="bottom" constant="50" id="j4n-a5-T2b"/>
+                            <constraint firstItem="xQB-Na-PQl" firstAttribute="leading" secondItem="DHY-Jp-UFf" secondAttribute="leadingMargin" constant="49" id="siT-4a-Zrh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="DM8-Dg-xaw">
@@ -355,6 +370,7 @@
                         <outlet property="logoutButton" destination="O2s-Bk-L55" id="bdS-fE-rif"/>
                         <outlet property="photoActivity" destination="dMc-Sy-DMj" id="ZMl-iX-YAu"/>
                         <outlet property="roleSegement" destination="ene-ta-gwh" id="3Ub-sy-u8j"/>
+                        <outlet property="updateProfilePicButton" destination="xQB-Na-PQl" id="dgD-9d-t5C"/>
                         <outlet property="userEmail" destination="JJP-Gf-z7i" id="fO1-bq-YJF"/>
                         <outlet property="userName" destination="OGf-tC-iZl" id="7Lq-AC-EIC"/>
                         <outlet property="userPhoto" destination="eUb-At-Wdd" id="DVy-pU-eZG"/>
@@ -414,7 +430,7 @@
         <scene sceneID="JbI-IN-bhk">
             <objects>
                 <collectionViewController id="I7X-Cy-m0X" customClass="PresenterEventsCVC" customModule="DDVP" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="uEn-SY-Op0">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="uEn-SY-Op0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="nbu-6g-cJ8">
@@ -756,7 +772,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ffF-A2-WCn" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jtA-JS-lqf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jtA-JS-lqf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -896,6 +912,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bucket_icon_camera" width="147" height="157"/>
         <image name="presenter-event-holder" width="1016" height="1018"/>
         <image name="question_icon" width="300" height="300"/>
         <image name="remove_delete_exit_close" width="256" height="256"/>

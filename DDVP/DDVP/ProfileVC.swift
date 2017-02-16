@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKLoginKit
 
-class ProfileVC: UIViewController {
+class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let loginButton: FBSDKLoginButton = {
         let button = FBSDKLoginButton()
@@ -23,11 +23,14 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userRole: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
-
+    @IBOutlet weak var updateProfilePicButton: UIButton!
     @IBOutlet weak var roleSegement: UISegmentedControl!
+    
+    let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         roleSegement.addTarget(self, action: #selector(ProfileVC.roleChanged), for: .valueChanged)
         
@@ -35,15 +38,23 @@ class ProfileVC: UIViewController {
         
         if pollUser?.UserProvider == UserProvider.facebook {
         
+            updateProfilePicButton.isHidden = true
             logoutButton.isHidden = true
-            
             view.addSubview(loginButton)
 
         }
         else {
+            updateProfilePicButton.isHidden = false
             logoutButton.isHidden = false
             logoutButton.layer.cornerRadius = 3.0
             
+            //position the update pic button
+            updateProfilePicButton.layer.frame.origin.x = userPhoto.layer.frame.origin.x
+            updateProfilePicButton.layer.frame.origin.y = 100
+            updateProfilePicButton.bringSubview(toFront: userPhoto)
+            
+            //et current view controller as the delegate for the UIImagePickerController, to handle a few events.
+            imagePicker.delegate = self
         }
         
         self.userEmail.text = pollUser?.Email
@@ -110,6 +121,29 @@ class ProfileVC: UIViewController {
         let loginViewController: LoginViewController = loginButton.delegate as! LoginViewController
         loginViewController.btnLogoutTapped(self)
     }
+    
+    @IBAction func updateProfilePicButtonTapped(_ sender: Any) {
+        
+        print("updateProfilePic Button Tapped")
+        
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .camera
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    // MARK: - UIImagePickerControllerDelegate Methods
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            userPhoto.contentMode = .scaleAspectFit
+            userPhoto.image = pickedImage
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
     //MARK: - Helper Functions
     
     // align all subviews Horizontally Centered to view
