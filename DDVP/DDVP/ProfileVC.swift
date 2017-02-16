@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKLoginKit
 
-class ProfileVC: UIViewController {
+class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let loginButton: FBSDKLoginButton = {
         let button = FBSDKLoginButton()
@@ -23,11 +23,14 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userRole: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
-
+    @IBOutlet weak var updateProfilePicButton: UIButton!
     @IBOutlet weak var roleSegement: UISegmentedControl!
+    
+    let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         roleSegement.addTarget(self, action: #selector(ProfileVC.roleChanged), for: .valueChanged)
         
@@ -35,20 +38,25 @@ class ProfileVC: UIViewController {
         
         if pollUser?.UserProvider == UserProvider.facebook {
         
+            updateProfilePicButton.isHidden = true
             logoutButton.isHidden = true
-            
             view.addSubview(loginButton)
-            loginButton.center = view.center
+
         }
         else {
+            updateProfilePicButton.isHidden = false
             logoutButton.isHidden = false
+            logoutButton.layer.cornerRadius = 3.0
             
+            //position the update pic button
+            updateProfilePicButton.layer.frame.origin.x = userPhoto.layer.frame.origin.x
+            updateProfilePicButton.layer.frame.origin.y = 100
+            updateProfilePicButton.bringSubview(toFront: userPhoto)
+            
+            //et current view controller as the delegate for the UIImagePickerController, to handle a few events.
+            imagePicker.delegate = self
         }
         
-        
-        //alignSubviews()
-        
-       
         self.userEmail.text = pollUser?.Email
         self.userName.text = pollUser?.Name
         
@@ -63,6 +71,7 @@ class ProfileVC: UIViewController {
     override func viewDidLayoutSubviews() {
         // Set your constraint here
         loginButton.center = CGPoint.init(x: logoutButton.center.x, y: logoutButton.center.y)
+        logoutButton.frame = loginButton.frame
         alignSubviews()
     }
     
@@ -112,25 +121,37 @@ class ProfileVC: UIViewController {
         let loginViewController: LoginViewController = loginButton.delegate as! LoginViewController
         loginViewController.btnLogoutTapped(self)
     }
+    
+    @IBAction func updateProfilePicButtonTapped(_ sender: Any) {
+        
+        print("updateProfilePic Button Tapped")
+        
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .camera
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    // MARK: - UIImagePickerControllerDelegate Methods
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            userPhoto.contentMode = .scaleAspectFit
+            userPhoto.image = pickedImage
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
     //MARK: - Helper Functions
     
     // align all subviews Horizontally Centered to view
     func alignSubviews(){
-//        let x = view.center.x
-//        
-//        logoutButton.center = view.center
-//        
-//        userPhoto.center = CGPoint(x: x, y: userPhoto.center.y)
-//        photoActivity.center = CGPoint(x: x, y: photoActivity.center.y)
-//        userEmail.center = CGPoint(x: x, y: userEmail.center.y)
-//        userName.center = CGPoint(x: x, y: userName.center.y)
-//        userRole.center = CGPoint(x: x, y: userRole.center.y)
-//        roleSegement.center = CGPoint(x: x, y: roleSegement.center.y)
         
         //user photo formatting
         userPhoto.layer.borderWidth = 3.0
-//        userPhoto.layer.borderColor = UIColor.white.cgColor
-        userPhoto.layer.borderColor = UIColor.green.cgColor
+        userPhoto.layer.borderColor = UIColor.lightGray.cgColor
         userPhoto.layer.cornerRadius = userPhoto.frame.size.width/2
         userPhoto.clipsToBounds = true
     }
