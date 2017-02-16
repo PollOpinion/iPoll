@@ -9,6 +9,16 @@
 import UIKit
 import FBSDKLoginKit
 
+struct Platform {
+    static let isSimulator: Bool = {
+        var isSim = false
+        #if arch(i386) || arch(x86_64)
+            isSim = true
+        #endif
+        return isSim
+    }()
+}
+
 class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let loginButton: FBSDKLoginButton = {
@@ -124,12 +134,17 @@ class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     
     @IBAction func updateProfilePicButtonTapped(_ sender: Any) {
         
-        print("updateProfilePic Button Tapped")
-        
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .camera
-        
-        present(imagePicker, animated: true, completion: nil)
+        if Platform.isSimulator {
+            print ("camera won't work as it's Simulator")
+        }
+        else{
+            print("updateProfilePic Button Tapped")
+            
+            imagePicker.allowsEditing = false
+            imagePicker.sourceType = .camera
+            
+            present(imagePicker, animated: true, completion: nil)
+        }
     }
     
     // MARK: - UIImagePickerControllerDelegate Methods
