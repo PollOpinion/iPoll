@@ -134,17 +134,35 @@ class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     
     @IBAction func updateProfilePicButtonTapped(_ sender: Any) {
         
-        if Platform.isSimulator {
-            print ("camera won't work as it's Simulator")
-        }
-        else{
-            print("updateProfilePic Button Tapped")
+       //Action sheet
+        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+        
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action: UIAlertAction) in
+            print("Camera action")
             
-            imagePicker.allowsEditing = false
-            imagePicker.sourceType = .camera
-            
-            present(imagePicker, animated: true, completion: nil)
+            if Platform.isSimulator {
+                print ("camera won't work as it's Simulator")
+            }
+            else{
+                
+                self.presentImagePicker(source:.camera)
+                
+            }
         }
+        let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (action: UIAlertAction) in
+            print("Photo Library action")
+            
+            self.presentImagePicker(source:.photoLibrary)
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action: UIAlertAction) in
+            print("Cancelled")
+            //do nothing
+        }
+        optionMenu.addAction(cameraAction)
+        optionMenu.addAction(photoLibraryAction)
+        optionMenu.addAction(cancelAction)
+        self.present(optionMenu, animated: true, completion: nil)
     }
     
     // MARK: - UIImagePickerControllerDelegate Methods
@@ -152,7 +170,7 @@ class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
     
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            userPhoto.contentMode = .scaleAspectFit
+            userPhoto.contentMode = .scaleAspectFill
             userPhoto.image = pickedImage
         }
         
@@ -237,6 +255,13 @@ class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
             }
         }
         return nil
+    }
+    
+    func presentImagePicker(source:UIImagePickerControllerSourceType){
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = source
+        
+        present(imagePicker, animated: true, completion: nil)
     }
     
     //MARK: segment value changed delegate
