@@ -17,8 +17,9 @@ struct PollQuestion{
     var opt2: String
     var opt3: String
     var opt4: String
+    var isPublished : Bool
     
-    init(titleStr: String?, questionStr: String?, durationInt:Int, opt1Str: String?, opt2Str: String?, opt3Str: String?, opt4Str: String?) {
+    init(titleStr: String?, questionStr: String?, durationInt:Int, opt1Str: String?, opt2Str: String?, opt3Str: String?, opt4Str: String?, publish: String?) {
         self.title = titleStr ?? ""
         self.question = questionStr ?? ""
         self.duration = durationInt
@@ -26,13 +27,14 @@ struct PollQuestion{
         self.opt2 = opt2Str ?? ""
         self.opt3 = opt3Str ?? ""
         self.opt4 = opt4Str ?? ""
+        self.isPublished = publish == "YES" ? true : false
     }
     
     static func toArrayofPollQuestion(fromArray: [[String : Any]]) -> [PollQuestion]{
         var questionArray = [PollQuestion]()
         for dict in fromArray{
             let duration  = Int((dict["duration"] as! Int?)!)
-            let que  = self.init(titleStr: dict["title"] as! String?, questionStr: dict["question"] as! String?, durationInt: duration, opt1Str: dict["opt1"] as! String?, opt2Str: dict["opt2"] as! String?, opt3Str: dict["opt3"] as! String?, opt4Str: dict["opt4"] as! String?)
+            let que  = self.init(titleStr: dict["title"] as! String?, questionStr: dict["question"] as! String?, durationInt: duration, opt1Str: dict["opt1"] as! String?, opt2Str: dict["opt2"] as! String?, opt3Str: dict["opt3"] as! String?, opt4Str: dict["opt4"] as! String?, publish: dict["isPublished"] as! String?)
             questionArray.append(que)
         }
         return questionArray
@@ -41,6 +43,7 @@ struct PollQuestion{
     func toAnyObject() -> Any {
         
         var obj = [
+            "isPublished" : isPublished == true ? "YES" : "NO",
             "title": title,
             "question": question,
             "duration": duration,
@@ -50,6 +53,7 @@ struct PollQuestion{
         
         if self.opt3.characters.count > 0, self.opt4.characters.count > 0 {
             obj = [
+                "publish" : isPublished,
                 "title": title,
                 "question": question,
                 "duration": duration,
@@ -61,6 +65,7 @@ struct PollQuestion{
         }
         else if self.opt3.characters.count > 0, self.opt4.characters.count < 1 {
             obj = [
+                "publish" : isPublished,
                 "title": title,
                 "question": question,
                 "duration": duration,
@@ -157,9 +162,21 @@ class EventQuestionListVC: UITableViewController {
             let receivedQuestionArray  = Array(userInfo.values).sorted{
                 (Int((($0)[kKeyQuestionId] as! Int?)!) > Int((($1)[kKeyQuestionId] as! Int?)!))
             }
-            let questionsArray  = PollQuestion.toArrayofPollQuestion(fromArray: receivedQuestionArray)
-            self.questionArray = (questionsArray as [PollQuestion]?)!
+            let allQuestions  = PollQuestion.toArrayofPollQuestion(fromArray: receivedQuestionArray)
             
+            if pollUser?.LoginRole == UserRole.presenter{
+                self.questionArray = (allQuestions as [PollQuestion]?)!
+                
+            }
+            else{ //participant
+                
+                let  tempArray = (allQuestions as [PollQuestion]?)!
+                
+                self.questionArray = tempArray.filter({ (question:PollQuestion) -> Bool in
+                    question.isPublished != false
+                })
+                
+            }
             self.fireBaseQueIdArray = Array(userInfo.keys).sorted {($0) > ($1)}
             
         }
@@ -207,6 +224,7 @@ class EventQuestionListVC: UITableViewController {
         
         if pollUser?.LoginRole == UserRole.presenter{
             cell.publishButton.tag = indexPath.row
+            cell.publishButton.isHidden = eventObj.isPublished
         }
         else{ // participant
             cell.publishButton.isHidden = true
