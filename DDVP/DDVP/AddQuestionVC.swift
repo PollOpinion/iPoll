@@ -147,21 +147,21 @@ class AddQuestionVC: UITableViewController {
         
         self.tableView.endEditing(true)
         
-        let textLabelsCount = Question.getTotalTextLabels()
-        let isAddButtonOn = self.noOfExtraOptionsOn < 2
-        var countCurrentText = textLabelsCount
-        if isAddButtonOn {
-            countCurrentText = textLabelsCount - (2 - self.noOfExtraOptionsOn) + (self.isAddButtonOn ? 1 : 0)
-        }
+//        let textLabelsCount = Question.getTotalTextLabels()
+//        let isAddButtonOn = self.noOfExtraOptionsOn < 2
+//        var countCurrentText = textLabelsCount
+//        if isAddButtonOn {
+//            countCurrentText = textLabelsCount - (2 - self.noOfExtraOptionsOn) + (self.isAddButtonOn ? 1 : 0)
+//        }
         
         let durationVal:Int = Int(enteredData[2]) ?? -1
-        
-        let newQuestion : PollQuestion = PollQuestion.init(titleStr: enteredData[0], questionStr: enteredData[1], durationInt: durationVal, opt1Str:enteredData[3], opt2Str:enteredData[4], opt3Str:enteredData[5], opt4Str:enteredData[6] )
+        let isPublished:String = action == 1001 ? "YES" : "NO"
+        let newQuestion : PollQuestion = PollQuestion.init(titleStr: enteredData[0], questionStr: enteredData[1], durationInt: durationVal, opt1Str:enteredData[3], opt2Str:enteredData[4], opt3Str:enteredData[5], opt4Str:enteredData[6], publish: isPublished )
         
         
         let questionListVC: EventQuestionListVC = self.backViewController() as! EventQuestionListVC
         questionListVC.reloadQuestionListWith(question: newQuestion, actionID:action)
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
         
         //#warning : for testing
         for quetionField in enteredData {
