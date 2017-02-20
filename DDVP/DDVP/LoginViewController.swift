@@ -365,7 +365,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UIViewCon
     }
     
     func animateScreen(completion: ((Bool) -> Swift.Void)? = nil) {
-        
+        self.navigationController?.isNavigationBarHidden = true
         let splashScreen = UIImageView(frame: (self.view.frame))
         splashScreen.image = UIImage(named: "Default")
         self.view.addSubview(splashScreen)
@@ -385,6 +385,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UIViewCon
                 self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 
         }) { (finish:Bool) in
+            self.navigationController?.isNavigationBarHidden = false
             splashScreen.removeFromSuperview()
             completion!(finish)
         }
