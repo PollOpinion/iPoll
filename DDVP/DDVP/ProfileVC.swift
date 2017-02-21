@@ -136,6 +136,8 @@ class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         
        //Action sheet
         let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+        optionMenu.popoverPresentationController?.sourceView = self.view
+
         
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action: UIAlertAction) in
             print("Camera action")
@@ -169,10 +171,13 @@ class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
     
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            userPhoto.contentMode = .scaleAspectFill
-            userPhoto.image = pickedImage
+        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
+            userPhoto.image = editedImage
         }
+        else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            userPhoto.image = originalImage
+        }
+        userPhoto.contentMode = .scaleAspectFill
         
         dismiss(animated: true, completion: nil)
     }
@@ -258,7 +263,7 @@ class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     }
     
     func presentImagePicker(source:UIImagePickerControllerSourceType){
-        imagePicker.allowsEditing = false
+        imagePicker.allowsEditing = true
         imagePicker.sourceType = source
         
         present(imagePicker, animated: true, completion: nil)
