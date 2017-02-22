@@ -19,7 +19,7 @@ struct Platform {
     }()
 }
 
-class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileVC: UIViewController{
     
     let loginButton: FBSDKLoginButton = {
         let button = FBSDKLoginButton()
@@ -136,6 +136,8 @@ class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         
        //Action sheet
         let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+        optionMenu.popoverPresentationController?.sourceView = self.view
+
         
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action: UIAlertAction) in
             print("Camera action")
@@ -163,18 +165,6 @@ class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         optionMenu.addAction(photoLibraryAction)
         optionMenu.addAction(cancelAction)
         self.present(optionMenu, animated: true, completion: nil)
-    }
-    
-    // MARK: - UIImagePickerControllerDelegate Methods
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            userPhoto.contentMode = .scaleAspectFill
-            userPhoto.image = pickedImage
-        }
-        
-        dismiss(animated: true, completion: nil)
     }
     
     //MARK: - Helper Functions
@@ -258,7 +248,7 @@ class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     }
     
     func presentImagePicker(source:UIImagePickerControllerSourceType){
-        imagePicker.allowsEditing = false
+        imagePicker.allowsEditing = true
         imagePicker.sourceType = source
         
         present(imagePicker, animated: true, completion: nil)

@@ -306,20 +306,37 @@ class EventQuestionListVC: UITableViewController {
             
             print ( segue.destination )
             
-            let selectedQuestion:PollQuestion = questionArray[currentSelectedRow] 
+            let selectedQuestion:PollQuestion = questionArray[currentSelectedRow]
             
             let QuestionAnswerVC:QuestionAnswerVC = segue.destination as! QuestionAnswerVC
             QuestionAnswerVC.questionObj = selectedQuestion.toAnyObject() as! [String : Any]
-            QuestionAnswerVC.answers = [selectedQuestion.opt1 : 100, selectedQuestion.opt2 : 79]
             
-            if selectedQuestion.opt3.characters.count > 0 {
-                QuestionAnswerVC.answers[selectedQuestion.opt3 ] =  120
+            if pollUser?.LoginRole == UserRole.presenter{
+                
+                if selectedQuestion.isPublished == true{
+                    
+                    //TODO : below are the dummy values, please use actuals later
+                    
+                    QuestionAnswerVC.answers = [selectedQuestion.opt1 : 100, selectedQuestion.opt2 : 79]
+                    
+                    if selectedQuestion.opt3.characters.count > 0 {
+                        QuestionAnswerVC.answers[selectedQuestion.opt3 ] =  120
+                    }
+                    
+                    if selectedQuestion.opt4.characters.count > 0 {
+                        QuestionAnswerVC.answers[selectedQuestion.opt4 ] = 180
+                    }
+                }
+                else{
+                    // do not sent any values to QuestionAnswerVC.answers
+                }
+                
             }
-            
-            if selectedQuestion.opt4.characters.count > 0 {
-                QuestionAnswerVC.answers[selectedQuestion.opt4 ] = 180 
+            else{ //participant
+                
+                // do not sent any values to QuestionAnswerVC.answers
+                
             }
-            
             
         }
         else if segue.identifier == "segueAddQuestionVC" {
