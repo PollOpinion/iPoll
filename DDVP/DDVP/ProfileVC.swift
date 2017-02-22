@@ -19,7 +19,7 @@ struct Platform {
     }()
 }
 
-class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileVC: UIViewController{
     
     let loginButton: FBSDKLoginButton = {
         let button = FBSDKLoginButton()
@@ -165,21 +165,6 @@ class ProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         optionMenu.addAction(photoLibraryAction)
         optionMenu.addAction(cancelAction)
         self.present(optionMenu, animated: true, completion: nil)
-    }
-    
-    // MARK: - UIImagePickerControllerDelegate Methods
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    
-        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
-            userPhoto.image = editedImage
-        }
-        else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            userPhoto.image = originalImage
-        }
-        userPhoto.contentMode = .scaleAspectFill
-        
-        dismiss(animated: true, completion: nil)
     }
     
     //MARK: - Helper Functions
